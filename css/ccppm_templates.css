@@ -1,0 +1,141 @@
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+#ccppm_templates_top_right #ccppm_template_btn_new   {
+  margin-left: 10px;
+}
+
+#wpfooter {
+  position: relative !important;
+}
+
+#ccppm_template_container {
+  width: calc( 100% - 20px );
+  min-height: 800px;
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+}
+
+#ccppm_template_container_left, #ccppm_templates_top_left {
+  width: 50%;
+  display: block;
+  position: relative;
+  float: left;
+  clear: both;
+  height: 40px;
+}
+
+#ccppm_template_container_right, #ccppm_templates_top_right {
+  width: calc( 50% - 1px );
+  border-left: 1px solid #DDDDDD;
+  display: inline-block;
+  position: relative;
+  height: 40px;
+}
+
+#ccppm_template_container_left {
+  min-height: 1000px;
+}
+
+#ccppm_template_container_right {
+  min-height: 1000px;
+}
+
+#ccppm_template_content {
+  width: 100%;
+  height: 1000px;
+}
+
+#ccppm_template_btn_new, #ccppm_template_btn_new_append, #ccppm_template_btn_new_cancel, #ccppm_template_btn_save, #ccppm_template_btn_delete {
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#ccppm_template_new_name {
+  border: 1px solid #ddd;
+  padding: 2px;
+}
+
+#ccppm_template_new {
+  display: none;
+}
+
+#ccppm_template_new_name {
+  width: 50%;
+}
+
+#ccppm_templates_top, #ccppm_templates_top select, #ccppm_templates_top a.button {
+	font-size: 11px;
+}
+
+#ccppm_templates_top input#ccppm_templates_elements_ids {
+  font-size: 11px;
+  width: 60px;
+}
+
+.ccppm_templates_type_master {
+  color: #6e6e6e;
+}
+
+.ccppm_templates_type_javascript {
+  color: #a10c0c;
+}
+
+.ccppm_templates_type_styles {
+  color: #d17d00;
+}
+
+.ccppm_templates_type_page_break, 
+.ccppm_templates_type_index, 
+.ccppm_templates_type_toc {
+  color: #414141;
+}
+
+.ccppm_templates_type_html, 
+.ccppm_templates_type_htmlx2 {
+  color: #918f8f;
+}
+
+.ccppm_templates_type_media {
+  color: #b3b000;
+}
+
+.ccppm_templates_type_planning {
+  color: #0099ad;
+}
+
+.ccppm_templates_type_section, 
+.ccppm_templates_type_2sections, 
+.ccppm_templates_type_section_and_subsections {
+  color: #458219;
+}
+
+.ccppm_templates_type_film {
+  color: #d84400;
+}
+
+.ccppm_templates_type_jury, 
+.ccppm_templates_type_movie-type {
+  color: #ff9900;
+}
+
+.ccppm_templates_type_partenaire, 
+.ccppm_templates_type_partenaire-category {
+  color: #5739c4;
+}
+
+.ccppm_templates_type_planning,
+.ccppm_templates_type_accreditation {
+  color: #0087e0;
+}
+
+.ccppm_templates_type_contact {
+  color: #229911;
+}

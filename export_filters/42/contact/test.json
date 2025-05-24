@@ -1,0 +1,1 @@
+{"name":"test","type":"contact","filters":[{"filter_type":"operator","operator":"ET"},{"filter_type":"field","field":"name#Nom","comparator":"==","value":"ARNOLDY"}]}

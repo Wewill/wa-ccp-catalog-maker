@@ -1,0 +1,15 @@
+fieldset {
+	border: 1px solid black;
+	padding: 10px;
+}
+div#trash {
+	float: right;
+	font-size: 20px;
+	padding: 10px 75px;
+	background-color: #666;
+	color: #FFF;
+}
+span.selected_fields {
+	margin: 5px 20px 5px 5px;
+	display: inline-block;
+}

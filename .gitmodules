@@ -1,0 +1,12 @@
+[submodule "github/ace-builds"]
+	path = github/ace-builds
+	url = https://github.com/ajaxorg/ace-builds.git
+[submodule "github/github/text-to-svg"]
+	path = github/github/text-to-svg
+	url = https://github.com/shrhdk/text-to-svg.git
+[submodule "github/text-to-svg"]
+	path = github/text-to-svg
+	url = https://github.com/shrhdk/text-to-svg.git
+[submodule "github/ace"]
+	path = github/ace
+	url = git://github.com/ajaxorg/ace.git

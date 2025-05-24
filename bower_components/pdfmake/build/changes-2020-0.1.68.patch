@@ -1,0 +1,128 @@
+--- pdfmake.js.0.1.68-changes-2019	2020-11-22 12:26:14.000000000 +0100
++++ pdfmake.js	2020-11-22 17:43:52.369036031 +0100
+@@ -21157,7 +21157,7 @@
+ 
+ 	this.pageMargins = pageMargins;
+ 
+-// start add @patch: concipio : margin dynamics
++// @concipio start add @patch: concipio : margin dynamics
+ 
+ 	this.pageMarginsFkt = null;
+ 
+@@ -21297,29 +21297,42 @@
+ 	this.availableHeight = this.getCurrentPage().pageSize.height - this.pageMargins.top - this.pageMargins.bottom;
+ 	this.pageSnapshot().availableWidth = this.getCurrentPage().pageSize.width - this.pageMargins.left - this.pageMargins.right;
+ */
+-
+-//	console.log('DocumentContext.prototype.initializePage', this.x, this.getCurrentPage());
+-	var marginLeft = this.getCurrentPage().pageMargins.left;
+-	var marginRight = this.getCurrentPage().pageMargins.right;
++  var currentPage = this.getCurrentPage();
++//	console.log('@concipio2020-11 DocumentContext.prototype.initializePage', this.x, currentPage, this.page);
++	var marginLeft = currentPage.pageMargins.left;
++	var marginRight = currentPage.pageMargins.right;
+ 	var cropMarksLength = this.pageMargins.cropMarksLength || 0;
+-	var oldx = this.x;
++  var oldx = this.x;
++
+ 	if (this.x != undefined) {
+ 		if (this.getCurrentPage().pageMargins.initialized == undefined) {
++
++      var lastPageLeftMargin = ((this.page) % 2)?marginRight:marginLeft;
++      var thisPageLeftMargin = ((this.page) % 2)?marginLeft:marginRight;
++      var diffMargin = thisPageLeftMargin - lastPageLeftMargin;
++
++      this.x += ((this.page) % 2)? + diffMargin : - diffMargin;
++
++//      console.log("Calcul this.x :", this.x);
++      /* concipio2020-11 OLD CODE 2019 */
++/*
+ 			if (this.x > marginLeft)
+ 	//			this.x = this.x + marginLeft + cropMarksLength;
+ 				this.x = this.x - marginRight + cropMarksLength;
+ 			else if (this.x < marginLeft)
+-				this.x = this.x + marginLeft - cropMarksLength;
++        this.x = this.x + marginLeft - cropMarksLength;
++*/
++      /* concipio2020-11 END OLD CODE 2019 */
+ 		}
+ 	} else {
+ 		this.x = this.getCurrentPage().pageMargins.left; // @patch: margins dynmics add by hobbsi
+ 	}
+ 	this.getCurrentPage().pageMargins.initialized = true;
+-//	console.log('Y : ', this.y, this.getCurrentPage().pageMargins.top);
++//	console.log('@concipio Y : ', this.y, ' // top ', this.getCurrentPage().pageMargins.top, ' // cropMarksLength ', cropMarksLength);
+ 	this.y = this.getCurrentPage().pageMargins.top;
+ 	this.availableHeight = this.getCurrentPage().pageSize.height - this.getCurrentPage().pageMargins.top - this.getCurrentPage().pageMargins.bottom;
+ 	this.pageSnapshot().availableWidth = this.getCurrentPage().pageSize.width - this.getCurrentPage().pageMargins.left - this.getCurrentPage().pageMargins.right ;
+-//	console.log('left ', marginLeft, ' // right ', marginRight, ' // this.x', oldx , "=>", this.x, '//', this.pageSnapshot().availableWidth,  this.getCurrentPage().pageSize);
++//	console.log('@concipio left ', marginLeft, ' // right ', marginRight, ' // this.x', oldx , "=>", this.x, '//', this.pageSnapshot().availableWidth,  this.getCurrentPage().pageSize);
+ };
+ 
+ DocumentContext.prototype.pageSnapshot = function () {
+@@ -21406,7 +21419,8 @@
+ 
+ 
+ DocumentContext.prototype.moveToNextPage = function (pageOrientation) {
+-//	console.log('@concipio DocumentContext.prototype.moveToNextPage');
++//  console.log('@concipio DocumentContext.prototype.moveToNextPage');
++//  console.trace();
+ 	var nextPageIndex = this.page + 1;
+ 
+ 	var prevPage = this.page;
+@@ -21414,7 +21428,7 @@
+ 
+ 	var createNewPage = nextPageIndex >= this.pages.length;
+ 	if (createNewPage) {
+-//		console.log('@concipio DocumentContext.prototype.moveToNextPage', 'createNewPage');
++		console.log('@concipio DocumentContext.prototype.moveToNextPage', 'createNewPage');
+ 
+ 		var currentAvailableWidth = this.availableWidth;
+ 		var currentPageOrientation = this.getCurrentPage().pageSize.orientation;
+@@ -21426,7 +21440,7 @@
+ 			this.availableWidth = currentAvailableWidth;
+ 		}
+ 	} else {
+-//		console.log('@concipio DocumentContext.prototype.moveToNextPage', '! createNewPage');
++		console.log('@concipio DocumentContext.prototype.moveToNextPage', '! createNewPage');
+ 		this.page = nextPageIndex;
+ 		this.initializePage();
+ 	}
+@@ -67582,6 +67596,8 @@
+ function fitOnPage(self, addFct) {
+ 	var position = addFct(self);
+ 	if (!position) {
++//    console.log('@concipio2020-11 fitOnPage no position', position);
++//    console.trace();
+ 		self.moveToNextPage();
+ 		position = addFct(self);
+ 	}
+@@ -67771,13 +67787,16 @@
+ 	var page = context.getCurrentPage(),
+ 		position = this.getCurrentPositionOnPage();
+ 
++//  console.log('@concipio2020-11 position begin : ', position)
+ 	if (context.availableHeight < height || !page) {
+ 		return false;
+-	}
+-//	console.log('@concipio ElementWriter.prototype.addLine', line.x, context.x);
++  }
++  // @concipio2020-11
++  var oldx = line.x;
++  // @concipio2020-11 end 
+ 	line.x = context.x + (line.x || 0);
+ 	line.y = context.y + (line.y || 0);
+-//	console.log('@concipio ElementWriter.prototype.addLine', line.x);
++//	console.log('@concipio2020-11 ElementWriter.prototype.addLine oldx', oldx , ' // line.x ', line.x, ' // context.x ', context.x);
+ 
+ 	this.alignLine(line);
+ 
+@@ -67791,6 +67810,8 @@
+ 		context.moveDown(height);
+ 	}
+ 
++//  console.log('@concipio2020-11 position end : ', position)
++
+ 	return position;
+ };
+ 
