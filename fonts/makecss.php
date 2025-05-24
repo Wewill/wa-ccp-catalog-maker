@@ -17,7 +17,6 @@ foreach($files as $file) {
   list($name, $ext) = explode('.', $file);
   $output .= "@font-face { \n";
     $output .= "	font-family: '$name';\n";
-//    $output .= "	src: url('http://dev.fifam.fr/wp-content/plugins/ccp-pdf-maker/fonts/$file');\n";
     $output .= "  src: url(\"data:application/font-woff;base64,";
     $output .= base64_encode(file_get_contents($file));
     $output .= "\") format(\"woff\");";

@@ -1,1 +1,0 @@
-{"name":"Spanish contact","type":"contact","filters":[{"filter_type":"field","field":"language#Langue","comparator":"==","value":"Spanish"},{"filter_type":"field","field":"language#Langue","comparator":"contains","value":"Spanish"}],"fields":["name","firstname","surname"]}

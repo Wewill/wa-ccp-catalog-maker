@@ -14,13 +14,17 @@ Description: PDF Maker for catalogue and others
 
 add_action('plugins_loaded', 'fct_wa_ccp_catalog_maker');
 
-$ccppm = False;
+$ccpcm = False;
 
 function fct_wa_ccp_catalog_maker() {
-	global $ccppm;
-	require_once('includes/ccppm.inc.php');
-	$ccppm = new ccppm();
-	$ccppm->run();
+	global $ccpcm;
+	require_once('config.inc.php');
+	require_once('includes/ccpcm.inc.php');
+	if (defined(EDITION_SLUG))
+		$ccpcm = new ccpcm(EDITION_SLUG, EDITION_ID);
+	else
+		$ccpcm = new ccpcm();
+	$ccpcm->run();
 }
 
 function load_wp_media_files() {

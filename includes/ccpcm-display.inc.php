@@ -1,28 +1,28 @@
 <?php
 
-class ccppm_display extends ccppm_object {
+class ccpcm_display extends ccpcm_object {
 	function init_menu() {
 		add_action('admin_menu', [$this, 'setup_menu']);
 	}
 
 	function setup_menu() {
-		wp_enqueue_script('ccppm_ajax', plugin_dir_url(__FILE__).'../js/ccppm_ajax.js');
-		add_menu_page('Catalogue Maker', 'Catalogue Maker', 'manage_options', 'ccppm', [$this, 'catalogue'], 'dashicons-book', 200);
-		add_submenu_page( 'ccppm', 'Templates', 'Templates', 'manage_options', 'ccppm-templates', [$this, 'templates']);
-		add_submenu_page( 'ccppm', 'Verify', 'Verify', 'manage_options', 'ccppm-verify', [$this, 'verify']);
-#		add_submenu_page( 'ccppm', 'Settings', 'Settings', 'manage_options', 'ccppm-settings', [$this, 'settings']);
-		add_submenu_page( 'ccppm', 'Generate data', 'Generate data', 'manage_options', 'ccppm-generate-data', [$this, 'generate_data']);
-		add_submenu_page( 'ccppm', 'Exports', 'Exports', 'manage_options', 'ccppm-export-data', [$this, 'export_data']);
+		wp_enqueue_script('ccpcm_ajax', plugin_dir_url(__FILE__).'../js/ccpcm_ajax.js');
+		add_menu_page('Catalogue Maker', 'Catalogue Maker', 'manage_options', 'ccpcm', [$this, 'catalogue'], 'dashicons-book', 200);
+		add_submenu_page( 'ccpcm', 'Templates', 'Templates', 'manage_options', 'ccpcm-templates', [$this, 'templates']);
+		add_submenu_page( 'ccpcm', 'Verify', 'Verify', 'manage_options', 'ccpcm-verify', [$this, 'verify']);
+#		add_submenu_page( 'ccpcm', 'Settings', 'Settings', 'manage_options', 'ccpcm-settings', [$this, 'settings']);
+		add_submenu_page( 'ccpcm', 'Generate data', 'Generate data', 'manage_options', 'ccpcm-generate-data', [$this, 'generate_data']);
+		add_submenu_page( 'ccpcm', 'Exports', 'Exports', 'manage_options', 'ccpcm-export-data', [$this, 'export_data']);
 	}
 
 	function catalogue(){
 	      echo "<h1>Catalogue</h1>";
-				$this->ccppm->catalogues->display();
+				$this->ccpcm->catalogues->display();
 	}
 
 	function templates(){
 	      echo "<h1>Templates</h1>";
-				$this->ccppm->templates->display();
+				$this->ccpcm->templates->display();
 	}
 
 
@@ -43,25 +43,25 @@ var dpi_selector = jQuery('#dpi_selector');
 dpi_selector.on('change', function() {
     templates_caches = {};
     catalogue_data_caches = {};
-    ccppm_ajax('set_dpi', {'dpi': dpi_selector.val()}, false, false);
+    ccpcm_ajax('set_dpi', {'dpi': dpi_selector.val()}, false, false);
 });
 </script>
 <?php
 	}
 
 	function verify(){
-		wp_enqueue_style('ccppm_data', plugin_dir_url(__FILE__).'../css/ccppm_data.css');
+		wp_enqueue_style('ccpcm_data', plugin_dir_url(__FILE__).'../css/ccpcm_data.css');
 
 		echo "<h1>Verify</h1>";
-		echo "<div class='ccppm_data_info'><span class='title'>Verifier ici la cohérence de vos données.</span> Verify indique les champs manquants obligatoires, necessaires.</span></div>";
-		$this->ccppm->data->verify();
+		echo "<div class='ccpcm_data_info'><span class='title'>Verifier ici la cohérence de vos données.</span> Verify indique les champs manquants obligatoires, necessaires.</span></div>";
+		$this->ccpcm->data->verify();
 	}
 
 	function generate_data() {
-		wp_enqueue_style('ccppm_data', plugin_dir_url(__FILE__).'../css/ccppm_data.css');
+		wp_enqueue_style('ccpcm_data', plugin_dir_url(__FILE__).'../css/ccpcm_data.css');
 		echo "<h1>Generate data</h1>";
-		echo "<div class='ccppm_data_info'><span class='title'>Générer les données afin de fournir les catalogues et templates.</span> A chaque modification du contenu ( films, sections, partenraires, jurys, projections ... ) ; il est nécessaire de lancer un generate data. Il est conseillé de travailler en 9dpi ( le plus rapide, les images sont de basse qualité ). La version 72dpi est adaptée pour le téléchargement de la brochure. La version 150dpi est adaptée pour une brochure web à la qualité optimale. La version 300dpi est destinée à l'impression.</span></div>";
-		echo "<div class='ccppm_data_notice'><span class='title'>Même s'il y a une erreur 'time-out' 504, le serveur continue de calculer.</span> Il ne sert à rien de le relancer, cela peut être long et le proxy ne gere pas de tels temps de calcul.</span></div>";
+		echo "<div class='ccpcm_data_info'><span class='title'>Générer les données afin de fournir les catalogues et templates.</span> A chaque modification du contenu ( films, sections, partenraires, jurys, projections ... ) ; il est nécessaire de lancer un generate data. Il est conseillé de travailler en 9dpi ( le plus rapide, les images sont de basse qualité ). La version 72dpi est adaptée pour le téléchargement de la brochure. La version 150dpi est adaptée pour une brochure web à la qualité optimale. La version 300dpi est destinée à l'impression.</span></div>";
+		echo "<div class='ccpcm_data_notice'><span class='title'>Même s'il y a une erreur 'time-out' 504, le serveur continue de calculer.</span> Il ne sert à rien de le relancer, cela peut être long et le proxy ne gere pas de tels temps de calcul.</span></div>";
 		echo "<p></p>";
 		$dpis = array(
 			9,
@@ -71,74 +71,74 @@ dpi_selector.on('change', function() {
 		);
 		if ($_GET['emptyallcache']) {
 			foreach($dpis as $dpi) {
-				$this->ccppm->data->redefine($dpi);
-				$this->ccppm->data->jsondb->remove_all();
+				$this->ccpcm->data->redefine($dpi);
+				$this->ccpcm->data->jsondb->remove_all();
 			}
 			
 		}
 
 		if ($_GET['emptyallcachestorage']) {
 			foreach($dpis as $dpi) {
-				$this->ccppm->data->redefine($dpi);
-				$this->ccppm->data->jsondb->remove_all($this->ccppm->data->storage_path);
+				$this->ccpcm->data->redefine($dpi);
+				$this->ccpcm->data->jsondb->remove_all($this->ccpcm->data->storage_path);
 				die('9dpi only for moment');
 			}
 		}
 
 
 		if ($_GET['force_recrop'])
-			$this->ccppm->data->force_recrop = True;
+			$this->ccpcm->data->force_recrop = True;
 
 		if ($_GET['dpi']) {
 			if (in_array($_GET['dpi'], $dpis)) {
-				$this->ccppm->log('[ GENERATE ][ '.$_GET['dpi'].' ] Data Start #'.$this->ccppm->data->force_recrop);
-				$this->ccppm->data->redefine($_GET['dpi']);
-				$this->ccppm->data->jsondb->remove_all();
-				$this->ccppm->data->update();
-				$this->ccppm->log('[ GENERATE ][ '.$_GET['dpi'].' ] Data End #'.$this->ccppm->data->force_recrop);
+				$this->ccpcm->log('[ GENERATE ][ '.$_GET['dpi'].' ] Data Start #'.$this->ccpcm->data->force_recrop);
+				$this->ccpcm->data->redefine($_GET['dpi']);
+				$this->ccpcm->data->jsondb->remove_all();
+				$this->ccpcm->data->update();
+				$this->ccpcm->log('[ GENERATE ][ '.$_GET['dpi'].' ] Data End #'.$this->ccpcm->data->force_recrop);
 			}
 		}
 		if ($_GET['generate'] == 'planning') {
-			$this->ccppm->log('[ GENERATE ][ 9 ] Planning Start');
-			$this->ccppm->data->redefine(9);
-			$this->ccppm->data->update_planning(False, False);
-			$this->ccppm->log('[ GENERATE ][ 9 ] Planning End');
+			$this->ccpcm->log('[ GENERATE ][ 9 ] Planning Start');
+			$this->ccpcm->data->redefine(9);
+			$this->ccpcm->data->update_planning(False, False);
+			$this->ccpcm->log('[ GENERATE ][ 9 ] Planning End');
 		}
 		if ($_GET['generate'] == 'planning-section') {
-			$this->ccppm->log('[ GENERATE ][ 9 ] Planning Section Start');
-			$this->ccppm->data->redefine(9);
-			$this->ccppm->data->update_sections_planning();
-			$this->ccppm->log('[ GENERATE ][ 9 ] Planning Section End');
+			$this->ccpcm->log('[ GENERATE ][ 9 ] Planning Section Start');
+			$this->ccpcm->data->redefine(9);
+			$this->ccpcm->data->update_sections_planning();
+			$this->ccpcm->log('[ GENERATE ][ 9 ] Planning Section End');
 		}
 		if ($_GET['generate'] == 'projection') {
-			$this->ccppm->log('[ GENERATE ][ 9 ] Projections Start');
-			$this->ccppm->data->redefine(9);
-			$this->ccppm->data->update_projection(False, False);
-			$this->ccppm->log('[ GENERATE ][ 9 ] Projections End');
+			$this->ccpcm->log('[ GENERATE ][ 9 ] Projections Start');
+			$this->ccpcm->data->redefine(9);
+			$this->ccpcm->data->update_projection(False, False);
+			$this->ccpcm->log('[ GENERATE ][ 9 ] Projections End');
 		}
 		$dpis = array(9, 72, 150, 300);
-		echo "<div id='ccppm_data_container'>";
+		echo "<div id='ccpcm_data_container'>";
 		printf("<h2>(Re)générer les données et les images <em>manquantes</em></h2>");
 		foreach($dpis as $dpi) {
-			printf ('<a class="button button-primary" href="?page=ccppm-generate-data&dpi=%s">Generate at %s dpi%s</a> ', $dpi, $dpi, ($dpi == 9)?" (DEFAULT)":"");
+			printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&dpi=%s">Generate at %s dpi%s</a> ', $dpi, $dpi, ($dpi == 9)?" (DEFAULT)":"");
 		}
 		echo "</div>";
-		echo "<div id='ccppm_data_container'>";
+		echo "<div id='ccpcm_data_container'>";
 		printf("<h2>(Re)générer les données et les images <em>forcé</em></h2>");
 		echo "<p><strong>Cette méthode est plus longue,</strong> elle permet notamment de re-générer une image qui a été modifiée ou recadrée qui resterait persistant</p>";
 		foreach($dpis as $dpi) {
-			printf ('<a class="button button-primary" href="?page=ccppm-generate-data&dpi=%s&force_recrop=1">Generate at %s dpi%s</a> ', $dpi, $dpi, ($dpi == 9)?" (DEFAULT)":"");
+			printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&dpi=%s&force_recrop=1">Generate at %s dpi%s</a> ', $dpi, $dpi, ($dpi == 9)?" (DEFAULT)":"");
 		}
 		echo "</div>";
-		echo "<div id='ccppm_data_container'>";
+		echo "<div id='ccpcm_data_container'>";
 		printf("<h2>Génération du planning</h2>");
-		printf ('<a class="button button-primary" href="?page=ccppm-generate-data&generate=planning">(Re)générer le planning</a> ');
-		printf ('<a class="button button-primary" href="?page=ccppm-generate-data&generate=planning-section">(Re)générer les sections du planning (DEV)</a> ');
-		printf ('<a class="button button-primary" href="?page=ccppm-generate-data&generate=projection">(Re)générer les projections (DEV)</a> ');
+		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=planning">(Re)générer le planning</a> ');
+		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=planning-section">(Re)générer les sections du planning (DEV)</a> ');
+		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=projection">(Re)générer les projections (DEV)</a> ');
 		printf("<h2>Vider le cache</h2>");
 		echo "<p><strong>En cas de soucis,</strong> cette fonction permet de vider l'ensmeble des données et images et de repartir de zéro.</p>";
-		printf ('<a class="button button-primary" href="?page=ccppm-generate-data&emptyallcache=true">Vider le cache données</a> ');
-		printf ('<a class="button button-primary" href="?page=ccppm-generate-data&emptyallcachestorage=true">Vider le cache images</a> ');
+		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&emptyallcache=true">Vider le cache données</a> ');
+		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&emptyallcachestorage=true">Vider le cache images</a> ');
 		echo "</div>";
 	}
 
@@ -181,7 +181,7 @@ dpi_selector.on('change', function() {
 		if (array_key_exists('all', $_REQUEST))
 			$export_all = $_REQUEST['all'];
 		if ($current_type && $export_all) 
-			$this->ccppm->export->generate($_GET['type']);
+			$this->ccpcm->export->generate($_GET['type']);
 		if (array_key_exists('filter_name', $_REQUEST))
 			$filter_name = $_REQUEST['filter_name'];
 		else
@@ -201,12 +201,12 @@ dpi_selector.on('change', function() {
 			}
 		}
 		if (array_key_exists('mode_export_view', $_REQUEST)) {
-			$export_data = $this->ccppm->export->generate_data_by_filter($path);
+			$export_data = $this->ccpcm->export->generate_data_by_filter($path);
 		} else {
 			$export_data = False;
 		}
 		if (array_key_exists('mode_export_file', $_REQUEST)) {
-			$this->ccppm->export->generate_file_by_filter($path);
+			$this->ccpcm->export->generate_file_by_filter($path);
 		}
 		if (array_key_exists('filter_operator_append', $_REQUEST))
 			$filter_operator_append = [
@@ -288,19 +288,19 @@ dpi_selector.on('change', function() {
 			}
 		}
 
-		wp_enqueue_style('ccppm_export', plugin_dir_url(__FILE__).'../css/ccppm_export.css');
-		wp_enqueue_script('ccppm_export', plugin_dir_url(__FILE__).'../js/ccppm_export.js', ['jquery-ui-sortable', 'jquery-ui-droppable']);
+		wp_enqueue_style('ccpcm_export', plugin_dir_url(__FILE__).'../css/ccpcm_export.css');
+		wp_enqueue_script('ccpcm_export', plugin_dir_url(__FILE__).'../js/ccpcm_export.js', ['jquery-ui-sortable', 'jquery-ui-droppable']);
 		echo "<h1>Exporter toutes les données</h1>";
-		foreach(array_keys($this->ccppm->data->meta_keys) as $type)
-			printf ('<a class="button button-primary" href="?page=ccppm-export-data&type=%s&all=1">Export l\'ensemble "%s"</a> ', $type, $type);
+		foreach(array_keys($this->ccpcm->data->meta_keys) as $type)
+			printf ('<a class="button button-primary" href="?page=ccpcm-export-data&type=%s&all=1">Export l\'ensemble "%s"</a> ', $type, $type);
 
 		echo "<h1>Exporter avec des filtres</h1>";
 		echo "<form id=\"formular\">\n";
 		echo "<div class=\"\"><label>Ensemble de données : </label>";
-		echo "<input type=\"hidden\" name=\"page\" value=\"ccppm-export-data\">\n";
+		echo "<input type=\"hidden\" name=\"page\" value=\"ccpcm-export-data\">\n";
 		echo "<select name=\"type\" onchange=\"jQuery('#formular').submit();\">\n";
 		printf ('<option value="">-- Choisir un type --</option>'."\n", $type, $type);
-		foreach(array_keys($this->ccppm->data->meta_keys) as $type)
+		foreach(array_keys($this->ccpcm->data->meta_keys) as $type)
 			printf ('<option value="%s"%s>%s</option>'."\n", $type, ($current_type == $type)?' selected="selected"':'', $type);
 		echo "</select>";
 		echo "</div>\n";
@@ -308,7 +308,7 @@ dpi_selector.on('change', function() {
 		if ($current_type) {	
 			if ($filters) {
 				echo "<form method=\"GET\">\n";
-				echo "<input type=\"hidden\" name=\"page\" value=\"ccppm-export-data\">\n";
+				echo "<input type=\"hidden\" name=\"page\" value=\"ccpcm-export-data\">\n";
 				echo "<input type=\"hidden\" name=\"type\" value=\"$current_type\">\n";
 				echo "<fieldset>\n";
 				echo "<legend>Filtres existants</legend>\n";
@@ -326,7 +326,7 @@ dpi_selector.on('change', function() {
 			
 			if (!$filter_name) {
 				echo "<form method=\"GET\">\n";
-				echo "<input type=\"hidden\" name=\"page\" value=\"ccppm-export-data\">\n";
+				echo "<input type=\"hidden\" name=\"page\" value=\"ccpcm-export-data\">\n";
 				echo "<input type=\"hidden\" name=\"type\" value=\"$current_type\">\n";
 				echo "<fieldset>\n";
 				echo "<legend>Créer un filtre</legend>\n";
@@ -337,27 +337,27 @@ dpi_selector.on('change', function() {
 				echo "</fieldset>\n";
 				echo "</form>";
 			} else {
-				$fields = array_keys($this->ccppm->data->meta_keys[$current_type]);
-				$translates = $this->ccppm->data->get_icl_field_name_translate($fields);
+				$fields = array_keys($this->ccpcm->data->meta_keys[$current_type]);
+				$translates = $this->ccpcm->data->get_icl_field_name_translate($fields);
 				echo "<form method=\"POST\" id=\"formular_filter\">\n";
 				echo "<h2>Filtre : $filter_name</h2>";
 				if ($data) {
 					if (!array_key_exists('fields', $data)) {
 						$data['fields'] = [];
-						foreach ($this->ccppm->data->meta_keys[$current_type] as $field => $meta) {
+						foreach ($this->ccpcm->data->meta_keys[$current_type] as $field => $meta) {
 							$data['fields'][] = $meta['name'];	
 						}
 					}
 					// affichage du filtre courant
 					echo "<fieldset id=\"selected_fields_fieldset\">\n";
 					echo "<legend>Champs exportés</legend>\n";
-					foreach ($this->ccppm->data->meta_keys[$current_type] as $field => $meta) {
+					foreach ($this->ccpcm->data->meta_keys[$current_type] as $field => $meta) {
 						if (! array_key_exists('type', $meta))
 							$meta['type'] = 'string';
 						if (is_array($translates) && array_key_exists($field, $translates))
 							$label = $translates[$field];
 						else
-							$label = $this->ccppm->export->form_get_label($type, $field);
+							$label = $this->ccpcm->export->form_get_label($type, $field);
 						echo "<span class=\"selected_fields\"><input type=\"checkbox\" name=\"selected_fields[]\" value=\"".$meta['name']."\" id=\"field_".$meta['name']."\"".((in_array($meta['name'], $data['fields']))?"checked=\"checked\"":"")."><label for=\"field_".$meta['name']."\">$label</label></span>";
 					}
 					echo "<br/><input type=\"submit\" class=\"button button-primary\" value=\"Sauvegarder\"/>";
@@ -397,13 +397,13 @@ dpi_selector.on('change', function() {
 				echo "<legend>Ajouter un filtre</legend>\n";
 				echo "<select id=\"filter_field_append\" name=\"filter_field_append\">";
 				echo "<option value=\"\">-- choisir --</option>\n";
-				foreach ($this->ccppm->data->meta_keys[$current_type] as $field => $meta) {
+				foreach ($this->ccpcm->data->meta_keys[$current_type] as $field => $meta) {
 					if (! array_key_exists('type', $meta))
 						$meta['type'] = 'string';
 					if (array_key_exists($field, $translates))
 						$label = $translates[$field];
 					else
-						$label = $this->ccppm->export->form_get_label($type, $field);
+						$label = $this->ccpcm->export->form_get_label($type, $field);
 					echo "<option value=\"".$meta['name']."#".$label."\" data-type=\"".$meta['type']."\">";
 					echo "<label>".$label." (".$meta['type'].")</label>\n";
 					echo "</option>";

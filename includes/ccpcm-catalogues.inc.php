@@ -1,36 +1,34 @@
 <?php
+if (file_exists(plugin_dir_path(__FILE__).'../custom/ccpcm-catalogues-'.CCPCM_PROJECT.'.inc.php')) {
+	require_once(plugin_dir_path(__FILE__).'../custom/ccpcm-catalogues-'.CCPCM_PROJECT.'.inc.php');
+} else {
+	class ccpcm_catalogues_custom extends ccpcm_object {
+		public $types = array(
+			'section'=>'Section',
+			'section_and_subsections'=>'Section and subsections',
+			'2sections'=>'1/2 page par section x 2',
+			'contact'=>'Contact',
+			'html'=>'Html',
+			'htmlx2'=>'2 Html',
+			'media'=>'Media',
+			'toc'=>'Toc',
+			'index'=>'Index',
+			'page_break'=>'Page break',
+		);
+	}
+}
 
-class ccppm_catalogues extends ccppm_object {
-	public $types = array(
-		'section'=>'Section',
-		'section_and_subsections'=>'Section and subsections',
-		'2sections'=>'1/2 page par section x 2',
-		'film'=>'Film',
-		'contact'=>'Contact',
-		'jury'=>'Jury',
-		'movie-type'=>'Movie types and Jurys',
-		'partenaire'=>'Partners',
-		'html'=>'Html',
-		'htmlx2'=>'2 Html',
-		'media'=>'Media',
-		'toc'=>'Toc',
-		'index'=>'Index',
-		'page_break'=>'Page break',
-		'planning'=>'Planning',
-		'accreditation'=>'Accreditation',
-		'partenaire-category'=>'Catégories de Partners',
-		'gravityform_winner' => 'Gravityform Winner',
-	);
+class ccpcm_catalogues extends ccpcm_catalogues_custom {
 
 	public function display() {
-		print ('<script>var edition_slug = "'.$this->ccppm->edition_slug.'"; var edition_id = "'.$this->ccppm->edition_id.'"; var catalogue_id = false;</script>');
-		wp_enqueue_style('ccppm_catalogue', plugin_dir_url(__FILE__).'../css/ccppm_catalogues.css');
+		print ('<script>var edition_slug = "'.$this->ccpcm->edition_slug.'"; var edition_id = "'.$this->ccpcm->edition_id.'"; var catalogue_id = false;</script>');
+		wp_enqueue_style('ccpcm_catalogue', plugin_dir_url(__FILE__).'../css/ccpcm_catalogues.css');
 		wp_enqueue_script('pdfmake', plugin_dir_url(__FILE__).'../bower_components/pdfmake/build/pdfmake.js');
 		wp_enqueue_script('trumbowyg', plugin_dir_url(__FILE__).'../bower_components/trumbowyg/dist/trumbowyg.js');
 		wp_enqueue_script('trumbowyg_allowtagsfrompaste', plugin_dir_url(__FILE__).'../bower_components/trumbowyg/dist/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.min.js', ['trumbowyg']);
 		wp_enqueue_style('trumbowyg', plugin_dir_url(__FILE__).'../bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
 
-		wp_enqueue_style('ccppm_fonts', plugin_dir_url(__FILE__).'../fonts/fonts.css');
+		wp_enqueue_style('ccpcm_fonts', plugin_dir_url(__FILE__).'../fonts/fonts.css');
 
 //    wp_enqueue_style('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.css');
 //    wp_enqueue_script('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.js');
@@ -44,11 +42,11 @@ class ccppm_catalogues extends ccppm_object {
 
 		wp_enqueue_script('jquery-ui-droppable');
 
-		wp_enqueue_script('ccppm_templates_functions', plugin_dir_url(__FILE__).'../js/ccppm_templates_functions.js');
-		wp_enqueue_script('ccppm_catalogues', plugin_dir_url(__FILE__).'../js/ccppm_catalogues.js', ['ccppm_templates_functions']);
-    wp_enqueue_script('ccppm_catalogues_functions_tmp', plugin_dir_url(__FILE__).'../js/ccppm_catalogues_functions_tmp.js', ['ccppm_catalogues']);
+		wp_enqueue_script('ccpcm_templates_functions', plugin_dir_url(__FILE__).'../js/ccpcm_templates_functions.js');
+		wp_enqueue_script('ccpcm_catalogues', plugin_dir_url(__FILE__).'../js/ccpcm_catalogues.js', ['ccpcm_templates_functions']);
+    	wp_enqueue_script('ccpcm_catalogues_functions_tmp', plugin_dir_url(__FILE__).'../js/ccpcm_catalogues_functions_tmp.js', ['ccpcm_catalogues']);
 
-		print('<div id="ccppm_catalogue_container">');
+		print('<div id="ccpcm_catalogue_container">');
 		$this->display_top();
 		$this->display_left();
 		$this->display_right();
@@ -56,31 +54,31 @@ class ccppm_catalogues extends ccppm_object {
 		print('</div>');
 	}
 
-  public function display_top() {
-    print('<div id="ccppm_catalogues_top">');
-    print('<div id="ccppm_catalogues_top_left">Catalogue : <select id="ccppm_catalogues_select"></select>');
-		print('&nbsp;Master : <select id="ccppm_catalogue_masters_select"></select>');
-    print('&nbsp;<a id="ccppm_catalogue_btn_save" class="button button-primary">Save</a>');
-    print('&nbsp;<a id="ccppm_catalogue_btn_delete" class="button button-secondary">Delete</a>');
+	public function display_top() {
+		print('<div id="ccpcm_catalogues_top">');
+		print('<div id="ccpcm_catalogues_top_left">Catalogue : <select id="ccpcm_catalogues_select"></select>');
+			print('&nbsp;Master : <select id="ccpcm_catalogue_masters_select"></select>');
+		print('&nbsp;<a id="ccpcm_catalogue_btn_save" class="button button-primary">Save</a>');
+		print('&nbsp;<a id="ccpcm_catalogue_btn_delete" class="button button-secondary">Delete</a>');
+			print('</div>');
+			print('<div id="ccpcm_catalogues_top_right">');
+			print('<a id="ccpcm_catalogue_btn_new" class="button button-primary">New Catalogue</a>&nbsp;<span id="ccpcm_catalogue_new"><input id="ccpcm_catalogue_new_name" value="noname">&nbsp;<a id="ccpcm_catalogue_btn_new_append" class="button button-primary">Create</a>&nbsp;<a id="ccpcm_catalogue_btn_new_cancel" class="button button-secondary">Cancel</a></span>');
+			$this->ccpcm->display->dpi_selector();
+			print('&nbsp;<a id="ccpcm_catalogue_btn_render" class="button button-primary">Render</a>');
+			print('&nbsp;<a id="ccpcm_catalogue_btn_download" class="button button-secondary">Download</a>');
+			print('</div>');
 		print('</div>');
-		print('<div id="ccppm_catalogues_top_right">');
-		print('<a id="ccppm_catalogue_btn_new" class="button button-primary">New Catalogue</a>&nbsp;<span id="ccppm_catalogue_new"><input id="ccppm_catalogue_new_name" value="noname">&nbsp;<a id="ccppm_catalogue_btn_new_append" class="button button-primary">Create</a>&nbsp;<a id="ccppm_catalogue_btn_new_cancel" class="button button-secondary">Cancel</a></span>');
-		$this->ccppm->display->dpi_selector();
-		print('&nbsp;<a id="ccppm_catalogue_btn_render" class="button button-primary">Render</a>');
-		print('&nbsp;<a id="ccppm_catalogue_btn_download" class="button button-secondary">Download</a>');
-		print('</div>');
-    print('</div>');
-  }
+	}
 
 	public function display_left(){
-		print('<div id="ccppm_catalogue_container_left">');
-		print('<ul id="ccppm_catalogue_items">');
+		print('<div id="ccpcm_catalogue_container_left">');
+		print('<ul id="ccpcm_catalogue_items">');
 		foreach($this->types as $type => $desc) {
-			printf('<li class="ccppm_catalogue_items_item noselect ccppm_catalogue_items_item_%s" rel="%s">%s</li>', $type, $type, $desc);
+			printf('<li class="ccpcm_catalogue_items_item noselect ccpcm_catalogue_items_item_%s" rel="%s">%s</li>', $type, $type, $desc);
 		}
 		print('</ul>');
-		print('<div id="ccppm_catalogue_config">');
-		print('<ul id="ccppm_catalogue_config_sortable">');
+		print('<div id="ccpcm_catalogue_config">');
+		print('<ul id="ccpcm_catalogue_config_sortable">');
 		print('</ul>');
 		print('</div>');
 
@@ -88,107 +86,107 @@ class ccppm_catalogues extends ccppm_object {
 	}
 
 	public function display_popup() {
-		print('<div id="ccppm_catalogue_popup_background">');
+		print('<div id="ccpcm_catalogue_popup_background">');
 		print('</div>');
-		print('<div id="ccppm_catalogue_popup">');
+		print('<div id="ccpcm_catalogue_popup">');
 
-		print('<div class="ccppm_catalogue_popup_left">Template name : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><select id="ccppm_catalogue_popup_template_select"></select></div>');
+		print('<div class="ccpcm_catalogue_popup_left">Template name : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><select id="ccpcm_catalogue_popup_template_select"></select></div>');
 
-		print('<div id="ccppm_catalogue_popup_html" class="ccppm_catalogue_popup_type">');
-		print('<div class="ccppm_catalogue_popup_col_left">');
-		print('<div class="ccppm_catalogue_popup_comment"><span class="title">Conseil ! Pensez à cleaner votre texte avant d\'exporter ou de tester la brochure.</span> Il est nécessaire de supprimer les balises inutiles / polluantes :
+		print('<div id="ccpcm_catalogue_popup_html" class="ccpcm_catalogue_popup_type">');
+		print('<div class="ccpcm_catalogue_popup_col_left">');
+		print('<div class="ccpcm_catalogue_popup_comment"><span class="title">Conseil ! Pensez à cleaner votre texte avant d\'exporter ou de tester la brochure.</span> Il est nécessaire de supprimer les balises inutiles / polluantes :
 		Simplement en utilisant par exemple le site : <a href="https://html-cleaner.com" target="_blank">https://html-cleaner.com</a><br/>Copier / coller en totalité le texte en mode "code " (<>) et le nettoyer, puis recoller le texte nettoyé toujours en mode "code" (<>).</div>');
-		print('<div class="ccppm_catalogue_popup_left">Title : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><input id="ccppm_catalogue_popup_html_title" class="ccppm_catalogue_popup_input"></div>');
-		print('<div class="ccppm_catalogue_popup_left">Color : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><input id="ccppm_catalogue_popup_html_color" class="ccppm_catalogue_popup_input"></div>');
-		print('<div id="ccppm_catalogue_popup_html_rte"></div>');
-		print('<p><a id="ccppm_catalogue_popup_html_save" class="button button-primary">Save</a>&nbsp;<a id="ccppm_catalogue_popup_html_btn_get_ratio" class="button button-primary">Get image Ratio</a>&nbsp;<a id="ccppm_catalogue_popup_html_btn_render" class="button button-primary">Render</a></p>');
+		print('<div class="ccpcm_catalogue_popup_left">Title : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_html_title" class="ccpcm_catalogue_popup_input"></div>');
+		print('<div class="ccpcm_catalogue_popup_left">Color : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_html_color" class="ccpcm_catalogue_popup_input"></div>');
+		print('<div id="ccpcm_catalogue_popup_html_rte"></div>');
+		print('<p><a id="ccpcm_catalogue_popup_html_save" class="button button-primary">Save</a>&nbsp;<a id="ccpcm_catalogue_popup_html_btn_get_ratio" class="button button-primary">Get image Ratio</a>&nbsp;<a id="ccpcm_catalogue_popup_html_btn_render" class="button button-primary">Render</a></p>');
 		print('</div>');
-		print('<div class="ccppm_catalogue_popup_col_right">');
-		print('<iframe id="ccppm_catalogue_popup_html_render"></iframe>');
+		print('<div class="ccpcm_catalogue_popup_col_right">');
+		print('<iframe id="ccpcm_catalogue_popup_html_render"></iframe>');
 		print('</div>');
 		print('</div>');
 
-		print('<div id="ccppm_catalogue_popup_htmlx2" class="ccppm_catalogue_popup_type">');
-		print('<div class="ccppm_catalogue_popup_col_left">');
-		print('<div class="ccppm_catalogue_popup_comment"><span class="title">Conseil ! Pensez à cleaner votre texte avant d\'exporter ou de tester la brochure.</span> Il est nécessaire de supprimer les balises inutiles / polluantes :
+		print('<div id="ccpcm_catalogue_popup_htmlx2" class="ccpcm_catalogue_popup_type">');
+		print('<div class="ccpcm_catalogue_popup_col_left">');
+		print('<div class="ccpcm_catalogue_popup_comment"><span class="title">Conseil ! Pensez à cleaner votre texte avant d\'exporter ou de tester la brochure.</span> Il est nécessaire de supprimer les balises inutiles / polluantes :
 		Simplement en utilisant par exemple le site : <a href="https://html-cleaner.com" target="_blank">https://html-cleaner.com</a><br/>Copier / coller en totalité le texte en mode "code " (<>) et le nettoyer, puis recoller le texte nettoyé toujours en mode "code" (<>).</div>');
-		print('<div class="ccppm_catalogue_popup_left">Title : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><input id="ccppm_catalogue_popup_htmlx2_title" class="ccppm_catalogue_popup_input"></div>');
-		print('<div class="ccppm_catalogue_popup_left">Color : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><input id="ccppm_catalogue_popup_htmlx2_color" class="ccppm_catalogue_popup_input"></div>');
-		print('<div id="ccppm_catalogue_popup_htmlx2_1_rte"></div>');
-		print('<div id="ccppm_catalogue_popup_htmlx2_2_rte"></div>');
-		print('<p><a id="ccppm_catalogue_popup_htmlx2_save" class="button button-primary">Save</a>&nbsp;<a id="ccppm_catalogue_popup_htmlx2_btn_get_ratio" class="button button-primary">Get image Ratio</a>&nbsp;<a id="ccppm_catalogue_popup_htmlx2_btn_render" class="button button-primary">Render</a></p>');
+		print('<div class="ccpcm_catalogue_popup_left">Title : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_htmlx2_title" class="ccpcm_catalogue_popup_input"></div>');
+		print('<div class="ccpcm_catalogue_popup_left">Color : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_htmlx2_color" class="ccpcm_catalogue_popup_input"></div>');
+		print('<div id="ccpcm_catalogue_popup_htmlx2_1_rte"></div>');
+		print('<div id="ccpcm_catalogue_popup_htmlx2_2_rte"></div>');
+		print('<p><a id="ccpcm_catalogue_popup_htmlx2_save" class="button button-primary">Save</a>&nbsp;<a id="ccpcm_catalogue_popup_htmlx2_btn_get_ratio" class="button button-primary">Get image Ratio</a>&nbsp;<a id="ccpcm_catalogue_popup_htmlx2_btn_render" class="button button-primary">Render</a></p>');
 		print('</div>');
-		print('<div class="ccppm_catalogue_popup_col_right">');
-		print('<iframe id="ccppm_catalogue_popup_htmlx2_render"></iframe>');
+		print('<div class="ccpcm_catalogue_popup_col_right">');
+		print('<iframe id="ccpcm_catalogue_popup_htmlx2_render"></iframe>');
 		print('</div>');
-		print('</div>');
-
-		print('<div id="ccppm_catalogue_popup_media" class="ccppm_catalogue_popup_type">');
-		print('<div class="ccppm_catalogue_popup_comment"><span class="title">Formats acceptés :</span> *.jpg, 300dpi, CMJN uniquement, bords perdus de 5mm donc 10mm de format utile (FU) en plus par rapport au format fini (FF), traits de coupes optionnels.</div>');
-		print('<div class="ccppm_catalogue_popup_left">Media associé : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><input id="ccppm_catalogue_popup_media_upload" type="button" class="button" value="Select media" /></div>');
-		print('<div class=""><img id="ccppm_catalogue_popup_media_preview"><div id="ccppm_catalogue_popup_media_url"></div><input type="hidden" value="" id="ccppm_catalogue_popup_media_id"></div>');
-		print('<p><a id="ccppm_catalogue_popup_media_save" class="button button-primary">Save</a></p>');
 		print('</div>');
 
-		print('<div id="ccppm_catalogue_popup_data" class="ccppm_catalogue_popup_type">');
-		//print('<div class="ccppm_catalogue_popup_comment"><span class="title">Planning :</span> attention, le template doit être en data/unique et non en data/multiple</div>');
-		print('<div class="ccppm_catalogue_popup_left">Designation name : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><select id="ccppm_catalogue_popup_data_select"></select></div>');
-		print('<div class="ccppm_catalogue_popup_left">Order : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><select id="ccppm_catalogue_popup_data_order">');
+		print('<div id="ccpcm_catalogue_popup_media" class="ccpcm_catalogue_popup_type">');
+		print('<div class="ccpcm_catalogue_popup_comment"><span class="title">Formats acceptés :</span> *.jpg, 300dpi, CMJN uniquement, bords perdus de 5mm donc 10mm de format utile (FU) en plus par rapport au format fini (FF), traits de coupes optionnels.</div>');
+		print('<div class="ccpcm_catalogue_popup_left">Media associé : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_media_upload" type="button" class="button" value="Select media" /></div>');
+		print('<div class=""><img id="ccpcm_catalogue_popup_media_preview"><div id="ccpcm_catalogue_popup_media_url"></div><input type="hidden" value="" id="ccpcm_catalogue_popup_media_id"></div>');
+		print('<p><a id="ccpcm_catalogue_popup_media_save" class="button button-primary">Save</a></p>');
+		print('</div>');
+
+		print('<div id="ccpcm_catalogue_popup_data" class="ccpcm_catalogue_popup_type">');
+		//print('<div class="ccpcm_catalogue_popup_comment"><span class="title">Planning :</span> attention, le template doit être en data/unique et non en data/multiple</div>');
+		print('<div class="ccpcm_catalogue_popup_left">Designation name : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><select id="ccpcm_catalogue_popup_data_select"></select></div>');
+		print('<div class="ccpcm_catalogue_popup_left">Order : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><select id="ccpcm_catalogue_popup_data_order">');
 		print('<option value="name_simplified">By name simplified</option>');
 		print('<option value="order">By order</option>');
 		print('<option value="name">By name</option>');
 		print('<option value="date">By date</option>');
 		print('</select></div>');
-		print('<div id="ccppm_catalogue_popup_data2" class="ccppm_catalogue_popup_type_inside">');
-		print('<div class="ccppm_catalogue_popup_left">Second designation name : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><select id="ccppm_catalogue_popup_data2_select"></select></div>');
+		print('<div id="ccpcm_catalogue_popup_data2" class="ccpcm_catalogue_popup_type_inside">');
+		print('<div class="ccpcm_catalogue_popup_left">Second designation name : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><select id="ccpcm_catalogue_popup_data2_select"></select></div>');
 		print('</div>');
-		print('<div id="ccppm_catalogue_popup_data3" class="ccppm_catalogue_popup_type_inside">');
-		print('<div class="ccppm_catalogue_popup_left">Display by : </div>');
-		print('<div class="ccppm_catalogue_popup_right"><select id="ccppm_catalogue_popup_section_display_by_select"><option value="film">Film</option><option value="projection">Projection</option></select></div>');
+		print('<div id="ccpcm_catalogue_popup_data3" class="ccpcm_catalogue_popup_type_inside">');
+		print('<div class="ccpcm_catalogue_popup_left">Display by : </div>');
+		print('<div class="ccpcm_catalogue_popup_right"><select id="ccpcm_catalogue_popup_section_display_by_select"><option value="film">Film</option><option value="projection">Projection</option></select></div>');
 		print('</div>');
-		print('<p><a id="ccppm_catalogue_popup_data_save" class="button button-primary">Save</a></p>');
-		print('</div>');
-
-		print('<div id="ccppm_catalogue_popup_other" class="ccppm_catalogue_popup_type">');
-		print('<p><a id="ccppm_catalogue_popup_other_save" class="button button-primary">Save</a></p>');
+		print('<p><a id="ccpcm_catalogue_popup_data_save" class="button button-primary">Save</a></p>');
 		print('</div>');
 
-		print('<div id="ccppm_catalogue_popup_toc" class="ccppm_catalogue_popup_type">');
-		print('<p><a id="ccppm_catalogue_popup_toc_save" class="button button-primary">Save</a></p>');
+		print('<div id="ccpcm_catalogue_popup_other" class="ccpcm_catalogue_popup_type">');
+		print('<p><a id="ccpcm_catalogue_popup_other_save" class="button button-primary">Save</a></p>');
 		print('</div>');
 
-		print('<div id="ccppm_catalogue_popup_index" class="ccppm_catalogue_popup_type">');
-		print('<p><a id="ccppm_catalogue_popup_index_save" class="button button-primary">Save</a></p>');
+		print('<div id="ccpcm_catalogue_popup_toc" class="ccpcm_catalogue_popup_type">');
+		print('<p><a id="ccpcm_catalogue_popup_toc_save" class="button button-primary">Save</a></p>');
+		print('</div>');
+
+		print('<div id="ccpcm_catalogue_popup_index" class="ccpcm_catalogue_popup_type">');
+		print('<p><a id="ccpcm_catalogue_popup_index_save" class="button button-primary">Save</a></p>');
 		print('</div>');
 
 		print('</div>');
 	}
 
 	public function display_right() {
-		print('<iframe id="ccppm_catalogue_container_right"></iframe>');
+		print('<iframe id="ccpcm_catalogue_container_right"></iframe>');
 	}
 
 	public function get_catalogues() {
-		$catalogues = $this->ccppm->templates->jsondb->get_ids('catalogues');
+		$catalogues = $this->ccpcm->templates->jsondb->get_ids('catalogues');
 		asort($catalogues);
 		$catalogues = array_values($catalogues);
 		return $catalogues;
 	}
 
 	public function get_catalogue_masters() {
-		$templates_ids = $this->ccppm->templates->jsondb->get_ids('templates');
+		$templates_ids = $this->ccpcm->templates->jsondb->get_ids('templates');
 		$templates = array();
 		foreach($templates_ids as $template_id) {
-			$template = $this->ccppm->templates->jsondb->get('templates', $template_id);
+			$template = $this->ccpcm->templates->jsondb->get('templates', $template_id);
 			if (array_key_exists('type', $template) && $template['type'] == 'master')
 				$templates[] = $template_id;
 		}
@@ -199,12 +197,12 @@ class ccppm_catalogues extends ccppm_object {
 
 	public function get_catalogue($id, $options = []) {
 		$data = array();
-		$data['catalogue'] = $this->ccppm->templates->jsondb->get('catalogues', $id);
+		$data['catalogue'] = $this->ccpcm->templates->jsondb->get('catalogues', $id);
 		if (array_key_exists('content', $data['catalogue'])){
 			foreach($data['catalogue']['content'] as $idx => $row) {
 				if (!in_array($row['type'], ['page_break', 'html', 'htmlx2', 'media', 'toc', 'index'])) {
 					$template_id = $row['template'];
-					$template_data = $this->ccppm->templates->jsondb->get('templates', $template_id);
+					$template_data = $this->ccpcm->templates->jsondb->get('templates', $template_id);
 					if (!$template_data) {
 						$data['catalogue']['content'][$idx]['_error'] = "Le template n'existe pas";
 					}
@@ -212,7 +210,7 @@ class ccppm_catalogues extends ccppm_object {
 					$is_data2 = False;
 					$is_elements_count_unknown = False;
 					if (!array_key_exists('elements_count', $template_data))
-						$this->ccppm->log('[ get_catalogue ] Error counts : '.json_encode($row, True));
+						$this->ccpcm->log('[ get_catalogue ] Error counts : '.json_encode($row, True));
 					if (!array_key_exists('elements_count', $template_data) || !$template_data['elements_count'])
 						$is_elements_count_unknown = True;
 					if ($type == 'section_and_subsections')
@@ -222,7 +220,7 @@ class ccppm_catalogues extends ccppm_object {
 						$is_data2 = True;
 					}
 					if ($row['data']) {
-						$qn = $this->ccppm->data->jsondb->get_quick_name($type, $row['data']);
+						$qn = $this->ccpcm->data->jsondb->get_quick_name($type, $row['data']);
 						if ($qn)
 							$data['catalogue']['content'][$idx]['_display']['data'] = $qn;
 						else
@@ -231,7 +229,7 @@ class ccppm_catalogues extends ccppm_object {
 						$data['catalogue']['content'][$idx]['_error'] = "Pas de contenu selectionné";
 					}
 					if (array_key_exists('data2', $row) && $row['data2']) {
-						$qn = $this->ccppm->data->jsondb->get_quick_name($type, $row['data2']);
+						$qn = $this->ccpcm->data->jsondb->get_quick_name($type, $row['data2']);
 						if ($qn)
 							$data['catalogue']['content'][$idx]['_display']['data2'] = $qn;
 						else
@@ -249,10 +247,10 @@ class ccppm_catalogues extends ccppm_object {
 	}
 
 	public function get_catalogue_templates($type) {
-		$templates_ids = $this->ccppm->templates->jsondb->get_ids('templates');
+		$templates_ids = $this->ccpcm->templates->jsondb->get_ids('templates');
 		$templates = array();
 		foreach($templates_ids as $template_id) {
-			$template = $this->ccppm->templates->jsondb->get('templates', $template_id);
+			$template = $this->ccpcm->templates->jsondb->get('templates', $template_id);
 			if ($template['type'] == $type)
 				$templates[] = $template_id;
 		}
@@ -268,14 +266,14 @@ class ccppm_catalogues extends ccppm_object {
 				$type = 'section';
 				break;
 		}
-		return $this->ccppm->data->jsondb->get_quick_names($type);
+		return $this->ccpcm->data->jsondb->get_quick_names($type);
 	}
 
 	public function get_data($id) {
 		return [];
 		//@todo: a revoir completement
 		$data = array();
-		$ids = $this->ccppm->data->jsondb->get_ids($type);
+		$ids = $this->ccpcm->data->jsondb->get_ids($type);
 		$t_ids = array();
 		if (count($ids)) {
 			if ($count === 0)
@@ -288,25 +286,25 @@ class ccppm_catalogues extends ccppm_object {
 				# @todo: justin code à supprimer pour arreter de voir tjrs le meme film
 				#if ($type == 'film')
 				#  $id = 26585;
-				$d = $this->ccppm->data->jsondb->get($type, $id);
+				$d = $this->ccpcm->data->jsondb->get($type, $id);
 				switch($type) {
 					case 'section':
-						$index = $this->ccppm->data->jsondb->get_index('film', 'section');
+						$index = $this->ccpcm->data->jsondb->get_index('film', 'section');
 						$films = array();
 						if (array_key_exists($id, $index)) {
 							$f_ids = $index[$id];
 							foreach($f_ids as $f_id)
-								$films[] = $this->ccppm->data->jsondb->get('film', $f_id);
+								$films[] = $this->ccpcm->data->jsondb->get('film', $f_id);
 						}
 						$d['films'] = $films;
 						break;
 					case 'movie-type':
-            $index = $this->ccppm->data->jsondb->get_index('jury', 'movie-type');
+            $index = $this->ccpcm->data->jsondb->get_index('jury', 'movie-type');
             $jurys = array();
             if (array_key_exists($id, $index)) {
               $j_ids = $index[$id];
               foreach($j_ids as $j_id)
-                $jurys[] = $this->ccppm->data->jsondb->get('jury', $j_id);
+                $jurys[] = $this->ccpcm->data->jsondb->get('jury', $j_id);
             }
             $d['jurys'] = $jurys;
             break;
@@ -323,39 +321,39 @@ class ccppm_catalogues extends ccppm_object {
 	public function set_catalogue($id, $data, $new) {
 		$r_data = array();
 		if ($new) {
-			$r_content = $this->ccppm->templates->jsondb->get('catalogues', $id);
+			$r_content = $this->ccpcm->templates->jsondb->get('catalogues', $id);
 			if ($r_content) {
 				$r_data['id'] = $id;
 				$r_data['content'] = $r_content;
 				$r_data['data'] = $this->get_data($id);
 				return $r_data;
 			} else {
-				$this->ccppm->templates->jsondb->append('catalogues', $id, $data);
+				$this->ccpcm->templates->jsondb->append('catalogues', $id, $data);
 				$r_data['id'] = $id;
 				return $r_data;
 			}
 		} else {
-			$this->ccppm->templates->jsondb->append('catalogues', $id, $data);
+			$this->ccpcm->templates->jsondb->append('catalogues', $id, $data);
 			$r_data['id'] = $id;
 			return $r_data;
 		}
 	}
 
 	public function delete_catalogue($id) {
-		$this->ccppm->templates->jsondb->delete('catalogues', $id);
+		$this->ccpcm->templates->jsondb->delete('catalogues', $id);
 	}
 
 	/*
 		RENDU !!!
 	*/
 	public function get_catalogue_content($id, $dpi=False) {
-		$data = $this->ccppm->templates->jsondb->get('catalogues', $id);
+		$data = $this->ccpcm->templates->jsondb->get('catalogues', $id);
 		if (!array_key_exists('content', $data))
 			return null;
 		foreach($data['content'] as $idx => $element) {
 			switch($element['type']) {
 				case 'media':
-					$this->ccppm->data->redefine($dpi);
+					$this->ccpcm->data->redefine($dpi);
 					$sizes = [
 						'r21_28'=>'595.28:793.7066666676',
 						'r21_14'=>'595.28:396.8533333338',
@@ -366,15 +364,15 @@ class ccppm_catalogues extends ccppm_object {
 						'r17_8'=>'168:80',
 					];
 
-					$data['content'][$idx]['media']['base64'] = $this->ccppm->data->convert_file_to_base64($element['media_url'], $sizes, True);
+					$data['content'][$idx]['media']['base64'] = $this->ccpcm->data->convert_file_to_base64($element['media_url'], $sizes, True);
 					break;
 				case 'html':
 					$html = $element['html'];
 
 					$html = $this->convert_html_img_inline($dpi, $html);
 					$data['content'][$idx]['html'] = $html;
-//					$this->ccppm->log($data['content'][$idx]['html']);
-//					$this->ccppm->log("DPI : $dpi");
+//					$this->ccpcm->log($data['content'][$idx]['html']);
+//					$this->ccpcm->log("DPI : $dpi");
 					break;
 				case 'htmlx2':
 					$html = $element['html'];
@@ -384,8 +382,8 @@ class ccppm_catalogues extends ccppm_object {
 					$html2 = $this->convert_html_img_inline($dpi, $html2);
 					$data['content'][$idx]['html'] = $html;
 					$data['content'][$idx]['html2'] = $html2;
-//					$this->ccppm->log($data['content'][$idx]['html']);
-//					$this->ccppm->log("DPI : $dpi");
+//					$this->ccpcm->log($data['content'][$idx]['html']);
+//					$this->ccpcm->log("DPI : $dpi");
 					break;
 			}
 		}
@@ -441,10 +439,10 @@ class ccppm_catalogues extends ccppm_object {
 						break;
 				}
 			}
-//						$this->ccppm->log($url);
+//						$this->ccpcm->log($url);
 			if ($url) {
 				$content = file_get_contents($url);
-				if ($url == 'https://www.concipio.fr/logo.png') $this->ccppm->log($type);
+				if ($url == 'https://www.concipio.fr/logo.png') $this->ccpcm->log($type);
 				if ($content !== False && $type) {
 					$width *= $dpi / 72;
 					$imagick = new Imagick();
@@ -472,7 +470,7 @@ class ccppm_catalogues extends ccppm_object {
 			$bn = $b['_order'];
 		else
 			return 0;
-//		$this->ccppm->log("$an < $bn : ".(($an < $bn) ? -1 : 1));
+//		$this->ccpcm->log("$an < $bn : ".(($an < $bn) ? -1 : 1));
 		if ($an == $bn)
     	    return 0;
 		return ($an < $bn) ? -1 : 1;
@@ -524,7 +522,7 @@ class ccppm_catalogues extends ccppm_object {
 	}
 
 	public function name_simplify($txt) {
-//		$this->ccppm->log($txt);
+//		$this->ccpcm->log($txt);
 //		$before = $txt;
 		$txt = strtolower($txt);
 		$txt = str_replace("'", ' ', $txt);
@@ -532,7 +530,7 @@ class ccppm_catalogues extends ccppm_object {
 		$txt = str_replace("-", ' ', $txt);
 		$txt = str_replace('"', ' ', $txt);
 		$txt = $this->skip_accents($txt);
-//		$this->ccppm->log("name_simplify : $before => $txt");
+//		$this->ccpcm->log("name_simplify : $before => $txt");
 		return $txt;
 	}
 
@@ -558,7 +556,7 @@ class ccppm_catalogues extends ccppm_object {
 		$bn = trim(strtolower($bn));
 		if ($an == $bn)
 			return 0;
-//		$this->ccppm->log("[ get_catalogue_data_order_by_name_simplified ] '$an' <=> '$bn' => ".(($an < $bn) ? -1 : 1));
+//		$this->ccpcm->log("[ get_catalogue_data_order_by_name_simplified ] '$an' <=> '$bn' => ".(($an < $bn) ? -1 : 1));
 		return ($an < $bn) ? -1 : 1;
 	}
 
@@ -591,7 +589,7 @@ class ccppm_catalogues extends ccppm_object {
 
 	public function try_log_order($data, $field) {
 		foreach($data as $d) {
-			$this->ccppm->log("+ order + ".$d[$field]);
+			$this->ccpcm->log("+ order + ".$d[$field]);
 		}
 	}
 
@@ -600,7 +598,7 @@ class ccppm_catalogues extends ccppm_object {
 			$ids = [];
 		$ids = array_filter($ids);
 		if ($template_id) {
-			$template = $this->ccppm->templates->jsondb->get('templates', $template_id);
+			$template = $this->ccpcm->templates->jsondb->get('templates', $template_id);
 			if ($count !== True)
 				$count = $template['elements_count'];
 			else
@@ -608,14 +606,14 @@ class ccppm_catalogues extends ccppm_object {
 		}
 		switch($type) {
 			case 'index':
-				$section_ids = $this->ccppm->data->jsondb->get_ids('section');
+				$section_ids = $this->ccpcm->data->jsondb->get_ids('section');
 				$sections = [];
 				foreach($section_ids as $id) {
-				  $this->ccppm->data->jsondb->get('section', $id);
+				  $this->ccpcm->data->jsondb->get('section', $id);
 				  if ($id != 220)
-					$sections[] = $this->ccppm->data->jsondb->get('section', $id);
+					$sections[] = $this->ccpcm->data->jsondb->get('section', $id);
 				}
-				usort($sections, [$this->ccppm->catalogues, 'get_catalogue_data_order_by_order']);
+				usort($sections, [$this->ccpcm->catalogues, 'get_catalogue_data_order_by_order']);
 				return ['sections'=>$sections]; 
 			break;
 		}
@@ -626,7 +624,7 @@ class ccppm_catalogues extends ccppm_object {
 					$type = 'section';
 					break;
 			}
-			$d = $this->ccppm->data->jsondb->get($type, $id);
+			$d = $this->ccpcm->data->jsondb->get($type, $id);
 			if ($infos) {
 				$d['infos'] = [];
 				foreach($infos as $k => $v)
@@ -634,43 +632,43 @@ class ccppm_catalogues extends ccppm_object {
 			}
 			switch($type) {
 				case 'section':
-					$index = $this->ccppm->data->jsondb->get_index('film', 'section');
+					$index = $this->ccpcm->data->jsondb->get_index('film', 'section');
 					$films = array();
 					if (array_key_exists($id, $index)) {
 						$f_ids = $index[$id];
 						foreach($f_ids as $f_id) {
-							$f_film = $this->ccppm->data->jsondb->get('film', $f_id);
-							$this->ccppm->custom->append_film_additionnal_fields($f_film);
+							$f_film = $this->ccpcm->data->jsondb->get('film', $f_id);
+							$this->ccpcm->custom->append_film_additionnal_fields($f_film);
 							$films[] = $f_film;
 						}
 					}
 					$d['films'] = $films;
-					$d['films'] = $this->ccppm->custom->apply_post_in_taxonomy_order($d['ccppto_film'], $d['films']);
-					$d['projections'] = $this->ccppm->custom->apply_post_in_taxonomy_order($d['ccppto_projection'], $d['projections']);
+					$d['films'] = $this->ccpcm->custom->apply_post_in_taxonomy_order($d['ccppto_film'], $d['films']);
+					$d['projections'] = $this->ccpcm->custom->apply_post_in_taxonomy_order($d['ccppto_projection'], $d['projections']);
 					$d['films'] = $this->get_catalogue_data_order_by($d['films'], $order);
 					$d['projections'] = $this->get_catalogue_data_order_by($d['projections'], $order);
 					if ($d['featured_film_1']) {
-						$d['featured_film_1'] = $this->ccppm->data->jsondb->get('film', $d['featured_film_1']);
+						$d['featured_film_1'] = $this->ccpcm->data->jsondb->get('film', $d['featured_film_1']);
 					} else {
 						$d['featured_film_1'] = False;
 					}
 					if ($d['featured_film_2']) {
-						$d['featured_film_2'] = $this->ccppm->data->jsondb->get('film', $d['featured_film_2']);
+						$d['featured_film_2'] = $this->ccpcm->data->jsondb->get('film', $d['featured_film_2']);
 					} else {
 						$d['featured_film_2'] = False;
 					}
 					break;
 				case 'section_and_subsections':
-					$d = $this->ccppm->data->jsondb->get('section', $id);
-					$p_index = $this->ccppm->data->jsondb->get_index('projection', 'film');
+					$d = $this->ccpcm->data->jsondb->get('section', $id);
+					$p_index = $this->ccpcm->data->jsondb->get_index('projection', 'film');
 
-					$s_index = $this->ccppm->data->jsondb->get_index('film', 'section');
+					$s_index = $this->ccpcm->data->jsondb->get_index('film', 'section');
 					if (array_key_exists($id, $s_index)) {
 						$f_ids = $s_index[$id];
 						$films = array();
 						foreach($f_ids as $f_id) {
-							$film = $this->ccppm->data->jsondb->get('film', $f_id);
-							$this->ccppm->custom->append_film_additionnal_fields($film);
+							$film = $this->ccpcm->data->jsondb->get('film', $f_id);
+							$this->ccpcm->custom->append_film_additionnal_fields($film);
 							$films[] = $film;
 						}
 						$s_section['films'] = $films;
@@ -679,20 +677,20 @@ class ccppm_catalogues extends ccppm_object {
 						$d['films'] = array();
 					}
 
-					$section_index = $this->ccppm->data->jsondb->get_index('section', 'parent');
+					$section_index = $this->ccpcm->data->jsondb->get_index('section', 'parent');
 					$d['subsections'] = array();
 					if (array_key_exists($id, $section_index)) {
 						$s_ids = $section_index[$id];
 						foreach($s_ids as $s_id) {
-							$s_section = $this->ccppm->data->jsondb->get('section', $s_id);
+							$s_section = $this->ccpcm->data->jsondb->get('section', $s_id);
 
 							$films = array();
 							if (array_key_exists($s_id, $s_index)) {
 								$f_ids = $s_index[$s_id];
 								$films = array();
 								foreach($f_ids as $f_id) {
-									$film = $this->ccppm->data->jsondb->get('film', $f_id);
-									$this->ccppm->custom->append_film_additionnal_fields($film);
+									$film = $this->ccpcm->data->jsondb->get('film', $f_id);
+									$this->ccpcm->custom->append_film_additionnal_fields($film);
 									$films[] = $film;
 								}
 //								$s_section['films'] = $films;
@@ -705,18 +703,18 @@ class ccppm_catalogues extends ccppm_object {
 
 					break;
 				case 'movie-type':
-					$d = $this->ccppm->data->jsondb->get('movie-type', $id);
-					$index = $this->ccppm->data->jsondb->get_index('jury', 'movie-type');
+					$d = $this->ccpcm->data->jsondb->get('movie-type', $id);
+					$index = $this->ccpcm->data->jsondb->get_index('jury', 'movie-type');
 					$jurys = array();
 					if (array_key_exists($id, $index)) {
 						$j_ids = $index[$id];
 						foreach($j_ids as $j_id)
-							$jurys[] = $this->ccppm->data->jsondb->get('jury', $j_id);
+							$jurys[] = $this->ccpcm->data->jsondb->get('jury', $j_id);
 					}
 					$d['jurys'] = $this->get_catalogue_data_order_by($jurys, $order);
 					break;
 				case 'film':
-					$this->ccppm->custom->append_film_additionnal_fields($d);
+					$this->ccpcm->custom->append_film_additionnal_fields($d);
 					break;
 				default:
 					break;
@@ -734,12 +732,12 @@ class ccppm_catalogues extends ccppm_object {
 				$id = $ids[0];
 				$qns = [$id=>$id];
 			} else {
-				$qns = $this->ccppm->data->jsondb->get_quick_names($type);
+				$qns = $this->ccpcm->data->jsondb->get_quick_names($type);
 			}
 			//fonction de tri !!
 			asort($qns);
 			foreach($qns as $id => $qn) {
-				$d = $this->ccppm->data->jsondb->get($type, $id);
+				$d = $this->ccpcm->data->jsondb->get($type, $id);
 				if ($infos) {
 					$d['infos'] = [];
 					foreach($infos as $k => $v)
@@ -747,22 +745,22 @@ class ccppm_catalogues extends ccppm_object {
 				}
 				switch($type) {
 					case 'movie-type':
-						$index = $this->ccppm->data->jsondb->get_index('jury', 'movie-type');
+						$index = $this->ccpcm->data->jsondb->get_index('jury', 'movie-type');
 						$jurys = array();
 						if (array_key_exists($id, $index)) {
 							$j_ids = $index[$id];
 							foreach($j_ids as $j_id)
-								$jurys[] = $this->ccppm->data->jsondb->get('jury', $j_id);
+								$jurys[] = $this->ccpcm->data->jsondb->get('jury', $j_id);
 						}
 						$d['jurys'] = $this->get_catalogue_data_order_by($jurys, $order);
 						break;
 					case 'partenaire-category':
-						$index = $this->ccppm->data->jsondb->get_index('partenaire', 'partenaire-category');
+						$index = $this->ccpcm->data->jsondb->get_index('partenaire', 'partenaire-category');
 						$partenaire = [];
 						if (array_key_exists($id, $index)) {
 						  $c_ids = $index[$id];
 						  foreach($c_ids as $c_id) {
-							$partenaire[] = $this->ccppm->data->jsondb->get('partenaire', $c_id);
+							$partenaire[] = $this->ccpcm->data->jsondb->get('partenaire', $c_id);
 						  }
 						}
 						$d['partners'] = $this->get_catalogue_data_order_by($partenaire, $order);
@@ -771,23 +769,23 @@ class ccppm_catalogues extends ccppm_object {
 
 /*				switch($type) {
 					case 'section':
-						$index = $this->ccppm->data->jsondb->get_index('film', 'section');
+						$index = $this->ccpcm->data->jsondb->get_index('film', 'section');
 						$films = array();
 						if (array_key_exists($id, $index)) {
 							$f_ids = $index[$id];
 							foreach($f_ids as $f_id)
-								$films[] = $this->ccppm->data->jsondb->get('film', $f_id);
+								$films[] = $this->ccpcm->data->jsondb->get('film', $f_id);
 						}
 						$d['films'] = $films;
 						break;
 					case 'section_and_subsections':
 					//@todo: a completer
-						$index = $this->ccppm->data->jsondb->get_index('film', 'section');
+						$index = $this->ccpcm->data->jsondb->get_index('film', 'section');
 						$films = array();
 						if (array_key_exists($id, $index)) {
 							$f_ids = $index[$id];
 							foreach($f_ids as $f_id)
-								$films[] = $this->ccppm->data->jsondb->get('film', $f_id);
+								$films[] = $this->ccpcm->data->jsondb->get('film', $f_id);
 						}
 						$d['films'] = $films;
 						break;

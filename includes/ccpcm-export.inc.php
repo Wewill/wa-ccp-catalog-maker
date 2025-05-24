@@ -5,13 +5,13 @@ require_once(dirname(__FILE__).'/../vendor/autoload.php');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class ccppm_export extends ccppm_object {
+class ccpcm_export extends ccpcm_object {
     private $fields = null;
 
 	public function generate_data_by_filter($file) {
 		$file_data = json_decode(file_get_contents($file), True);
 		$type = $file_data['type'];
-		$data = $this->ccppm->data->get_data_as_array($type);
+		$data = $this->ccpcm->data->get_data_as_array($type);
 		$data = $this->reverse_array1($data);
 		$data = $this->reverse_array2($data);
 		return $data;
@@ -69,7 +69,7 @@ class ccppm_export extends ccppm_object {
     public function generate($type = False, $data = False) {
 //        die('export en cours de création... patience...');
 	if (!$data)
-		$data = $this->ccppm->data->get_data_as_array($type);
+		$data = $this->ccpcm->data->get_data_as_array($type);
 
         if ($data) {
             $spreadsheet = new Spreadsheet();
@@ -102,7 +102,7 @@ class ccppm_export extends ccppm_object {
 
     public function form_get_label($type, $field) {
         if (is_null($this->fields))
-            $this->fields = $this->ccppm->data->get_fields();
+            $this->fields = $this->ccpcm->data->get_fields();
         switch($field) {
             case '_thumbnail_id':
                 return "Photo principale";

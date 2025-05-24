@@ -1,12 +1,12 @@
-.ccppm_required {
+.ccpcm_required {
   color: red;
 }
 
-.ccppm_important {
+.ccpcm_important {
   color: blue;
 }
 
-#ccppm_data_container {
+#ccpcm_data_container {
   width: calc( 100% - 20px );
   background-color: #FFFFFF;
   /*border: 1px solid #DDDDDD;*/
@@ -19,7 +19,7 @@
   margin-bottom: 10px;
 }
 
-.ccppm_data_warning {
+.ccpcm_data_warning {
   padding: 20px;
   color: #d8a600;
   background-color: #fff8e1;
@@ -28,7 +28,7 @@
   margin-bottom: 10px;
 }
 
-.ccppm_data_info {
+.ccpcm_data_info {
   padding: 20px;
   color: #004cd8;
   background-color: #cedfff;
@@ -37,7 +37,7 @@
   margin-bottom: 10px;
 }
 
-.ccppm_data_notice {
+.ccpcm_data_notice {
   padding: 20px;
   color: #d84400;
   background-color: #ffece3;
@@ -46,7 +46,7 @@
   margin-bottom: 10px;
 }
 
-.ccppm_data_success {
+.ccpcm_data_success {
   padding: 20px;
   color: #00d861;
   background-color: #d7ffe9;
@@ -55,9 +55,9 @@
   margin-bottom: 10px;
 }
 
-.ccppm_data_warning .title,
-.ccppm_data_info .title,
-.ccppm_data_notice .title {
+.ccpcm_data_warning .title,
+.ccpcm_data_info .title,
+.ccpcm_data_notice .title {
   font-weight: bold;
   font-size: 14px;
 }

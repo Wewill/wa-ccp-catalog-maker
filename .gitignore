@@ -1,3 +1,4 @@
 vendor/
 jsondb/
 templates/
+config.inc.php

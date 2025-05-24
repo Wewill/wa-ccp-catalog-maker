@@ -1,13 +1,13 @@
 <?php
 
-class ccppm_custom extends ccppm_object {
+class ccpcm_custom extends ccpcm_object {
     private $cache = [];
 
     private function get_index($f_type, $f_name) {
         $name = sprintf('index__%s__%s', $f_type, $f_name);
         if (array_key_exists($name, $this->cache))
             return $this->cache[$name];
-        $index = $this->ccppm->data->jsondb->get_index($f_type, $f_name);
+        $index = $this->ccpcm->data->jsondb->get_index($f_type, $f_name);
         $this->cache[$name] = $index;
         return $index;
     }
@@ -16,7 +16,7 @@ class ccppm_custom extends ccppm_object {
         $name = sprintf('data__%s__%s', $f_type, $f_id);
         if (array_key_exists($name, $this->cache))
             return $this->cache[$name];
-        $data = $this->ccppm->data->jsondb->get($f_type, $f_id);
+        $data = $this->ccpcm->data->jsondb->get($f_type, $f_id);
         $this->cache[$name] = $data;
         return $data;
     }
@@ -31,13 +31,13 @@ class ccppm_custom extends ccppm_object {
         $is_guest = False;
         $is_highlighted = False;
 	$is_debate = False;
-//        $this->ccppm->log("$id");
+//        $this->ccpcm->log("$id");
         if (array_key_exists($id, $index)) {
-//          $this->ccppm->log("$id 1");
+//          $this->ccpcm->log("$id 1");
           $p_ids = $index[$id];
           foreach($p_ids as $p_id) {
-//            $this->ccppm->log("$id 2");
-            $projection = $this->ccppm->data->jsondb->get('projection', $p_id);
+//            $this->ccpcm->log("$id 2");
+            $projection = $this->ccpcm->data->jsondb->get('projection', $p_id);
             if ($projection['is_guest'])
                 $is_guest = True;
             if (array_key_exists('is_highlighted', $projection) && $projection['is_highlighted'])
@@ -55,7 +55,7 @@ class ccppm_custom extends ccppm_object {
               if (array_key_exists(0, $projection['room']))
                 $projection['room'] = $projection['room'][0];
 //              else 
-//                $this->ccppm->log('[append_film_additionnal_fields] pb de projection/room '.$p_id.' : '.json_encode($projection, True));
+//                $this->ccpcm->log('[append_film_additionnal_fields] pb de projection/room '.$p_id.' : '.json_encode($projection, True));
             }
             $projections[] = $projection;
           }

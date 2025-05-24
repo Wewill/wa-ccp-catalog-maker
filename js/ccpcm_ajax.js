@@ -1,9 +1,9 @@
-var ccppm_ajax;
+var ccpcm_ajax;
 
 (function($){
-  ccppm_ajax = function(method, data = {}, callback = function(data) {}, async = true) {
+  ccpcm_ajax = function(method, data = {}, callback = function(data) {}, async = true) {
     $.ajax({
-       url : '/wp-content/plugins/ccp-pdf-maker/ccp-pdf-maker-ajax.php', // La ressource ciblée
+       url : '/wp-content/plugins/wa-ccp-catalog-maker/wa-ccp-catalog-maker-ajax.php', // La ressource ciblée
        type : 'POST', // Le type de la requête HTTP
        dataType : 'json',
        async: async,

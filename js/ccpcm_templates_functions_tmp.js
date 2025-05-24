@@ -5,7 +5,7 @@ function display_content() {
 
 
 (function($) {
-  ccppm_templates_select.on('change', function(event) {
+  ccpcm_templates_select.on('change', function(event) {
     templates_caches = {};
   });
 })(jQuery);

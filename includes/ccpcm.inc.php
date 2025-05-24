@@ -1,6 +1,6 @@
 <?php
 
-class ccppm {
+class ccpcm {
 	private $modules = ['display', 'data', 'catalogues', 'templates', 'integrator', 'custom', 'export'];
 	public $edition_slug = False;
 	public $edition_id = False;
@@ -21,8 +21,8 @@ class ccppm {
 		if (property_exists($this, $name))
 			return $this->$name;
 		elseif (in_array($name, $this->modules)) {
-			require_once("ccppm-${name}.inc.php");
-			$c = "ccppm_${name}";
+			require_once("ccpcm-${name}.inc.php");
+			$c = "ccpcm_${name}";
 			if (class_exists($c)) {
 				$this->$name = new $c($this);
 				return $this->$name;
@@ -52,7 +52,7 @@ class ccppm {
 //		wp_enqueue_script('pdfmake_extra');
 		print ('<script>var edition_slug = "'.$this->edition_slug.'"; var edition_id = "'.$this->edition_id.'"; </script>');
 		wp_enqueue_script('pdfmake', plugin_dir_url(__FILE__).'../bower_components/pdfmake/build/pdfmake.js');
-		wp_enqueue_style('ccppm_fonts', plugin_dir_url(__FILE__).'../fonts/fonts.css');
+		wp_enqueue_style('ccpcm_fonts', plugin_dir_url(__FILE__).'../fonts/fonts.css');
 
 //    wp_enqueue_style('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.css');
 //    wp_enqueue_script('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.js');
@@ -66,11 +66,11 @@ class ccppm {
 
 //		wp_enqueue_script('jquery-ui-droppable');
 
-		wp_enqueue_script('ccppm_templates_functions', plugin_dir_url(__FILE__).'../js/ccppm_templates_functions.js'); //, ['pdfmake_extra']);
-		wp_enqueue_script('ccppm_integrator', plugin_dir_url(__FILE__).'../js/ccppm_integrator.js', ['ccppm_templates_functions']);
-		wp_enqueue_script('ccppm_ajax', plugin_dir_url(__FILE__).'../js/ccppm_ajax.js');
+		wp_enqueue_script('ccpcm_templates_functions', plugin_dir_url(__FILE__).'../js/ccpcm_templates_functions.js'); //, ['pdfmake_extra']);
+		wp_enqueue_script('ccpcm_integrator', plugin_dir_url(__FILE__).'../js/ccpcm_integrator.js', ['ccpcm_templates_functions']);
+		wp_enqueue_script('ccpcm_ajax', plugin_dir_url(__FILE__).'../js/ccpcm_ajax.js');
 
-  //  wp_enqueue_script('ccppm_integrator_functions_tmp', plugin_dir_url(__FILE__).'../js/ccppm_integrator_functions_tmp.js', ['ccppm_integrator']);
+  //  wp_enqueue_script('ccpcm_integrator_functions_tmp', plugin_dir_url(__FILE__).'../js/ccpcm_integrator_functions_tmp.js', ['ccpcm_integrator']);
   
 	}
 
@@ -204,10 +204,10 @@ class ccppm {
 	}
 }
 
-class ccppm_object {
-	protected $ccppm = Null;
-	public function __construct($ccppm) {
-		$this->ccppm = $ccppm;
+class ccpcm_object {
+	protected $ccpcm = Null;
+	public function __construct($ccpcm) {
+		$this->ccpcm = $ccpcm;
 	}
 }
 
