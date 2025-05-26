@@ -1,10 +1,10 @@
-
 # wa-jp-catalog-maker
 [toc]
 
-## Contexte
-WA JP Catalog Maker
+# wa-ccp-catalog-maker
+WA CCP Catalog Maker
 
+## Contexte
 Make onboard dynamics PDF catalog from your site content : posts, taxonomies, medias... 
 
 ## Installation

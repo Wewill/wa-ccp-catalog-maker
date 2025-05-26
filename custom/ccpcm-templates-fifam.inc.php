@@ -19,28 +19,28 @@ class ccpcm_templates_custom extends ccpcm_object {
             if (!count($ids)) {
             switch($type) {
                 case '2sections':
-                $type = 'section';
-                $count = 2;
-                $ids = $this->ccpcm->data->jsondb->get_ids($type);
-    //              $ids = array(221,222);
-                break;
+                    $type = 'section';
+                    $count = 2;
+                    $ids = $this->ccpcm->data->jsondb->get_ids($type);
+        //              $ids = array(221,222);
+                    break;
                 case 'section':
                 //$ids = array(231); // Compet LM #40
     //              $ids = array(257); // Compet CM #40
                 //$ids = array(230); // Compet #40
-                $ids = $this->ccpcm->data->jsondb->get_ids($type);
-                break;
+                    $ids = $this->ccpcm->data->jsondb->get_ids($type);
+                    break;
                 // Wil
                 case 'jury':
     //              $ids = array(51969);
-                $ids = $this->ccpcm->data->jsondb->get_ids($type);
-                break;
+                    $ids = $this->ccpcm->data->jsondb->get_ids($type);
+                    break;
                 case 'section_and_subsections':
                 //$id = 237; // Ouverture cloture #40
                 //$id = 233; // Compet CM #40
-                $id = 257; // Compet #40
-                return $this->ccpcm->catalogues->get_catalogue_data_by_type_and_id(False, $type, [$id], 'name_simplified', [], 1); //182 afrique /193 espagne / 210 UPJV // 192 Competition // 211 MASTERCLASS // 178 Competition CM // 181 Travaie
-                break;
+                    $id = 257; // Compet #40
+                    return $this->ccpcm->catalogues->get_catalogue_data_by_type_and_id(False, $type, [$id], 'name_simplified', [], 1); //182 afrique /193 espagne / 210 UPJV // 192 Competition // 211 MASTERCLASS // 178 Competition CM // 181 Travaie
+                    break;
                 case 'film':
                 //$ids = array(52502); // MD > pour test >> Markdown KO
                 //$ids = array(52085); // MD Bio > Markdown OK 
@@ -49,24 +49,24 @@ class ccpcm_templates_custom extends ccpcm_object {
                 //$ids = array(52400); // Cas sepcial ouvertre
     //              $ids = array(52000); // Film compet Kuessipan
                 //$ids = array(50984); // Film pr calage des bordered
-                $ids = $this->ccpcm->data->jsondb->get_ids($type);              
-                break;
+                    $ids = $this->ccpcm->data->jsondb->get_ids($type);              
+                    break;
                 case 'planning':
-                $ids = ['planning'];
-                break;
+                    $ids = ['planning'];
+                    break;
                 default:
-                $ids = $this->ccpcm->data->jsondb->get_ids($type);
-                break;
+                    $ids = $this->ccpcm->data->jsondb->get_ids($type);
+                    break;
             }
-            } else {
-            switch($type) {
-                case 'section_and_subsections':
-                //$id = 237; // Ouverture cloture #40
-                //$id = 233; // Compet CM #40
-                $id = $ids[0]; // Compet #40
-                return $this->ccpcm->catalogues->get_catalogue_data_by_type_and_id(False, $type, [$id], 'name_simplified', [], 1); //182 afrique /193 espagne / 210 UPJV // 192 Competition // 211 MASTERCLASS // 178 Competition CM // 181 Travaie
-                break;
-            }          
+                } else {
+                    switch($type) {
+                        case 'section_and_subsections':
+                            //$id = 237; // Ouverture cloture #40
+                            //$id = 233; // Compet CM #40
+                            $id = $ids[0]; // Compet #40
+                            return $this->ccpcm->catalogues->get_catalogue_data_by_type_and_id(False, $type, [$id], 'name_simplified', [], 1); //182 afrique /193 espagne / 210 UPJV // 192 Competition // 211 MASTERCLASS // 178 Competition CM // 181 Travaie
+                            break;
+                }          
             }
         }
     //    $this->ccpcm->data->redefine(150);
