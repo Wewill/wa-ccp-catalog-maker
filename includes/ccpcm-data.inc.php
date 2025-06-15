@@ -3,12 +3,12 @@
 if (file_exists(plugin_dir_path(__FILE__).'../custom/ccpcm-data-'.CCPCM_PROJECT.'.inc.php')) {
 	require_once(plugin_dir_path(__FILE__).'../custom/ccpcm-data-'.CCPCM_PROJECT.'.inc.php');
 } else {
-	class ccppa_data_custom extends ccpcm_object {
+	class ccpcm_data_custom extends ccpcm_object {
 
 	}
 }
 
-class ccpcm_data extends ccppa_data_custom {
+class ccpcm_data extends ccpcm_data_custom {
 	public $jsondb = False;
 	private $db_path = False;
 	public $storage_path = False;
@@ -516,15 +516,7 @@ class ccpcm_data extends ccppa_data_custom {
 		if ($url == '')
 			return '';
 		$url_parse = parse_url($url);
-		$path = '';
-		switch($url_parse['host']) {
-			case 'dev.fifam.fr':
-				$path = "/home/fifam.fr/vhosts/dev/htdocs";
-				break;
-			case 'www.fifam.fr':
-				$path = "/home/fifam.fr/vhosts/www/htdocs";
-				break;
-		}
+		$path = dirname(__FILE__).'/../../../..';
 		$file = sprintf("%s%s", $path, $url_parse['path']);
 		if ($sizes === False) {
 			$data = $this->store_file_get_data($url);

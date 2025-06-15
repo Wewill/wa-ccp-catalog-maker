@@ -1,6 +1,6 @@
 <?php
 
-class ccpcm_data_custom extends ccpppm_object {
+class ccpcm_data_custom extends ccpcm_object {
     public $picture_max_sizes_available = [
         "9"=>['width'=>52.5, 'height'=>74.5],
         "18"=>['width'=>105, 'height'=>149],

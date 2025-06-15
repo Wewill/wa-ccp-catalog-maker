@@ -60,7 +60,7 @@ dpi_selector.on('change', function() {
 	function generate_data() {
 		wp_enqueue_style('ccpcm_data', plugin_dir_url(__FILE__).'../css/ccpcm_data.css');
 		echo "<h1>Generate data</h1>";
-		echo "<div class='ccpcm_data_info'><span class='title'>Générer les données afin de fournir les catalogues et templates.</span> A chaque modification du contenu ( films, sections, partenraires, jurys, projections ... ) ; il est nécessaire de lancer un generate data. Il est conseillé de travailler en 9dpi ( le plus rapide, les images sont de basse qualité ). La version 72dpi est adaptée pour le téléchargement de la brochure. La version 150dpi est adaptée pour une brochure web à la qualité optimale. La version 300dpi est destinée à l'impression.</span></div>";
+		echo "<div class='ccpcm_data_info'><span class='title'>Générer les données afin de fournir les catalogues et templates.</span> A chaque modification du contenu ; il est nécessaire de lancer un generate data. Il est conseillé de travailler en 9dpi ( le plus rapide, les images sont de basse qualité ). La version 72dpi est adaptée pour le téléchargement de la brochure. La version 150dpi est adaptée pour une brochure web à la qualité optimale. La version 300dpi est destinée à l'impression.</span></div>";
 		echo "<div class='ccpcm_data_notice'><span class='title'>Même s'il y a une erreur 'time-out' 504, le serveur continue de calculer.</span> Il ne sert à rien de le relancer, cela peut être long et le proxy ne gere pas de tels temps de calcul.</span></div>";
 		echo "<p></p>";
 		$dpis = array(

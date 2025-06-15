@@ -4,3 +4,86 @@
 [ 2025-05-24 18:52:09 ] [ GENERATE ][ 72 ] Data End #
 [ 2025-05-24 18:52:12 ] [ GENERATE ][ 9 ] Data Start #
 [ 2025-05-24 18:52:12 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-15 10:44:33 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:44:33 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-15 10:44:41 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:44:41 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-15 10:52:11 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:52:11 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-15 10:54:42 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:54:42 ] [ DATA.UPDATE ] update_film_and_partenaire
+[ 2025-06-15 10:54:42 ] [ DATA.UPDATE ] update_jury
+[ 2025-06-15 10:54:42 ] [ DATA.UPDATE ] update_partenaire
+[ 2025-06-15 10:54:42 ] [ DATA.UPDATE ] update_projection
+[ 2025-06-15 10:54:42 ] [ DATA.UPDATE ] update_accreditation
+[ 2025-06-15 10:54:42 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 10:55:41 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:55:41 ] [ DATA.UPDATE ] update_film_and_partenaire
+[ 2025-06-15 10:55:41 ] [ DATA.UPDATE ] update_jury
+[ 2025-06-15 10:55:41 ] [ DATA.UPDATE ] update_partenaire
+[ 2025-06-15 10:55:41 ] [ DATA.UPDATE ] update_projection
+[ 2025-06-15 10:55:41 ] [ DATA.UPDATE ] update_accreditation
+[ 2025-06-15 10:55:41 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 10:57:15 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:57:15 ] [ DATA.UPDATE ] update_film_and_partenaire
+[ 2025-06-15 10:57:15 ] [ DATA.UPDATE ] update_jury
+[ 2025-06-15 10:57:15 ] [ DATA.UPDATE ] update_partenaire
+[ 2025-06-15 10:57:15 ] [ DATA.UPDATE ] update_projection
+[ 2025-06-15 10:57:15 ] [ DATA.UPDATE ] update_accreditation
+[ 2025-06-15 10:57:15 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 10:57:48 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:57:48 ] [ DATA.UPDATE ] update_film_and_partenaire
+[ 2025-06-15 10:57:48 ] [ DATA.UPDATE ] update_jury
+[ 2025-06-15 10:57:48 ] [ DATA.UPDATE ] update_partenaire
+[ 2025-06-15 10:57:48 ] [ DATA.UPDATE ] update_projection
+[ 2025-06-15 10:57:48 ] [ DATA.UPDATE ] update_accreditation
+[ 2025-06-15 10:57:48 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 10:59:54 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 10:59:54 ] [ DATA.UPDATE ] update_film_and_partenaire
+[ 2025-06-15 10:59:54 ] [ DATA.UPDATE ] update_jury
+[ 2025-06-15 10:59:54 ] [ DATA.UPDATE ] update_partenaire
+[ 2025-06-15 10:59:54 ] [ DATA.UPDATE ] update_projection
+[ 2025-06-15 10:59:54 ] [ DATA.UPDATE ] update_accreditation
+[ 2025-06-15 10:59:54 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 11:02:53 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:02:53 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 11:03:13 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:03:13 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 11:03:13 ] 
+
+
+[ 2025-06-15 11:03:13 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-15 11:11:06 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:11:06 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:11:06 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 11:11:06 ] 
+directory : 19
+
+
+[ 2025-06-15 11:11:06 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-15 11:14:22 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:14:22 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:14:41 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:14:41 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:15:04 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:15:04 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:15:19 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:15:19 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:17:29 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:17:29 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:17:41 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:17:41 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:18:04 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:18:04 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:18:12 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:18:12 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:18:23 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:18:23 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:18:35 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-15 11:18:35 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-15 11:18:36 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-15 11:18:36 ] 
+directory : 19
+
+
+[ 2025-06-15 11:18:36 ] [ GENERATE ][ 9 ] Data End #

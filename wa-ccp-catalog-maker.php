@@ -20,7 +20,7 @@ function fct_wa_ccp_catalog_maker() {
 	global $ccpcm;
 	require_once('config.inc.php');
 	require_once('includes/ccpcm.inc.php');
-	if (defined(EDITION_SLUG))
+	if (defined("EDITION_SLUG"))
 		$ccpcm = new ccpcm(EDITION_SLUG, EDITION_ID);
 	else
 		$ccpcm = new ccpcm();
