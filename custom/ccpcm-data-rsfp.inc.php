@@ -33,29 +33,48 @@ class ccpcm_data_custom extends ccpcm_object {
 
 	public $quick_names = array(
 		'directory' => ['post_title'],
+		'farm' => ['post_title'],
+		'operation' => ['post_title'],
+		'structure' => ['post_title'],
 	);
 
 	public $terms = array(
+		'directory' => [
+			'geography' => [],
+			'production' => [],
+			'thematic' => [],
+		],
 	);
 
 	public $relations = array(
 	);
 
 	public $meta_keys_terms = array(
-		'geography' => [],
-		'production' => [],
-		'thematic' => [],
+		'geography' => [
+			'g_special_code' => [],
+		],
+		'production' => [
+
+		],
+		'thematic' => [
+			't_general_image' => ['name'=>'image', 'type'=>'picture', 'uniq'=>True, 'sizes'=>[
+				//'r036_1'=>'0.3620689655:1', 
+				//'r16_9'=>'16:8.38', 
+				'r1920_1080'=>'16:9', 
+				//'r419_136'=>'419.53:136.32', 
+				'r419_181'=>'419.53:181.76', 
+				//'r419_90' => '419.53:90.88', 
+				//'r380_550' => '380:550',
+				'r10_15'=>'170.3979:247.64',
+				'r4_3'=>'433.7032338099:311.8132338099', //#44
+			]],
+			't_general_color' => ['name'=>'color', 'type'=>'string', 'uniq'=>True],
+			't_general_content' => ['name'=>'content', 'type'=>'string', 'uniq'=>True],
+		],
 	);
 
 	public $meta_keys = [
 		'directory' => [
-			'_coblocks_accordion_ie_support' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'_coblocks_attr' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'_coblocks_dimensions' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'_coblocks_responsive_height' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'_edit_last' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'_edit_lock' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'_product_image_gallery' => ['name' => '', 'type' => '', 'uniq' => True ],
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
 				'r16_9'=>'16:8.38', 
 				'r1920_1080'=>'16:9', 
@@ -64,49 +83,102 @@ class ccpcm_data_custom extends ccpcm_object {
 				'r10_6'=>'197.015:115.88',
 				'r155_148'=>'155:148.82', //#44
 			]],
-			'_wp_old_date' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_farm_address' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_farm_in_transmission' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_farm_to_transmit' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_general_introduction' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_general_subtitle' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_area' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_commercialization' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_commercializations' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_diagrams' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_label' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_livestock' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_location' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_identity_number_of_people' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_acquisitions' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_diagrams' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_installation_period' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_knowledge_ap' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_testimony' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_viabilitys' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_knowledge_vivabilitys' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_medias_gallery' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_medias_video' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_medias_video_link' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_relationships_farm' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_relationships_operation' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_relationships_structure' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_stage_opentostage' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'd_stage_opentovisit' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'footnotes' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'hide_page_title' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'page_dark_toggle' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'page_wide_toggle' => ['name' => '', 'type' => '', 'uniq' => True ],
-			'paw_status' => ['name' => '', 'type' => '', 'uniq' => True ],
+			'd_farm_address' => ['name' => 'farm_address', 'type' => 'string', 'uniq' => True ],
+			'd_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
+			'd_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
+			'd_general_introduction' => ['name' => 'general_introduction', 'type' => 'string', 'uniq' => True ],
+			'd_general_subtitle' => ['name' => 'general_subtitle', 'type' => 'string', 'uniq' => True ],
+			'd_identity_area' => ['name' => 'identity_area', 'type' => 'string', 'uniq' => True ],
+			'd_identity_commercialization' => ['name' => 'identity_commercialization', 'type' => 'string', 'uniq' => True ],
+			'd_identity_commercializations' => ['name' => 'identity_commercializations', 'type' => 'serialize', 'uniq' => True ],
+			'd_identity_diagrams' => ['name' => 'identity_diagrams', 'type' => 'serialize', 'uniq' => True ],
+			'd_identity_label' => ['name' => 'identity_label', 'type' => 'string', 'uniq' => True ],
+			'd_identity_livestock' => ['name' => 'identity_livestock', 'type' => 'string', 'uniq' => True ],
+			'd_identity_location' => ['name' => 'identity_location', 'type' => 'string', 'uniq' => True ],
+			'd_identity_number_of_people' => ['name' => 'identity_number_of_people', 'type' => 'string', 'uniq' => True ],
+			'd_knowledge_acquisitions' => ['name' => 'knowledge_acquisitions', 'type' => 'serialize', 'uniq' => True ],
+			'd_knowledge_diagrams' => ['name' => 'knowledge_diagrams', 'type' => 'serialize', 'uniq' => True ],
+			'd_knowledge_installation_period' => ['name' => 'knowledge_installation_period', 'type' => 'string', 'uniq' => True ],
+			'd_knowledge_knowledge_ap' => ['name' => 'knowledge_knowledge_ap', 'type' => 'string', 'uniq' => True ],
+			'd_knowledge_testimony' => ['name' => 'knowledge_testimony', 'type' => 'string', 'uniq' => True ],
+			'd_knowledge_viabilitys' => ['name' => 'knowledge_viabilitys', 'type' => 'serialize', 'uniq' => True ],
+			'd_knowledge_vivabilitys' => ['name' => 'knowledge_vivabilitys', 'type' => 'serialize', 'uniq' => True ],
+			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
+			'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
+			'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
+			'd_relationships_farm' => ['name' => 'relationships_farm', 'type' => 'string', 'uniq' => True ],
+			'd_relationships_operation' => ['name' => 'relationships_operation', 'type' => 'string', 'uniq' => True ],
+			'd_relationships_structure' => ['name' => 'relationships_structure', 'type' => 'string', 'uniq' => True ],
+			'd_stage_opentostage' => ['name' => 'stage_opentostage', 'type' => 'string', 'uniq' => True ],
+			'd_stage_opentovisit' => ['name' => 'stage_opentovisit', 'type' => 'string', 'uniq' => True ],
+			'footnotes' => ['name' => 'footnotes', 'type' => 'serialize', 'uniq' => True ],
+			'hide_page_title' => ['name' => 'hide_page_title', 'type' => 'string', 'uniq' => True ],
 		],
 		'farm' => [
-
+			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
+				'r16_9'=>'16:8.38', 
+				'r1920_1080'=>'16:9', 
+				//'r260_269'=>'260.945:269.14',
+				'r4_3'=>'394.03:297.64',
+				'r10_6'=>'197.015:115.88',
+				'r155_148'=>'155:148.82', //#44
+			]],
+			'f_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
+			'f_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
+			'f_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
+			'f_general_biography' => ['name' => 'general_biography', 'type' => 'string', 'uniq' => True ],
+			'f_general_emails' => ['name' => 'eneral_emails', 'type' => 'serialize', 'uniq' => True ],
+			'f_general_farmers' => ['name' => 'general_farmers', 'type' => 'serialize', 'uniq' => True ],
+			'f_general_gallery' => ['name' => 'general_gallery', 'type' => 'post_picture', 'sizes'=>[
+				'r16_9'=>'16:8.38', 
+				'r1920_1080'=>'16:9', 
+				//'r260_269'=>'260.945:269.14',
+				'r4_3'=>'394.03:297.64',
+				'r10_6'=>'197.015:115.88',
+				'r155_148'=>'155:148.82', //#44
+			]],
+			'f_general_legal_entity' => ['name' => 'general_legal_entity', 'type' => 'string', 'uniq' => True ],
+			'f_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
+			'f_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],
+			'f_geolocation_address' => ['name' => 'geolocation_address', 'type' => 'string', 'uniq' => True ],
+			'f_geolocation_lat' => ['name' => 'geolocation_lat', 'type' => 'string', 'uniq' => True ],
+			'f_geolocation_lng' => ['name' => 'geolocation_lng', 'type' => 'string', 'uniq' => True ],
+			'f_geolocation_map' => ['name' => 'geolocation_map', 'type' => 'string', 'uniq' => True ],
+			'f_installation_period' => ['name' => '', 'type' => 'string', 'uniq' => True ],
+			'f_more_testimony' => ['name' => 'more_testimony', 'type' => 'string', 'uniq' => True ],
+			'f_transmission_farm_in_transmission' => ['name' => 'transmission_farm_in_transmission', 'type' => 'string', 'uniq' => True ],			
 		],
 		'operation' => [
-
+			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
+				'r16_9'=>'16:8.38', 
+				'r1920_1080'=>'16:9', 
+				//'r260_269'=>'260.945:269.14',
+				'r4_3'=>'394.03:297.64',
+				'r10_6'=>'197.015:115.88',
+				'r155_148'=>'155:148.82', //#44
+			]],
+			'o_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
+			'o_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
+			'o_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
+			'o_general_logotype' => ['name' => 'general_logotype', 'type' => 'string', 'uniq' => True ],
+			'o_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],			
 		],
 		'structure' => [
-
+			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
+				'r16_9'=>'16:8.38', 
+				'r1920_1080'=>'16:9', 
+				//'r260_269'=>'260.945:269.14',
+				'r4_3'=>'394.03:297.64',
+				'r10_6'=>'197.015:115.88',
+				'r155_148'=>'155:148.82', //#44
+			]],
+			's_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
+			's_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
+			's_general_email' => ['name' => 'general_email', 'type' => 'string', 'uniq' => True ],
+			's_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
+			's_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
+			's_general_referent' => ['name' => 'general_referent', 'type' => 'string', 'uniq' => True ],
+			's_internal_notes' => ['name' => 'internal_notes', 'type' => 'serialize', 'uniq' => True ],			
 		],
 	];
 
@@ -157,7 +229,6 @@ class ccpcm_data_custom extends ccpcm_object {
 
 	public function update_directory() {
 		$this->__fields = $this->get_fields();
-		$edition_id = $this->ccpcm->edition_id;
 		$args = [
 			'post_type'=>'directory',
 			'orderby'=>'post_title',
@@ -173,18 +244,167 @@ class ccpcm_data_custom extends ccpcm_object {
 			$post_id = $data['id'];
 			$data['permalink'] = get_permalink($post_id);
 			$this->jsondb->append('directory', $post_id, $data);
-			$c_posts['directory'] ++;
+			 $c_posts['directory'] ++;
 		}
 		return $c_posts;
 	}
 
-	public function update() {
-		$edition_id = $this->ccpcm->edition_id;
-		if (!$edition_id) {
-			print '<div class="ccpcm_data_notice">Please select "edition" in tool bar</div>';
-			return False;
+	public function update_farm() {
+		$this->__fields = $this->get_fields();
+		$args = [
+			'post_type'=>'farm',
+			'orderby'=>'post_title',
+			'order'=>'ASC',
+			'offset'=>0,
+			'posts_per_page'=>-1,
+    	];
+		$query = new WP_Query($args);
+		$query_data = get_posts($args);
+		$c_film = 0;
+		foreach($query_data as $data) {
+			$data = $this->get_post_data($data, 'farm');
+			$post_id = $data['id'];
+			$data['permalink'] = get_permalink($post_id);
+			$this->jsondb->append('farm', $post_id, $data);
+			 $c_posts['farm'] ++;
 		}
+		return $c_posts;
+	}
 
+	public function update_operation() {
+		$this->__fields = $this->get_fields();
+		$args = [
+			'post_type'=>'operation',
+			'orderby'=>'post_title',
+			'order'=>'ASC',
+			'offset'=>0,
+			'posts_per_page'=>-1,
+    	];
+		$query = new WP_Query($args);
+		$query_data = get_posts($args);
+		$c_film = 0;
+		foreach($query_data as $data) {
+			$data = $this->get_post_data($data, 'operation');
+			$post_id = $data['id'];
+			$data['permalink'] = get_permalink($post_id);
+			$this->jsondb->append('operation', $post_id, $data);
+			 $c_posts['operation'] ++;
+		}
+		return $c_posts;
+	}
+
+	public function update_structure() {
+		$this->__fields = $this->get_fields();
+		$args = [
+			'post_type'=>'structure',
+			'orderby'=>'post_title',
+			'order'=>'ASC',
+			'offset'=>0,
+			'posts_per_page'=>-1,
+    	];
+		$query = new WP_Query($args);
+		$query_data = get_posts($args);
+		$c_film = 0;
+		foreach($query_data as $data) {
+			$data = $this->get_post_data($data, 'structure');
+			$post_id = $data['id'];
+			$data['permalink'] = get_permalink($post_id);
+			$this->jsondb->append('structure', $post_id, $data);
+			 $c_posts['structure'] ++;
+		}
+		return $c_posts;
+	}
+
+	public function get_terms_metas($taxonomy, &$data) {
+		$term_id = $data['term_id'];
+//		foreach($this->meta_keys_terms as $t_taxonomy => $t_values) {
+		if (array_key_exists($taxonomy, $this->meta_keys_terms)) {
+			$t_values = $this->meta_keys_terms[$taxonomy];
+			foreach($t_values as $t_key => $t_infos) {
+				switch($t_infos['type']) {
+					case 'wprte':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq) {
+							$value =
+							$data[$t_infos['name']] = str_replace("\r", "", $data[$t_infos['name']]);
+							$data[$t_infos['name']] = str_replace("\n", "<br/>", $data[$t_infos['name']]);
+							# @todo: justin placer ici la création du tableau
+#							$data[$t_infos['name']] = str_replace("<!--", "{!--", $data[$t_infos['name']]);
+#							$data[$t_infos['name']] = str_replace("-->", "--}", $data[$t_infos['name']]);
+							$data[$t_infos['name']] = strip_tags($data[$t_infos['name']], $this->strip_tags_allowed);
+							$data[$t_infos['name']] = wpautop($data[$t_infos['name']]);
+							if (preg_match('/.*<aside>.*/', $data[$t_infos['name']])) {
+								$data[$t_infos['name']] = $this->convert_aside_to_img_table($data[$t_infos['name']]);
+							}
+							if (preg_match('/.*\[caption.*/', $data[$t_infos['name']])) {
+								$data[$t_infos['name']] = $this->convert_caption_to_p($data[$t_infos['name']]);
+							}
+							$data[$t_infos['name']] = $this->ccppm->catalogues->convert_html_img_inline($this->dpi, $data[$t_infos['name']]);
+						}
+						break;
+					case 'json':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq)
+							$data[$t_infos['name']] = json_decode($data[$t_infos['name']], True);
+						break;
+					case 'cmjn':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq) {
+							$data[$t_infos['name']] = explode(',', $data[$t_infos['name']]);
+							if (count($data[$t_infos['name']]) == 1)
+								$data[$t_infos['name']] = false;
+						} else {
+							foreach($data[$t_infos['name']] as $idx => $value) {
+								$data[$t_infos['name']][$idx] = explode(',', $value);
+								if (count($data[$t_infos['name']][$idx]) == 1)
+									$data[$t_infos['name']][$idx] = false;
+							}
+						}
+						break;
+					case 'picture':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq) {
+							$url = $data[$t_infos['name']];
+							if ($url) {
+								$post_id = $this->get_attachment_id($url);
+								if ( ! $post_id && array_key_exists('orginalPicture', $t_infos)) {
+									$post_id = $this->get_attachment_id($data[$t_infos['orginalPicture']]['url']);
+								}
+								$data[$t_infos['name']] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+							} else
+								$data[$t_infos['name']] = False;
+						} else {
+							$pictures = array();
+							$urls = $data[$t_infos['name']];
+							foreach($urls as $url) {
+								if ($url) {
+									$post_id = $this->get_attachment_id($url);
+									$pictures[] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+								}
+							}
+							$data[$t_infos['name']] = $pictures;
+						}
+						break;
+					default:
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						$data[$t_infos['name']] = $this->convert_special_char($data[$t_infos['name']]);
+						break;
+				}
+			}
+		}
+/*
+		print("<pre>");
+		print_r($data);
+		print("</pre>");
+*/
+	}
+
+	public function update() {
 		$this->__fields = $this->get_fields();
 
 //		$this->jsondb->remove_all();
@@ -194,6 +414,17 @@ class ccpcm_data_custom extends ccpcm_object {
 		$c_posts_tmp = $this->update_directory();
 		$c_posts = array_merge($c_posts, $c_posts_tmp);
 
+		$this->ccpcm->log('[ DATA.UPDATE ] update_farm');
+		$c_posts_tmp = $this->update_farm();
+		$c_posts = array_merge($c_posts, $c_posts_tmp);
+
+		$this->ccpcm->log('[ DATA.UPDATE ] update_operation');
+		$c_posts_tmp = $this->update_operation();
+		$c_posts = array_merge($c_posts, $c_posts_tmp);
+
+		$this->ccpcm->log('[ DATA.UPDATE ] update_structure');
+		$c_posts_tmp = $this->update_structure();
+		$c_posts = array_merge($c_posts, $c_posts_tmp);
 
 		$this->ccpcm->log('[ DATA.UPDATE ] update_terms');
 		foreach($this->terms as $type => $t_value)

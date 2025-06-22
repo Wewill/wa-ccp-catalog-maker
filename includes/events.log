@@ -87,3 +87,112 @@ directory : 19
 
 
 [ 2025-06-15 11:18:36 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 20:06:51 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 20:06:51 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 20:06:51 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 20:06:51 ] 
+directory : 19
+
+
+[ 2025-06-22 20:06:51 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 20:13:20 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 20:13:20 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 20:13:21 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 20:13:22 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 20:13:22 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 20:13:22 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 20:13:22 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+
+
+[ 2025-06-22 20:13:22 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 20:17:06 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 20:17:06 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 20:17:06 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 20:17:06 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 20:17:06 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 20:17:06 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 20:17:06 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+
+
+[ 2025-06-22 20:17:06 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 20:24:19 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 20:24:19 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 20:24:19 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 20:24:20 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 20:24:20 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 20:24:20 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 20:24:20 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+
+
+[ 2025-06-22 20:24:20 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 20:25:06 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 20:25:06 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 20:25:06 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 20:25:06 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 20:25:06 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 20:25:06 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 20:25:06 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+
+
+[ 2025-06-22 20:25:06 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 20:52:01 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 20:52:01 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 20:52:01 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 20:52:01 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 20:52:01 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 20:52:01 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 20:52:01 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+
+
+[ 2025-06-22 20:52:01 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 21:11:22 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 21:11:22 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 21:11:22 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 21:11:22 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 21:11:22 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 21:11:22 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 21:11:22 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+
+
+[ 2025-06-22 21:11:22 ] [ GENERATE ][ 9 ] Data End #
+[ 2025-06-22 21:27:31 ] [ GENERATE ][ 9 ] Data Start #
+[ 2025-06-22 21:27:31 ] [ DATA.UPDATE ] update_directory
+[ 2025-06-22 21:27:31 ] [ DATA.UPDATE ] update_farm
+[ 2025-06-22 21:27:31 ] [ DATA.UPDATE ] update_operation
+[ 2025-06-22 21:27:31 ] [ DATA.UPDATE ] update_structure
+[ 2025-06-22 21:27:31 ] [ DATA.UPDATE ] update_terms
+[ 2025-06-22 21:27:32 ] 
+directory : 19
+farm : 28
+operation : 2
+structure : 2
+geography : 115
+production : 30
+thematic : 12
+
+
+[ 2025-06-22 21:27:32 ] [ GENERATE ][ 9 ] Data End #

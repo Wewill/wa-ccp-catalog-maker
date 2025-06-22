@@ -822,6 +822,95 @@ class ccpcm_data_custom extends ccpcm_object {
 		return $c_posts;
 	}
 
+	public function get_terms_metas($taxonomy, &$data) {
+		$term_id = $data['term_id'];
+//		foreach($this->meta_keys_terms as $t_taxonomy => $t_values) {
+		if (array_key_exists($taxonomy, $this->meta_keys_terms)) {
+			$t_values = $this->meta_keys_terms[$taxonomy];
+			foreach($t_values as $t_key => $t_infos) {
+				switch($t_infos['type']) {
+					case 'wprte':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq) {
+							$value =
+							$data[$t_infos['name']] = str_replace("\r", "", $data[$t_infos['name']]);
+							$data[$t_infos['name']] = str_replace("\n", "<br/>", $data[$t_infos['name']]);
+							# @todo: justin placer ici la création du tableau
+#							$data[$t_infos['name']] = str_replace("<!--", "{!--", $data[$t_infos['name']]);
+#							$data[$t_infos['name']] = str_replace("-->", "--}", $data[$t_infos['name']]);
+							$data[$t_infos['name']] = strip_tags($data[$t_infos['name']], $this->strip_tags_allowed);
+							$data[$t_infos['name']] = wpautop($data[$t_infos['name']]);
+							if (preg_match('/.*<aside>.*/', $data[$t_infos['name']])) {
+								$data[$t_infos['name']] = $this->convert_aside_to_img_table($data[$t_infos['name']]);
+							}
+							if (preg_match('/.*\[caption.*/', $data[$t_infos['name']])) {
+								$data[$t_infos['name']] = $this->convert_caption_to_p($data[$t_infos['name']]);
+							}
+							$data[$t_infos['name']] = $this->ccppm->catalogues->convert_html_img_inline($this->dpi, $data[$t_infos['name']]);
+						}
+						break;
+					case 'json':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq)
+							$data[$t_infos['name']] = json_decode($data[$t_infos['name']], True);
+						break;
+					case 'cmjn':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq) {
+							$data[$t_infos['name']] = explode(',', $data[$t_infos['name']]);
+							if (count($data[$t_infos['name']]) == 1)
+								$data[$t_infos['name']] = false;
+						} else {
+							foreach($data[$t_infos['name']] as $idx => $value) {
+								$data[$t_infos['name']][$idx] = explode(',', $value);
+								if (count($data[$t_infos['name']][$idx]) == 1)
+									$data[$t_infos['name']][$idx] = false;
+							}
+						}
+						break;
+					case 'picture':
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						if ($uniq) {
+							$url = $data[$t_infos['name']];
+							if ($url) {
+								$post_id = $this->get_attachment_id($url);
+								if ( ! $post_id && array_key_exists('orginalPicture', $t_infos)) {
+									$post_id = $this->get_attachment_id($data[$t_infos['orginalPicture']]['url']);
+								}
+								$data[$t_infos['name']] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+							} else
+								$data[$t_infos['name']] = False;
+						} else {
+							$pictures = array();
+							$urls = $data[$t_infos['name']];
+							foreach($urls as $url) {
+								if ($url) {
+									$post_id = $this->get_attachment_id($url);
+									$pictures[] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+								}
+							}
+							$data[$t_infos['name']] = $pictures;
+						}
+						break;
+					default:
+						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
+						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
+						$data[$t_infos['name']] = $this->convert_special_char($data[$t_infos['name']]);
+						break;
+				}
+			}
+		}
+/*
+		print("<pre>");
+		print_r($data);
+		print("</pre>");
+*/
+	}
+
 	public function get_film_ids_by_section_ids($index_film_section, $section_ids) {
 		$film_ids = [];
 		foreach($section_ids as $section_id)
