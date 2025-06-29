@@ -1,9 +1,12 @@
 <?php
 
+//@ini_set( 'display_errors', 1 );
+
 class ccpcm {
 	private $modules = ['display', 'data', 'catalogues', 'templates', 'integrator', 'custom', 'export'];
 	public $edition_slug = False;
 	public $edition_id = False;
+	private $objects = [];
 
 	function __construct($edition_slug = False, $edition_id = False) {
 		global $ccp_editions_filter;
@@ -17,15 +20,19 @@ class ccpcm {
 			$this->edition_id = $edition_id;
 	}
 
+	public function __set($name, $value) { 
+		$this->objects[$name] = $value;
+	}
+
 	function __get($name) {
-		if (property_exists($this, $name))
-			return $this->$name;
+		if (array_key_exists($name, $this->objects))
+			return $this->objects[$name];
 		elseif (in_array($name, $this->modules)) {
-			require_once("ccpcm-${name}.inc.php");
+			require_once(__DIR__."/ccpcm-${name}.inc.php");
 			$c = "ccpcm_${name}";
 			if (class_exists($c)) {
-				$this->$name = new $c($this);
-				return $this->$name;
+				$this->objects[$name] = new $c($this);
+				return $this->objects[$name];
 			}
 		}
 		return False;

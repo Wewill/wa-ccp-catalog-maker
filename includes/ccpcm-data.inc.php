@@ -1,7 +1,7 @@
 <?php
 
-if (file_exists(plugin_dir_path(__FILE__).'../custom/ccpcm-data-'.CCPCM_PROJECT.'.inc.php')) {
-	require_once(plugin_dir_path(__FILE__).'../custom/ccpcm-data-'.CCPCM_PROJECT.'.inc.php');
+if (file_exists(__DIR__.'/../custom/ccpcm-data-'.CCPCM_PROJECT.'.inc.php')) {
+	require_once(__DIR__.'/../custom/ccpcm-data-'.CCPCM_PROJECT.'.inc.php');
 } else {
 	class ccpcm_data_custom extends ccpcm_object {
 

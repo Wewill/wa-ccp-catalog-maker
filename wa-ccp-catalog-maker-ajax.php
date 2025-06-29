@@ -14,5 +14,5 @@ if (array_key_exists('method', $_POST)) {
     $data = [];
   $ccpcm = new ccpcm($edition_slug, $edition_id);
   
-  print(json_encode($ccpcm->run_ajax($method, $data)));
+  print(json_encode($ccpcm->run_ajax($method, $data), True));
 }

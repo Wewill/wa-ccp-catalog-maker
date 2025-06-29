@@ -1,7 +1,8 @@
 <?php
+// @ini_set( 'display_errors', 1 );
 
-if (file_exists(plugin_dir_path(__FILE__).'../custom/ccpcm-templates-'.CCPCM_PROJECT.'.inc.php')) {
-	require_once(plugin_dir_path(__FILE__).'../custom/ccpcm-templates-'.CCPCM_PROJECT.'.inc.php');
+if (file_exists(__DIR__.'/../custom/ccpcm-templates-'.CCPCM_PROJECT.'.inc.php')) {
+	require_once(__DIR__.'/../custom/ccpcm-templates-'.CCPCM_PROJECT.'.inc.php');
 } else {
 	class ccpcm_templates_custom extends ccpcm_object {
 
@@ -13,6 +14,9 @@ class ccpcm_templates extends ccpcm_templates_custom {
 		'templates' => array(),
     'catalogues' => array(),
 	);
+
+  public $db_path;
+  public $jsondb;
 
   public $quick_names = array();
 
@@ -160,7 +164,6 @@ class ccpcm_templates extends ccpcm_templates_custom {
     $elements_ids = (array_key_exists('elements_ids', $data['template']))?array_filter(explode(',', $data['template']['elements_ids'])):[];
     if (array_key_exists('no_data', $options) and $options['no_data'])
       return $data;
-
     if (array_key_exists('type', $data['template']))
       $data['data'] = $this->get_random_data($data['template']['type'], $elements_count, $elements_ids);
     else

@@ -2,6 +2,9 @@
 
 class jsondb {
 	private $db_path = "/tmp/";
+	private $indexes;
+	private $quick_names;
+	private $__quick_names_cache;
 
 	function __construct($db_path, $indexes = array(), $quick_names = array()) {
 		$this->db_path = $db_path;

@@ -26,6 +26,7 @@ var ccpcm_global = {};
   var ccpcm_templates_select_update = function(id) {
     var name = id;
     var callback_get_templates = function(data) {
+      console.log(data);
       ccpcm_templates_select.empty();
       ccpcm_templates_select.append('<option value=""> *** Select a template ***</option>');
       $(data).each(function(idx, value) {
