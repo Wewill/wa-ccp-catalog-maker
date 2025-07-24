@@ -18,7 +18,11 @@ $ccpcm = False;
 
 function fct_wa_ccp_catalog_maker() {
 	global $ccpcm;
-	require_once('config.inc.php');
+	if (file_exists(__DIR__ . '/config.inc.php')) {
+		require_once(__DIR__ . '/config.inc.php');
+	} else {
+		wp_die('WA CCP Catalog Maker: Required configuration file is missing: config.inc.php', 'Configuration Error', array('response' => 500));
+	}
 	require_once('includes/ccpcm.inc.php');
 	if (defined("EDITION_SLUG"))
 		$ccpcm = new ccpcm(EDITION_SLUG, EDITION_ID);
