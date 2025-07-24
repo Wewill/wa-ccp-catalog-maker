@@ -9,6 +9,5 @@ class ccpcm_catalogues_custom extends ccpcm_object {
         'toc'=>'Toc',
         'index'=>'Index',
         'page_break'=>'Page break',
-        'gravityform_winner' => 'Gravityform Winner',
     );
 }
