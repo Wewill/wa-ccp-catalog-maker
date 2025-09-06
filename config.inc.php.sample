@@ -5,3 +5,4 @@ define('CCPCM_RELATIVE_JSONDB_PATH', '.');
 define('CCPCM_RELATIVE_TEMPLATES_PATH', '.');
 #define('CCPCM_RELATIVE_JSONDB_PATH', '../../cache/ccpcm/jsondb');
 #define('CCPCM_RELATIVE_TEMPLATES_PATH', '../../cache/ccpcm/templates');
+define('IS_PLANNING', 0);

@@ -24,10 +24,10 @@ class ccpcm_templates extends ccpcm_templates_custom {
     parent::__construct($ccpcm);
 		$edition_slug = $this->ccpcm->edition_slug;
 		require_once('jsondb.inc.php');
-		$this->db_path = sprintf("%s/%s/%s/", dirname(__FILE__), "../".CCPCM_RELATIVE_TEMPLATES_PATH."/templates/", $edition_slug);
-		if (!is_dir($this->db_path))
-			if (!mkdir($this->db_path, 0755, True))
-				printf("Can't create %s<br/>", $this->db_path);
+		$this->db_path = sprintf("%s/%s/", CCPCM_RELATIVE_TEMPLATES_PATH."/templates/", $edition_slug);
+		if (!is_dir(__DIR__.'/'.$this->db_path))
+			if (!mkdir(__DIR__.'/'.$this->db_path, 0755, True))
+				printf("Can't create %s<br/>", __DIR__.'/'.$this->db_path);
 		$this->jsondb = new jsondb($this->db_path, $this->indexes, $this->quick_names);
 	}
 

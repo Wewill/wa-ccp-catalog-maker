@@ -80,7 +80,7 @@ dpi_selector.on('change', function() {
 		if ($_GET['emptyallcachestorage']) {
 			foreach($dpis as $dpi) {
 				$this->ccpcm->data->redefine($dpi);
-				$this->ccpcm->data->jsondb->remove_all($this->ccpcm->data->storage_path);
+				$this->ccpcm->data->jsondb->remove_all(__DIR__.'/'.$this->ccpcm->data->storage_path);
 				die('9dpi only for moment');
 			}
 		}
@@ -131,10 +131,12 @@ dpi_selector.on('change', function() {
 		}
 		echo "</div>";
 		echo "<div id='ccpcm_data_container'>";
-		printf("<h2>Génération du planning</h2>");
-		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=planning">(Re)générer le planning</a> ');
-		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=planning-section">(Re)générer les sections du planning (DEV)</a> ');
-		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=projection">(Re)générer les projections (DEV)</a> ');
+		if (IS_PLANNING) {
+			printf("<h2>Génération du planning</h2>");
+			printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=planning">(Re)générer le planning</a> ');
+			printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=planning-section">(Re)générer les sections du planning (DEV)</a> ');
+			printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&generate=projection">(Re)générer les projections (DEV)</a> ');
+		}
 		printf("<h2>Vider le cache</h2>");
 		echo "<p><strong>En cas de soucis,</strong> cette fonction permet de vider l'ensmeble des données et images et de repartir de zéro.</p>";
 		printf ('<a class="button button-primary" href="?page=ccpcm-generate-data&emptyallcache=true">Vider le cache données</a> ');
@@ -189,7 +191,7 @@ dpi_selector.on('change', function() {
 		if ($filter_name) {
 			$path = sprintf('%s/../export_filters/%s/%s/%s.json', 
 				dirname(__FILE__),
-				$ccp_editions_filter->get_current_edition(),
+				$this->ccpcm->edition_slug,
 				$current_type, 
 				$filter_name
 			);
@@ -237,7 +239,7 @@ dpi_selector.on('change', function() {
 		if ($current_type) {
 			$path = sprintf('%s/../export_filters/%s/%s', 
 				dirname(__FILE__),
-				$ccp_editions_filter->get_current_edition(),
+				$this->ccpcm->edition_slug,
 				$current_type, 
 			);
 			if ($filter_name) {

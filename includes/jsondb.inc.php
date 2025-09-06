@@ -6,20 +6,21 @@ class jsondb {
 	private $quick_names;
 	private $__quick_names_cache;
 
-	function __construct($db_path, $indexes = array(), $quick_names = array()) {
+	function __construct($db_path, $indexes = [], $quick_names = []) {
 		$this->db_path = $db_path;
 		$this->indexes = $indexes;
 		$this->quick_names = $quick_names;
-		$this->__quick_names_cache = array();
+		$this->__quick_names_cache = [];
 	}
 
 	function append($type, $id, $data) {
 		$this->append_index($type, $id, $data);
-		$path = sprintf("%s/%s/", $this->db_path, $type);
+		$pathRelative = sprintf("%s/%s/", $this->db_path, $type);
+		$path = sprintf("%s/%s/", __DIR__.'/'.$this->db_path, $type);
 		if (!is_dir($path))
 			mkdir($path, 0755, True);
 		$file = sprintf("%s/%s.json", $path, $id);
-		$this->register($type, 'path', $path);
+		$this->register($type, 'path', $pathRelative);
 		file_put_contents($file, json_encode($data, True));
 		$this->append_quick_names($type, $id, $data);
 	}
@@ -27,7 +28,7 @@ class jsondb {
 	function delete($type, $id) {
 		$data = $this->get($type, $id);
 		$this->delete_index($type, $id, $data);
-		$path = sprintf("%s/%s/", $this->db_path, $type);
+		$path = sprintf("%s/%s/", __DIR__.'/'.$this->db_path, $type);
 		$file = sprintf("%s/%s.json", $path, $id);
 		if (file_exists($file)) {
 			unlink($file);
@@ -37,13 +38,13 @@ class jsondb {
 	}
 
 	function get($type, $id) {
-		$path = sprintf("%s/%s/", $this->db_path, $type);
+		$path = sprintf("%s/%s/", __DIR__.'/'.$this->db_path, $type);
 		$file = sprintf("%s/%s.json", $path, $id);
 		if (file_exists($file)) {
 			$data = file_get_contents($file);
 			return json_decode($data, True);
 		}
-		return array();
+		return [];
 	}
 
 	function append_quick_names($type, $id, $data) {
@@ -54,13 +55,14 @@ class jsondb {
 				foreach($fields as $field)
 					$name[] = $data[$field];
 				$name = implode(' ', $name);
-				$file = sprintf("%s/names_%s.json", $this->db_path, $type);
-				$this->register($type, 'names', $file);
+				$file = sprintf("%s/names_%s.json", __DIR__.'/'.$this->db_path, $type);
+				$fileRelative = sprintf("%s/names_%s.json", $this->db_path, $type);
+				$this->register($type, 'names', $fileRelative);
 				if (file_exists($file)) {
 					$names = file_get_contents($file);
 					$names = json_decode($names, True);
 				} else {
-					$names = array();
+					$names = [];
 				}
 				$names[$id] = $name;
 				file_put_contents($file, json_encode($names, True));
@@ -71,12 +73,12 @@ class jsondb {
 	function get_quick_names($type) {
 		if (array_key_exists($type, $this->quick_names)) {
 			if (!array_key_exists($type, $this->__quick_names_cache)) {
-				$file = sprintf("%s/names_%s.json", $this->db_path, $type);
+				$file = sprintf("%s/names_%s.json", __DIR__.'/'.$this->db_path, $type);
 				if (file_exists($file)) {
 					$names = file_get_contents($file);
 					$names = json_decode($names, True);
 				} else {
-					$names = array();
+					$names = [];
 				}
 				$this->__quick_names_cache[$type] = $names;
 				return $this->__quick_names_cache[$type];
@@ -88,12 +90,12 @@ class jsondb {
 	function get_quick_name($type, $id) {
 		if (array_key_exists($type, $this->quick_names)) {
 			if (!array_key_exists($type, $this->__quick_names_cache)) {
-				$file = sprintf("%s/names_%s.json", $this->db_path, $type);
+				$file = sprintf("%s/names_%s.json", __DIR__.'/'.$this->db_path, $type);
 				if (file_exists($file)) {
 					$names = file_get_contents($file);
 					$names = json_decode($names, True);
 				} else {
-					$names = array();
+					$names = [];
 				}
 				$this->__quick_names_cache[$type] = $names;
 			}
@@ -107,34 +109,35 @@ class jsondb {
 	}
 
 	function get_index($type, $t_name) {
-		$file = sprintf("%s/index_%s_%s.json", $this->db_path, $type, $t_name);
+		$file = sprintf("%s/index_%s_%s.json", __DIR__.'/'.$this->db_path, $type, $t_name);
 		if (file_exists($file)) {
 			$data = file_get_contents($file);
 			$data = json_decode($data, True);
 			return $data;
 		}
-		return array();
+		return [];
 	}
 
 	function get_ids($type) {
-		$file = sprintf("%s/ids_%s.json", $this->db_path, $type);
+		$file = sprintf("%s/ids_%s.json", __DIR__.'/'.$this->db_path, $type);
 		if (file_exists($file)) {
 			$data = file_get_contents($file);
 			$data = json_decode($data, True);
 			return $data;
 		}
-		return array();
+		return [];
 	}
 
 	function append_index_forced($child_type, $child_ids, $parent_type, $parent_id) {
 		if (array_key_exists($child_type, $this->indexes) && array_key_exists($parent_type, $this->indexes[$child_type])) {
-			$file = sprintf("%s/index_%s_%s.json", $this->db_path, $child_type, $parent_type);
-			$this->register($t_name, 'index', $file);
+			$file = sprintf("%s/index_%s_%s.json", __DIR__.'/'.$this->db_path, $child_type, $parent_type);
+			$fileRelative = sprintf("%s/index_%s_%s.json", $this->db_path, $child_type, $parent_type);
+			$this->register($t_name, 'index', $fileRelative);
 			if (file_exists($file)) {
 				$index = file_get_contents($file);
 				$index = json_decode($index, True);
 			} else {
-				$index = array();
+				$index = [];
 			}
 			if (array_key_exists($parent_id, $index)) {
 				$index[$parent_id] = array_unique(array_merge($index[$parent_id], $child_ids));
@@ -150,13 +153,14 @@ class jsondb {
 		if (array_key_exists($type, $this->indexes)) {
 			foreach($this->indexes[$type] as $t_name => $i_path) {
 				$k_index = $this->get_data_index_for_append($i_path, $data);
-				$file = sprintf("%s/index_%s_%s.json", $this->db_path, $type, $t_name);
-				$this->register($t_name, 'index', $file);
+				$file = sprintf("%s/index_%s_%s.json", __DIR__.'/'.$this->db_path, $type, $t_name);
+				$fileRelative = sprintf("%s/index_%s_%s.json", $this->db_path, $type, $t_name);
+				$this->register($t_name, 'index', $fileRelative);
 				if (file_exists($file)) {
 					$index = file_get_contents($file);
 					$index = json_decode($index, True);
 				} else {
-					$index = array();
+					$index = [];
 				}
 				if ($k_index !== False) {
 					foreach($k_index as $v_index) {
@@ -176,13 +180,14 @@ class jsondb {
 				}
 			}
 		}
-		$file = sprintf("%s/ids_%s.json", $this->db_path, $type, $t_name);
-		$this->register($type, 'ids', $file);
+		$file = sprintf("%s/ids_%s.json", __DIR__.'/'.$this->db_path, $type, $t_name);
+		$fileRelative = sprintf("%s/ids_%s.json", $this->db_path, $type, $t_name);
+		$this->register($type, 'ids', $fileRelative);
 		if (file_exists($file)) {
 			$index = file_get_contents($file);
 			$index = json_decode($index, True);
 		} else {
-			$index = array();
+			$index = [];
 		}
 		if (!in_array($id, $index))
 			$index[] = $id;
@@ -194,13 +199,14 @@ class jsondb {
 		if (array_key_exists($type, $this->indexes)) {
 			foreach($this->indexes[$type] as $t_name => $i_path) {
 				$k_index = $this->get_data_index_for_append($i_path, $data);
-				$file = sprintf("%s/index_%s_%s.json", $this->db_path, $type, $t_name);
-				$this->register($t_name, 'index', $file);
+				$file = sprintf("%s/index_%s_%s.json", __DIR__.'/'.$this->db_path, $type, $t_name);
+				$fileRelative = sprintf("%s/index_%s_%s.json", $this->db_path, $type, $t_name);
+				$this->register($t_name, 'index', $fileRelative);
 				if (file_exists($file)) {
 					$index = file_get_contents($file);
 					$index = json_decode($index, True);
 				} else {
-					$index = array();
+					$index = [];
 				}
 				if ($k_index !== False) {
 					foreach($k_index as $v_index) {
@@ -214,13 +220,14 @@ class jsondb {
 				}
 			}
 		}
-		$file = sprintf("%s/ids_%s.json", $this->db_path, $type, $t_name);
-		$this->register($type, 'ids', $file);
+		$file = sprintf("%s/ids_%s.json", __DIR__.'/'.$this->db_path, $type, $t_name);
+		$fileRelative = sprintf("%s/ids_%s.json", $this->db_path, $type, $t_name);
+		$this->register($type, 'ids', $fileRelative);
 		if (file_exists($file)) {
 			$index = file_get_contents($file);
 			$index = json_decode($index, True);
 		} else {
-			$index = array();
+			$index = [];
 		}
 		$index = array_diff($index, [$id]);
 		$index = array_values($index);
@@ -229,14 +236,14 @@ class jsondb {
 
 
 	function register($name, $type, $path_or_file) {
-		if (!is_dir($this->db_path))
-			mkdir($this->db_path);
-		$file = sprintf("%s/_.json", $this->db_path);
+		if (!is_dir(__DIR__.'/'.$this->db_path))
+			mkdir(__DIR__.'/'.$this->db_path);
+		$file = sprintf("%s/_.json", __DIR__.'/'.$this->db_path);
 		if (file_exists($file)) {
 			$data = file_get_contents($file);
 			$data = json_decode($data, True);
 		} else {
-			$data = array();
+			$data = [];
 		}
 		if (!array_key_exists($name, $data)) {
 			$data[$name] = array(
@@ -252,7 +259,7 @@ class jsondb {
 	}
 
 	function get_data_index_for_append($a_path, $data) {
-		$d = array();
+		$d = [];
 		foreach((array) $a_path as $i_path) {
 			$tmp = explode('@', $i_path);
 			if (count($tmp) == 1) {
@@ -280,7 +287,7 @@ class jsondb {
 
 	function remove_all($src = False) {
 		if (!$src)
-			$src = $this->db_path;
+			$src = __DIR__.'/'.$this->db_path;
 		$dir = opendir($src);
 		while(false !== ( $file = readdir($dir)) ) {
 			if (( $file != '.' ) && ( $file != '..' )) {

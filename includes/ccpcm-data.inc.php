@@ -66,15 +66,15 @@ class ccpcm_data extends ccpcm_data_custom {
 
 		$this->picture_max_size = $this->picture_max_sizes_available[$this->dpi];
 
-		$this->db_path = sprintf("%s/%s/%s/%s/", dirname(__FILE__), "../".CCPCM_RELATIVE_JSONDB_PATH."/jsondb/", $edition_slug, $this->dpi);
-		if (!is_dir($this->db_path))
-			if (!mkdir($this->db_path, 0755, True))
-				printf("Can't create %s<br/>", $this->db_path);
+		$this->db_path = sprintf("%s/%s/%s/", CCPCM_RELATIVE_JSONDB_PATH."/jsondb/", $edition_slug, $this->dpi);
+		if (!is_dir(__DIR__ .'/'. $this->db_path))
+			if (!mkdir(__DIR__ .'/'. $this->db_path, 0755, True))
+				printf("Can't create %s<br/>", __DIR__ .'/'. $this->db_path);
 
-		$this->storage_path = sprintf("%s/%s/%s/%s-storage/", dirname(__FILE__), "../".CCPCM_RELATIVE_JSONDB_PATH."/jsondb/", $edition_slug, $this->dpi);
-		if (!is_dir($this->storage_path))
-			if (!mkdir($this->storage_path, 0755, True))
-				printf("Can't create %s<br/>", $this->storage_path);
+		$this->storage_path = sprintf("%s/%s/%s-storage/", CCPCM_RELATIVE_JSONDB_PATH."/jsondb/", $edition_slug, $this->dpi);
+		if (!is_dir(__DIR__ .'/'. $this->storage_path))
+			if (!mkdir(__DIR__ .'/'. $this->storage_path, 0755, True))
+				printf("Can't create %s<br/>", __DIR__ .'/'. $this->storage_path);
 
 		$this->jsondb = new jsondb($this->db_path, $this->indexes, $this->quick_names);
 	}
@@ -413,7 +413,7 @@ class ccpcm_data extends ccpcm_data_custom {
 		$file_dst = sprintf("%s-%s", $file, $add_md5);
 		$m1 = substr($file, 0, 1);
 		$m2 = substr($file, 1, 2);
-		$path = sprintf("%s/%s/%s/", $this->storage_path, $m1, $m2);
+		$path = sprintf("%s/%s/%s/", __DIR__.'/'.$this->storage_path, $m1, $m2);
 		$filename_src = sprintf('%s/%s', $path, $file);
 		$filename_dst = sprintf('%s/%s', $path, $file_dst);
 		if (!file_exists($filename_dst) or filemtime($filename_src) > filemtime($filename_dst)) {
@@ -460,11 +460,12 @@ class ccpcm_data extends ccpcm_data_custom {
 			$file = $md5;
 		$m1 = substr($md5, 0, 1);
 		$m2 = substr($md5, 1, 2);
-		$path = sprintf("%s/%s/%s/", $this->storage_path, $m1, $m2);
+		$path = sprintf("%s/%s/%s/", __DIR__.'/'.$this->storage_path, $m1, $m2);
+		$pathRelative = sprintf("%s/%s/%s/", $this->storage_path, $m1, $m2);
 		if (!is_dir($path))
 			if (!mkdir($path, 0755, True))
 				printf("Can't create %s<br/>", $path);
-		$filename = sprintf("%s%s", $path, $file);
+		$filename = sprintf("%s%s", $pathRelative, $file);
 		return ['filename'=>$filename, 'md5'=>$md5, 'file'=>$file, 'path'=>$path];
 	}
 
@@ -516,7 +517,7 @@ class ccpcm_data extends ccpcm_data_custom {
 		if ($url == '')
 			return '';
 		$url_parse = parse_url($url);
-		$path = dirname(__FILE__).'/../../../..';
+		$path = __DIR__.'/../../../..';
 		$file = sprintf("%s%s", $path, $url_parse['path']);
 		if ($sizes === False) {
 			$data = $this->store_file_get_data($url);

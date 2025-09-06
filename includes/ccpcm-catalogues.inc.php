@@ -135,7 +135,7 @@ class ccpcm_catalogues extends ccpcm_catalogues_custom {
 		print('</div>');
 
 		print('<div id="ccpcm_catalogue_popup_data" class="ccpcm_catalogue_popup_type">');
-		//print('<div class="ccpcm_catalogue_popup_comment"><span class="title">Planning :</span> attention, le template doit être en data/unique et non en data/multiple</div>');
+		if (IS_PLANNING) print('<div class="ccpcm_catalogue_popup_comment"><span class="title">Planning :</span> attention, le template doit être en data/unique et non en data/multiple</div>');
 		print('<div class="ccpcm_catalogue_popup_left">Designation name : </div>');
 		print('<div class="ccpcm_catalogue_popup_right"><select id="ccpcm_catalogue_popup_data_select"></select></div>');
 		print('<div class="ccpcm_catalogue_popup_left">Order : </div>');

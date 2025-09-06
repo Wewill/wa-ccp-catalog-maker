@@ -101,8 +101,8 @@ class ccpcm_data_custom extends ccpcm_object {
 			'd_knowledge_installation_period' => ['name' => 'knowledge_installation_period', 'type' => 'string', 'uniq' => True ],
 			'd_knowledge_knowledge_ap' => ['name' => 'knowledge_knowledge_ap', 'type' => 'string', 'uniq' => True ],
 			'd_knowledge_testimony' => ['name' => 'knowledge_testimony', 'type' => 'string', 'uniq' => True ],
-			'd_knowledge_viabilitys' => ['name' => 'knowledge_viabilitys', 'type' => 'serialize', 'uniq' => True ],
-			'd_knowledge_vivabilitys' => ['name' => 'knowledge_vivabilitys', 'type' => 'serialize', 'uniq' => True ],
+			'd_knowledge_viabilitys' => ['name' => 'knowledge_viabilitys', 'type' => 'string', 'uniq' => False ],
+			'd_knowledge_vivabilitys' => ['name' => 'knowledge_vivabilitys', 'type' => 'string', 'uniq' => False ],
 			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
 			'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
 			'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
@@ -660,7 +660,15 @@ class ccpcm_data_custom extends ccpcm_object {
 							case 'serialize':
 								$vs = [];
 								if (array_key_exists($name, $element) && is_array($element[$name])) foreach($element[$name] as $v) {
-									$vs[] = implode(' ', array_values($v));
+#									print("$name => ");
+#									print_r($v);
+#									print ("<br/>");
+									if (is_string($v))
+										$v = unserialize($v);
+									if (is_array($v))
+										$vs[] = implode(' ', array_values($v));
+									else
+										$vs[] = $v;
 								}
 								$value = implode(', ', $vs);
 								break;
@@ -677,7 +685,10 @@ class ccpcm_data_custom extends ccpcm_object {
 								$value = ($element[$name] && array_key_exists('url', $element[$name]))?$element[$name]['url']:"";
 								break;
 							default:
-								$value = $element[$name];
+								if ($structure[$header['field']]['uniq'] === False && is_array($element[$name]))
+									$value = implode(', ', array_filter($element[$name]));
+								else
+									$value = $element[$name];
 								break;
 						}
 					} else {
