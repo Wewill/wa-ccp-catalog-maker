@@ -65,8 +65,8 @@ class ccpcm {
 //    wp_enqueue_script('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.js');
 //    wp_enqueue_script('codemirror_js', plugin_dir_url(__FILE__).'../bower_components/codemirror/mode/javascript/javascript.js');
 
-		wp_enqueue_script('pdfmake_fonts', plugin_dir_url(__FILE__).'../js/pdfmake_fonts.js', ['pdfmake']);
-		wp_enqueue_script('pdfmake_fonts_files', plugin_dir_url(__FILE__).'../js/vfs_fonts.js', ['pdfmake_fonts']);
+		wp_enqueue_script('pdfmake_fonts', plugin_dir_url(__FILE__).'../custom/'.CCPCM_PROJECT.'/js/pdfmake_fonts.js', ['pdfmake']);
+		wp_enqueue_script('pdfmake_fonts_files', plugin_dir_url(__FILE__).'../custom/'.CCPCM_PROJECT.'/js/vfs_fonts.js', ['pdfmake_fonts']);
 
 		wp_enqueue_script('htmltopdfmake', plugin_dir_url(__FILE__).'../node_modules/html-to-pdfmake/browser.js', ['pdfmake']);
 		wp_enqueue_script('canvas2svg', plugin_dir_url(__FILE__).'../js/canvas2svg.js');
