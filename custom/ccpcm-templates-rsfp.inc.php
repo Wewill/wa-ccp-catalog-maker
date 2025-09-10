@@ -63,7 +63,28 @@ class ccpcm_templates_custom extends ccpcm_object {
             $t_ids[] = $id;
             $d = $this->ccpcm->data->jsondb->get($type, $id);
             switch($type) {
-
+                case 'thematic':
+                    $index = $this->ccpcm->data->jsondb->get_index('directory', 'thematic');
+                    $directories = [];
+                    if (array_key_exists($id, $index)) {
+                        $d_ids = $index[$id];
+                        foreach($d_ids as $d_id) {
+                            $directory = $this->ccpcm->data->jsondb->get('directory', $d_id);
+                            $this->ccpcm->custom->append_film_additionnal_fields($directory);
+                            $directories[] = $directory;
+                        }
+                    }
+                    $d['directories'] = $directories;
+                    unset($directories);
+                    $order = 'order';
+/*
+                    if (array_key_exists('ccppto_film', $d) && array_key_exists('films', $d))
+                        $d['films'] = $this->ccpcm->custom->apply_post_in_taxonomy_order($d['ccppto_film'], $d['directories']);
+                    else
+                        $d['films'] = [];
+*/
+                    $d['directories'] = $this->ccpcm->catalogues->get_catalogue_data_order_by($d['directories'], $order);
+                    break;
             }
             $data[] = $d;
         }

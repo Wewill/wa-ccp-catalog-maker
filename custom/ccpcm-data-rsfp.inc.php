@@ -18,7 +18,7 @@ class ccpcm_data_custom extends ccpcm_object {
 
 	public $indexes = array(
 		'directory' => [
-
+			'thematic' => 'thematic@term_id',
 		],
 		'farm' => [
 
