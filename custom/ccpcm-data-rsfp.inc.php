@@ -33,6 +33,7 @@ class ccpcm_data_custom extends ccpcm_object {
 
 	public $quick_names = array(
 		'directory' => ['post_title'],
+		'thematic' => array('name'),
 		'farm' => ['post_title'],
 		'operation' => ['post_title'],
 		'structure' => ['post_title'],
