@@ -465,7 +465,7 @@ class ccpcm_data extends ccpcm_data_custom {
 		if (!is_dir($path))
 			if (!mkdir($path, 0755, True))
 				printf("Can't create %s<br/>", $path);
-		$filename = sprintf("%s%s", $pathRelative, $file);
+		$filename = sprintf("%s%s", $path, $file);
 		return ['filename'=>$filename, 'md5'=>$md5, 'file'=>$file, 'path'=>$path];
 	}
 
