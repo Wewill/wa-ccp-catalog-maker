@@ -45,13 +45,24 @@ class ccpcm {
 	}
 
 	public function shortcode($attrs) {
-		var_dump($attrs);
-		die();
-		$atts = shortcode_atts( array(
-			'id' => get_current_user_id(),
-		), $atts, 'prenom' );
+		if (!array_key_exists('method', $attrs))
+			throw new \Exception('method attribute not defined in ccpcm shortcode');
+		$html = '';
+		switch($attrs['method']) {
+			case 'integrator_button':
+				$this->display_integrator(True);
+				$attrs = shortcode_atts( [
+					'template' => '',
+					'master'=>'Master_A4',
+					'id' => get_the_ID(),
+					'title' => 'Voir le PDF',
+					'class' => 'ccpcm-integrator-button',
+				], $attrs, 'shortcode');
+				$html = sprintf('<a class="%s" onclick="ccpcm_integrator_download_pdf(\'%s\', \'%s\', {\'form_id\' : %s});">%s</a>', $attrs['class'],  $attrs['master'], $attrs['template'], $attrs['id'], $attrs['title']);
+				break;
+		}	
 		
-		return 'BUTTON';
+		return $html;
 	}
 
 	public function log($msg) {
@@ -69,7 +80,7 @@ class ccpcm {
 //		wp_enqueue_script('pdfmake_extra');
 		print ('<script>var edition_slug = "'.$this->edition_slug.'"; var edition_id = "'.$this->edition_id.'"; </script>');
 		wp_enqueue_script('pdfmake', plugin_dir_url(__FILE__).'../bower_components/pdfmake/build/pdfmake.js');
-		wp_enqueue_style('ccpcm_fonts', plugin_dir_url(__FILE__).'../fonts/fonts.css');
+		wp_enqueue_style('ccpcm_fonts', plugin_dir_url(__FILE__).'../custom/'.CCPCM_PROJECT.'/fonts/fonts.css');
 
 //    wp_enqueue_style('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.css');
 //    wp_enqueue_script('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.js');
@@ -176,6 +187,7 @@ class ccpcm {
 					$inputs = [];
 				$dpi = $data['dpi'];
 				$this->data->redefine($dpi);
+				$template = str_replace('-', '_', $template);
 				return $this->integrator->$template($inputs, $dpi);
 				break;
 			case 'get_catalogue_data_by_type_and_id':
