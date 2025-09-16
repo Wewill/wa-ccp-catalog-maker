@@ -40,9 +40,19 @@ class ccpcm {
 
 	function run() {
 		# non ajax
+		add_shortcode( 'ccpcm', [$this, 'shortcode'] );
 		$this->display->init_menu();
 	}
 
+	public function shortcode($attrs) {
+		var_dump($attrs);
+		die();
+		$atts = shortcode_atts( array(
+			'id' => get_current_user_id(),
+		), $atts, 'prenom' );
+		
+		return 'BUTTON';
+	}
 
 	public function log($msg) {
 		if (is_array($msg) || is_object($msg))
