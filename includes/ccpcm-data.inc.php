@@ -663,8 +663,10 @@ class ccpcm_data extends ccpcm_data_custom {
 		$days = array('DIMANCHE', 'LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI', 'SAMEDI');
 		$id = $data->ID;
 		$content = $data->post_content;
-		$content = str_replace("\r", "", $content);
-		$content = str_replace("\n", "<br/>", $content);
+		if (! $this->is_gutenberg) {
+			$content = str_replace("\r", "", $content);
+			$content = str_replace("\n", "<br/>", $content);
+		}
 //		$content = strip_tags($content, '<br><i><strong><b><u><p><ul><li><em>');
 		$content = strip_tags($content, $this->strip_tags_allowed);
 		$content = $this->ccpcm->catalogues->convert_html_img_inline($this->dpi, $content);

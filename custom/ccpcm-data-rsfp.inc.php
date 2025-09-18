@@ -14,6 +14,8 @@ class ccpcm_data_custom extends ccpcm_object {
 
     public $dpi = 9;
 
+	public $is_gutenberg = True;
+
     public $picture_max_size = ['width'=>52.5, 'height'=>74.5]; // 9 dpi
 
 	public $indexes = array(

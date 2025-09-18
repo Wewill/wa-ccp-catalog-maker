@@ -13,6 +13,7 @@ class ccpcm_data_custom extends ccpcm_object {
     public $strip_tags_allowed = '<br><i><strong><b><img><u><ul><li><em><h1><h2><h3><h4><h5><h6><p><span><aside>'; // ajout wil <h4> + suppression <p> pour <p style="text-align: right;"> align right //
 
     public $dpi = 9;
+	public $is_gutenberg = False;
 
     public $picture_max_size = ['width'=>52.5, 'height'=>74.5]; // 9 dpi
 
