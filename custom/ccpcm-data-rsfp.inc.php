@@ -85,6 +85,7 @@ class ccpcm_data_custom extends ccpcm_object {
 				'r4_3'=>'394.03:297.64',
 				'r10_6'=>'197.015:115.88',
 				'r155_148'=>'155:148.82', //#44
+				'r264_297' => '264.56888888919997:297.64',
 			]],
 			'd_farm_address' => ['name' => 'farm_address', 'type' => 'string', 'uniq' => True ],
 			'd_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
@@ -498,115 +499,12 @@ class ccpcm_data_custom extends ccpcm_object {
 		return implode(', ', $c);
 	}
 
-	public function export_function_awards_r($value) {
-		$c = [];
-		if ($value) {
-			if (is_array($value)) {
-				foreach($value as $row)
-					$c[] = sprintf('%s - %s (%s)', $row['festival'], $row['film'], $row['year']);
-			} else {
-				$c[] = $value;
-			}
-		}
-		return implode(', ', $c);
-	}
-
-	public function export_function_career_r($value) {
-		$c = [];
-		if ($value) {
-			if (is_array($value)) {
-				foreach($value as $row)
-					$c[] = sprintf('%s (%s)', $row['festival'], $row['year']);
-			} else {
-				$c[] = $value;
-			}
-		}
-		return implode(', ', $c);
-	}
-	
-	public function export_function_filmography_r($value) {
-		$c = [];
-		if ($value) {
-			if (is_array($value)) {
-				foreach($value as $row)
-					$c[] = sprintf('%s (%s  - %s)', $row['film'], $row['year'], $row['type']);
-			} else {
-				$c[] = $value;
-			}
-		}
-		return implode(', ', $c);
-	}
-
-	public function export_function_available_formats($value) {
-		$c = [];
-		if ($value) {
-			if (is_array($value)) {
-				foreach($value as $row)
-					$c[] = sprintf('%s - %s  - %s - %s - %s - %s', $row['format'], ($row['kdm'])?'kdm':'#', $row['format_information'], $row['vo'], $row['vostfr'], $row['sound_format']);
-			} else {
-				$c[] = $value;
-			}
-		}
-		return implode(', ', $c);
-	}
-	
-	public function export_function_null($value) {
-		return '';
-	}
-
-	public function export_function_film($value) {
-		$c = [];
-		if ($value) {
-			foreach($value as $film_id) {
-					$e = $this->ccpcm->data->jsondb->get('film', $film_id);
-					$c[] = $e['post_title'];
-			}
-		}
-		return implode(', ', $c);
-	}
-
-	public function export_function_date($value) {
-		$c = [];
-		if ($value) {
-			$value = $value['day'];
-		}
-		return $value;
-	}
-
-	public function export_function_datetime($value) {
-		$c = [];
-		if ($value) {
-			$value = $value['day'];
-		}
-		return $value;
-	}
-
-	public function export_function_time_begin_end($value) {
-		$c = [];
-		if ($value) {
-			$value = sprintf('%s => %s', $value['begin'], $value['end']);
-		}
-		return $value;
-	}
-
-	public function export_function_activities($value) {
-		$r = unserialize($value);
-		$c = [];
-		foreach($r as $k => $v)
-			$c[] = "$k : $v";
-		return implode(', ', $c);
-	}
-
 	public function export_function_term($value) {
 		$c = [];
 		foreach($value as $r) {
 			$c[] = $r['name'];
 		}
 		return implode(', ', $c);
-	}
-
-	public function export_function_accompanied_list($value) {
-		return implode(', ', $value);
 	}
 
 	public function get_data_as_array($type) {

@@ -875,8 +875,13 @@ class ccpcm_data extends ccpcm_data_custom {
 		if (array_key_exists($type, $this->terms)) {
 			foreach($this->terms[$type] as $key => $term_info) {
 				$terms = wp_get_post_terms( $id, $key);
-				foreach($terms as $term)
-					$r_data[$key][] = get_object_vars($term);
+				foreach($terms as $term) {
+					$data = get_object_vars($term);
+					$data['_order'] = intval($data['term_order']);
+					unset($data['term_order']);
+					$this->get_terms_metas($key, $data);
+					$r_data[$key][] = $data;
+				}
 			}
 		}
 		array_walk_recursive($r_data, function(&$v, $k) {
