@@ -86,6 +86,7 @@ class ccpcm_data_custom extends ccpcm_object {
 				//'r10_6'=>'197.015:115.88',
 				//'r155_148'=>'155:148.82', //#44
 				'r264_297' => '264.56888888919997:297.64',
+				'r198_238' => '198.4266666669:238.11199999999997',
 			]],
 			'd_farm_address' => ['name' => 'farm_address', 'type' => 'string', 'uniq' => True ],
 			'd_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
@@ -105,8 +106,8 @@ class ccpcm_data_custom extends ccpcm_object {
 			'd_knowledge_installation_period' => ['name' => 'knowledge_installation_period', 'type' => 'string', 'uniq' => True ],
 			'd_knowledge_knowledge_ap' => ['name' => 'knowledge_knowledge_ap', 'type' => 'string', 'uniq' => True ],
 			'd_knowledge_testimony' => ['name' => 'knowledge_testimony', 'type' => 'string', 'uniq' => True ],
-			'd_knowledge_viabilitys' => ['name' => 'knowledge_viabilitys', 'type' => 'string', 'uniq' => False ],
-			'd_knowledge_vivabilitys' => ['name' => 'knowledge_vivabilitys', 'type' => 'string', 'uniq' => False ],
+			'd_knowledge_viabilitys' => ['name' => 'knowledge_viabilitys', 'type' => 'serialize', 'uniq' => False ],
+			'd_knowledge_vivabilitys' => ['name' => 'knowledge_vivabilitys', 'type' => 'serialize', 'uniq' => False ],
 			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
 			'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
 			'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
@@ -115,8 +116,8 @@ class ccpcm_data_custom extends ccpcm_object {
 			'd_relationships_structure' => ['name' => 'relationships_structure', 'type' => 'string', 'uniq' => True ],
 			'd_stage_opentostage' => ['name' => 'stage_opentostage', 'type' => 'string', 'uniq' => True ],
 			'd_stage_opentovisit' => ['name' => 'stage_opentovisit', 'type' => 'string', 'uniq' => True ],
-			'footnotes' => ['name' => 'footnotes', 'type' => 'serialize', 'uniq' => True ],
-			'hide_page_title' => ['name' => 'hide_page_title', 'type' => 'string', 'uniq' => True ],
+			//'footnotes' => ['name' => 'footnotes', 'type' => 'serialize', 'uniq' => True ],
+			//'hide_page_title' => ['name' => 'hide_page_title', 'type' => 'string', 'uniq' => True ],
 		],
 		'farm' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
