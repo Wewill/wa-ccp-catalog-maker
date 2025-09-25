@@ -114,7 +114,15 @@ class ccpcm_data_custom extends ccpcm_object {
 			'd_knowledge_transmission_association' => ['name' => 'knowledge_transmission_association', 'type' => 'string', 'uniq' => True ],
 			'd_knowledge_skills' => ['name' => 'knowledge_skills', 'type' => 'serialize', 'uniq' => False ],
 			//
-			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
+			//'d_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
+			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'post_picture', 'sizes'=>[
+				//'r16_9'=>'16:8.38', 
+				//'r1920_1080'=>'16:9', 
+				//'r260_269'=>'260.945:269.14',
+				'r4_3'=>'394.03:297.64',
+				//'r10_6'=>'197.015:115.88',
+				//'r155_148'=>'155:148.82', //#44
+			]],
 			'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
 			'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
 			'd_medias_files' => ['name' => 'files', 'type' => 'string', 'uniq' => True ],
@@ -132,15 +140,18 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'farm' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				'r16_9'=>'16:8.38', 
-				'r1920_1080'=>'16:9', 
+				//'r16_9'=>'16:8.38', 
+				//'r1920_1080'=>'16:9', 
 				//'r260_269'=>'260.945:269.14',
 				'r4_3'=>'394.03:297.64',
-				'r10_6'=>'197.015:115.88',
-				'r155_148'=>'155:148.82', //#44
+				//'r10_6'=>'197.015:115.88',
+				//'r155_148'=>'155:148.82', //#44
 			]],
-			'f_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
-			'f_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
+			//'f_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
+			//'f_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
+			'f_transmission_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
+			'f_transmission_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
+			//
 			'f_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
 			'f_general_biography' => ['name' => 'general_biography', 'type' => 'string', 'uniq' => True ],
 			'f_general_emails' => ['name' => 'eneral_emails', 'type' => 'serialize', 'uniq' => True ],
@@ -156,13 +167,18 @@ class ccpcm_data_custom extends ccpcm_object {
 			'f_general_legal_entity' => ['name' => 'general_legal_entity', 'type' => 'string', 'uniq' => True ],
 			'f_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
 			'f_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],
+			//
 			'f_geolocation_address' => ['name' => 'geolocation_address', 'type' => 'string', 'uniq' => True ],
 			'f_geolocation_lat' => ['name' => 'geolocation_lat', 'type' => 'string', 'uniq' => True ],
 			'f_geolocation_lng' => ['name' => 'geolocation_lng', 'type' => 'string', 'uniq' => True ],
 			'f_geolocation_map' => ['name' => 'geolocation_map', 'type' => 'string', 'uniq' => True ],
-			'f_installation_period' => ['name' => '', 'type' => 'string', 'uniq' => True ],
+			//'f_installation_period' => ['name' => '', 'type' => 'string', 'uniq' => True ],
+			//
 			'f_more_testimony' => ['name' => 'more_testimony', 'type' => 'string', 'uniq' => True ],
-			'f_transmission_farm_in_transmission' => ['name' => 'transmission_farm_in_transmission', 'type' => 'string', 'uniq' => True ],			
+			'f_more_biography' => ['name' => 'more_biography', 'type' => 'string', 'uniq' => True ],
+			//
+			'f_internal_notes' => ['name' => 'internal_notes', 'type' => 'string', 'uniq' => True ],
+			//'f_transmission_farm_in_transmission' => ['name' => 'transmission_farm_in_transmission', 'type' => 'string', 'uniq' => True ],			
 		],
 		'operation' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
@@ -173,28 +189,42 @@ class ccpcm_data_custom extends ccpcm_object {
 				'r10_6'=>'197.015:115.88',
 				'r155_148'=>'155:148.82', //#44
 			]],
-			'o_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
+			'o_general_image' => ['name' => 'general_image', 'type' => 'post_picture', 'sizes'=>[
+				'r4_3'=>'394.03:297.64',
+			]],
+			//
+			'o_general_leaders' => ['name' => 'general_leaders', 'type' => 'serialize', 'uniq' => True ],
+			//'o_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
 			'o_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
 			'o_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
-			'o_general_logotype' => ['name' => 'general_logotype', 'type' => 'string', 'uniq' => True ],
-			'o_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],			
+			//'o_general_logotype' => ['name' => 'general_logotype', 'type' => 'string', 'uniq' => True ],
+			'o_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],
+			//
+			'o_more_description' => ['name' => 'more_description', 'type' => 'string', 'uniq' => True ],
+			//
+			'o_internal_notes' => ['name' => 'internal_notes', 'type' => 'string', 'uniq' => True ],
 		],
 		'structure' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				'r16_9'=>'16:8.38', 
-				'r1920_1080'=>'16:9', 
+				//'r16_9'=>'16:8.38', 
+				//'r1920_1080'=>'16:9', 
 				//'r260_269'=>'260.945:269.14',
 				'r4_3'=>'394.03:297.64',
-				'r10_6'=>'197.015:115.88',
-				'r155_148'=>'155:148.82', //#44
+				//'r10_6'=>'197.015:115.88',
+				//'r155_148'=>'155:148.82', //#44
 			]],
-			's_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
-			's_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
-			's_general_email' => ['name' => 'general_email', 'type' => 'string', 'uniq' => True ],
-			's_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
-			's_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
+			//
 			's_general_referent' => ['name' => 'general_referent', 'type' => 'string', 'uniq' => True ],
-			's_internal_notes' => ['name' => 'internal_notes', 'type' => 'serialize', 'uniq' => True ],			
+			's_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
+			//'s_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
+			//'s_general_email' => ['name' => 'general_email', 'type' => 'string', 'uniq' => True ],
+			's_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
+			's_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],
+			's_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
+			//
+			's_more_description' => ['name' => 'more_description', 'type' => 'string', 'uniq' => True ],
+			//
+			's_internal_notes' => ['name' => 'internal_notes', 'type' => 'string', 'uniq' => True ],
 		],
 	];
 
