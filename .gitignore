@@ -3,3 +3,4 @@ jsondb/
 templates/
 config.inc.php
 includes/events.log
+.DS_Store
