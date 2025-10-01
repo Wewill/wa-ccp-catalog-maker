@@ -48,6 +48,26 @@ class ccpcm_catalogues_custom extends ccpcm_object {
                         unset($directories);
                         $order = 'order';
 						break;
+					case 'directory':
+						$terms = [
+							'relationships_farm' => 'farm',
+							'relationships_operation' => 'operation',
+							'relationships_structure' => 'structure',
+						];
+                        foreach($terms as $fieldName => $termName) {
+                            if (array_key_exists($fieldName, $d)) {
+                                $termsData = [];
+                                if (is_string($d[$fieldName])) {
+                                    $d[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $d[$fieldName]);
+                                } else {
+                                    $termIds = $d[$fieldName];
+                                    foreach($termIds as $termId)
+                                        $termsData[] = $this->ccpcm->data->jsondb->get($termName, $termId);
+                                    $d[$fieldName] = $termsData;
+                                }
+                            }
+                        }
+						break;
 				}
 				$data[] = $d;
 			}
