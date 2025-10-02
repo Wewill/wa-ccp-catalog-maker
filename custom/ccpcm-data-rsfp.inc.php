@@ -154,7 +154,7 @@ class ccpcm_data_custom extends ccpcm_object {
 			//
 			'f_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
 			'f_general_biography' => ['name' => 'general_biography', 'type' => 'string', 'uniq' => True ],
-			'f_general_emails' => ['name' => 'eneral_emails', 'type' => 'serialize', 'uniq' => True ],
+			'f_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
 			'f_general_farmers' => ['name' => 'general_farmers', 'type' => 'serialize', 'uniq' => True ],
 			'f_general_gallery' => ['name' => 'general_gallery', 'type' => 'post_picture', 'sizes'=>[
 				//'r16_9'=>'16:8.38', 
