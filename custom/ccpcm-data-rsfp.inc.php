@@ -99,7 +99,9 @@ class ccpcm_data_custom extends ccpcm_object {
 			//'d_identity_commercialization' => ['name' => 'identity_commercialization', 'type' => 'string', 'uniq' => True ],
 			'd_identity_commercializations' => ['name' => 'identity_commercializations', 'type' => 'serialize', 'uniq' => True ],
 			//'d_identity_diagrams' => ['name' => 'identity_diagrams', 'type' => 'serialize', 'uniq' => True ],
-			'd_identity_label' => ['name' => 'identity_label', 'type' => 'string', 'uniq' => True ],
+			//'d_identity_label' => ['name' => 'identity_label', 'type' => 'string', 'uniq' => True ],
+			'd_identity_label'=> ['type'=>'select', 'name'=>'identity_label', 'uniq'=>True ],
+
 			'd_identity_livestock' => ['name' => 'identity_livestock', 'type' => 'string', 'uniq' => True ],
 			'd_identity_location' => ['name' => 'identity_location', 'type' => 'string', 'uniq' => True ],
 			'd_identity_number_of_people' => ['name' => 'identity_number_of_people', 'type' => 'string', 'uniq' => True ],
@@ -150,7 +152,7 @@ class ccpcm_data_custom extends ccpcm_object {
 			//'f_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
 			//'f_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
 			'f_transmission_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
-			'f_transmission_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
+			//'f_transmission_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ], 
 			//
 			'f_general_address' => ['name' => 'general_address', 'type' => 'string', 'uniq' => True ],
 			'f_general_biography' => ['name' => 'general_biography', 'type' => 'string', 'uniq' => True ],
@@ -182,12 +184,12 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'operation' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				'r16_9'=>'16:8.38', 
-				'r1920_1080'=>'16:9', 
+				//'r16_9'=>'16:8.38', 
+				//'r1920_1080'=>'16:9', 
 				//'r260_269'=>'260.945:269.14',
 				'r4_3'=>'394.03:297.64',
-				'r10_6'=>'197.015:115.88',
-				'r155_148'=>'155:148.82', //#44
+				//'r10_6'=>'197.015:115.88',
+				//'r155_148'=>'155:148.82', //#44
 			]],
 			'o_general_image' => ['name' => 'general_image', 'type' => 'post_picture', 'sizes'=>[
 				'r4_3'=>'394.03:297.64',
