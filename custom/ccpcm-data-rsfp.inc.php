@@ -57,7 +57,17 @@ class ccpcm_data_custom extends ccpcm_object {
 			'g_special_code' => ['name'=>'code', 'type'=>'string', 'uniq'=>True],
 		],
 		'production' => [
-
+			'p_general_image' => ['name'=>'image', 'type'=>'picture', 'uniq'=>True, 'sizes'=>[
+				//'r036_1'=>'0.3620689655:1', 
+				//'r16_9'=>'16:8.38', 
+				//'r1920_1080'=>'16:9', 
+				//'r419_136'=>'419.53:136.32', 
+				//'r419_181'=>'419.53:181.76', 
+				//'r419_90' => '419.53:90.88', 
+				//'r380_550' => '380:550',
+				//'r10_15'=>'170.3979:247.64',
+				'r4_3'=>'433.7032338099:311.8132338099', //#44
+			]],
 		],
 		'thematic' => [
 			't_general_image' => ['name'=>'image', 'type'=>'picture', 'uniq'=>True, 'sizes'=>[
@@ -82,7 +92,7 @@ class ccpcm_data_custom extends ccpcm_object {
 				//'r16_9'=>'16:8.38', 
 				//'r1920_1080'=>'16:9', 
 				//'r260_269'=>'260.945:269.14',
-				//'r4_3'=>'394.03:297.64',
+				'r4_3'=>'394.03:297.64',
 				//'r10_6'=>'197.015:115.88',
 				//'r155_148'=>'155:148.82', //#44
 				'r264_297' => '264.56888888919997:297.64',
@@ -100,7 +110,7 @@ class ccpcm_data_custom extends ccpcm_object {
 			'd_identity_commercializations' => ['name' => 'identity_commercializations', 'type' => 'serialize', 'uniq' => True ],
 			//'d_identity_diagrams' => ['name' => 'identity_diagrams', 'type' => 'serialize', 'uniq' => True ],
 			//'d_identity_label' => ['name' => 'identity_label', 'type' => 'string', 'uniq' => True ],
-			'd_identity_label'=> ['type'=>'select', 'name'=>'identity_label', 'uniq'=>True ],
+			'd_identity_label'=> ['name'=>'identity_label', 'type'=>'select', 'uniq'=>True ],
 
 			'd_identity_livestock' => ['name' => 'identity_livestock', 'type' => 'string', 'uniq' => True ],
 			'd_identity_location' => ['name' => 'identity_location', 'type' => 'string', 'uniq' => True ],
