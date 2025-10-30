@@ -24,6 +24,11 @@ class ccpcm_catalogues extends ccpcm_catalogues_custom {
 		print ('<script>var edition_slug = "'.$this->ccpcm->edition_slug.'"; var edition_id = "'.$this->ccpcm->edition_id.'"; var catalogue_id = false;</script>');
 		wp_enqueue_style('ccpcm_catalogue', plugin_dir_url(__FILE__).'../css/ccpcm_catalogues.css');
 		wp_enqueue_script('pdfmake', plugin_dir_url(__FILE__).'../bower_components/pdfmake/build/pdfmake.js');
+
+		// Added WILHEM for pdf-lib
+		//<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+		wp_enqueue_script( 'pdf-lib', 'https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js');
+
 		wp_enqueue_script('trumbowyg', plugin_dir_url(__FILE__).'../bower_components/trumbowyg/dist/trumbowyg.js');
 		wp_enqueue_script('trumbowyg_allowtagsfrompaste', plugin_dir_url(__FILE__).'../bower_components/trumbowyg/dist/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.min.js', ['trumbowyg']);
 		wp_enqueue_style('trumbowyg', plugin_dir_url(__FILE__).'../bower_components/trumbowyg/dist/ui/trumbowyg.min.css');

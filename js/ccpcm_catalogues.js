@@ -139,9 +139,9 @@ var ccpcm_tags_to_keep = [
   });
 
   /*
-    Generation de la visualisation catalogue
+    Generation de la visualisation catalogue > INITIAL
   */
-  function ccpcm_generate(download = false) {
+  /*function ccpcm_generate(download = false) {
     console.clear();
     if (!catalogue_id)
       return false;
@@ -166,6 +166,92 @@ var ccpcm_tags_to_keep = [
         $('#ccpcm_catalogue_container_right').attr('src', outDoc);
       });
     }
+  }*/
+  /*
+    Génération de la visualisation catalogue + fusion d’un PDF externe à une page précise > WILHEM
+    @TODO ATTENTION : C'est en dur prevu pour RSFP (4 pages de couvertures) > À GENERALISER PLUS TARD ! > Mettre en option les couvertures ? 
+  */
+  async function ccpcm_generate(download = false) {
+    console.clear();
+    if (!catalogue_id) return false;
+    console.log('Génération du catalogue PDF avec couvertures...');
+
+    lastGen = new Date();
+    var dd = false;
+    var data = temp_data;
+    var master = ccpcm_catalogue_masters_select.val();
+    display_javascript('_Javascript');
+    if ($('#dpi_selector').val()) ccpcm_global.renderDpi = $('#dpi_selector').val();
+
+    dd = display_template(master, data);
+
+    // Génération du PDF avec pdfmake
+    pdfMake.createPdf(dd).getBuffer(async (buffer) => {
+      console.log(`PDFMake buffer prêt en ${new Date().getTime() - lastGen.getTime()} ms`);
+
+      try {
+        const uint8Array = new Uint8Array(buffer);
+        const mainPdfDoc = await PDFLib.PDFDocument.load(uint8Array);
+
+        // 🧽 Étape 1 : suppression de 2 pages au début et 2 à la fin
+        const total = mainPdfDoc.getPageCount();
+        console.log(`Document pdfmake : ${total} pages initiales`);
+
+        if (total > 4) {
+          // Toujours supprimer en partant de la fin
+          mainPdfDoc.removePage(total - 1);
+          mainPdfDoc.removePage(total - 2);
+          mainPdfDoc.removePage(1);
+          mainPdfDoc.removePage(0);
+          console.log('Suppression : 2 pages au début + 2 à la fin');
+        } else {
+          console.warn('Le document contient moins de 5 pages — aucune suppression effectuée.');
+        }
+
+        // Utilitaire pour insérer un PDF à un emplacement précis
+        async function insertPdf(mainPdfDoc, pdfPath, insertAt) {
+          const response = await fetch(pdfPath);
+          if (!response.ok) throw new Error(`Erreur chargement PDF : ${pdfPath}`);
+          const insertPdfBytes = await response.arrayBuffer();
+          const insertPdfDoc = await PDFLib.PDFDocument.load(insertPdfBytes);
+          const insertPages = await mainPdfDoc.copyPages(insertPdfDoc, insertPdfDoc.getPageIndices());
+          insertPages.forEach((page, i) => mainPdfDoc.insertPage(insertAt + i, page));
+          console.log(`—> Insertion : ${pdfPath} à la page ${insertAt}`);
+          return mainPdfDoc.getPageCount();
+        }
+
+        // Insérer les 2 premières couvertures AU DÉBUT (dans l'ordre inverse)
+        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_2.pdf', 0);
+        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_1.pdf', 0);
+
+        // Insérer les 2 dernières couvertures À LA FIN
+        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_3.pdf', mainPdfDoc.getPageCount());
+        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_4.pdf', mainPdfDoc.getPageCount());
+
+        // Preparer le PDF final
+        const mergedPdfBytes = await mainPdfDoc.save();
+        const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+
+        // Download ou Render ? 
+        if (download) {
+          const filename = `${ccpcm_catalogues_select.val()}_${ccpcm_global.renderDpi}dpi_${(new Date()).toISOString()}.pdf`;
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.click();
+          console.log(`Téléchargé en ${new Date().getTime() - lastGen.getTime()} ms`);
+        } else {
+          $('#ccpcm_catalogue_container_right').attr('src', url);
+          console.log(`Rendu dans l’iframe en ${new Date().getTime() - lastGen.getTime()} ms`);
+        }
+
+        // Controle
+        console.log(`Total final : ${mainPdfDoc.getPageCount()} pages`);
+      } catch (err) {
+        console.error('Erreur pendant la génération / fusion PDF :', err);
+      }
+    });
   }
 
   /*
