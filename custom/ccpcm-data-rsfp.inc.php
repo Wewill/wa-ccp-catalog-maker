@@ -373,8 +373,10 @@ class ccpcm_data_custom extends ccpcm_object {
 		return $c_posts;
 	}
 
+	//todo : fonction dupliquée dans ccpcm-data... à supprimer
 	public function get_terms_metas($taxonomy, &$data) {
 		$term_id = $data['term_id'];
+
 //		foreach($this->meta_keys_terms as $t_taxonomy => $t_values) {
 		if (array_key_exists($taxonomy, $this->meta_keys_terms)) {
 			$t_values = $this->meta_keys_terms[$taxonomy];
@@ -507,8 +509,8 @@ class ccpcm_data_custom extends ccpcm_object {
 					$data['_order'] = intval($data['term_order']);
 					unset($data['term_order']);
 					$this->get_terms_metas($k_taxonomy, $data);
-#					print("<br/><br/>------ $k_taxonomy ------ ".$data['term_id']."<br/>");
-#					print_r($
+//					print("<br/><br/>------ $k_taxonomy ------ ".$data['term_id']."<br/>");
+//					print_r($ata);
 					$this->jsondb->append($k_taxonomy, $data['term_id'], $data);
 					$c_terms[$k_taxonomy]++;
 				}

@@ -305,7 +305,8 @@ class ccpcm_data extends ccpcm_data_custom {
 
 	public function get_terms_metas($taxonomy, &$data) {
 		$term_id = $data['term_id'];
-//		foreach($this->meta_keys_terms as $t_taxonomy => $t_values) {
+
+		//		foreach($this->meta_keys_terms as $t_taxonomy => $t_values) {
 		if (array_key_exists($taxonomy, $this->meta_keys_terms)) {
 			$t_values = $this->meta_keys_terms[$taxonomy];
 			foreach($t_values as $t_key => $t_infos) {
@@ -356,22 +357,35 @@ class ccpcm_data extends ccpcm_data_custom {
 						$uniq = (array_key_exists('uniq', $t_infos) and $t_infos['uniq'])?True:False;
 						$data[$t_infos['name']] = get_term_meta($term_id, $t_key, $uniq);
 						if ($uniq) {
-							$url = $data[$t_infos['name']];
-							if ($url) {
-								$post_id = $this->get_attachment_id($url);
-								if ( ! $post_id && array_key_exists('orginalPicture', $t_infos)) {
-									$post_id = $this->get_attachment_id($data[$t_infos['orginalPicture']]['url']);
-								}
+							if (intval($data[$t_infos['name']]) == $data[$t_infos['name']]) {
+								$post_id = $data[$t_infos['name']];
+								$url = wp_get_attachment_url( $post_id );
 								$data[$t_infos['name']] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
-							} else
-								$data[$t_infos['name']] = False;
-						} else {
-							$pictures = array();
-							$urls = $data[$t_infos['name']];
-							foreach($urls as $url) {
+							} else {
+								$url = $data[$t_infos['name']];
 								if ($url) {
-									$post_id = $this->get_attachment_id($url);
-									$pictures[] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+										$post_id = $this->get_attachment_id($url);
+										if ( ! $post_id && array_key_exists('orginalPicture', $t_infos)) {
+											$post_id = $this->get_attachment_id($data[$t_infos['orginalPicture']]['url']);
+										}
+									$data[$t_infos['name']] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+								} else
+									$data[$t_infos['name']] = False;
+							}
+						} else {
+							$pictures = [];
+							$metas = $data[$t_infos['name']];
+							foreach($metas as $meta) {
+								if ($meta) {
+									if (intval($meta) == $meta) {
+										$post_id = $meta;
+										$url = wp_get_attachment_url( $post_id );
+										$pictures[] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];		
+									} else {
+										$url = $meta;
+										$post_id = $this->get_attachment_id($url);
+										$pictures[] = ['url'=>$url, 'base64' => $this->convert_file_to_base64($url, (array_key_exists('sizes', $t_infos))?$t_infos['sizes']:False, (array_key_exists('cover', $t_infos))?$t_infos['cover']:False, False, $post_id)];
+									}
 								}
 							}
 							$data[$t_infos['name']] = $pictures;
