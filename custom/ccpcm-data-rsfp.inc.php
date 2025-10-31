@@ -241,12 +241,8 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'partner' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
-				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
+				'r1_1'=>'1:1',
+				//'r4_3'=>'394.03:297.64',
 			]],
 			'p_general_link' => ['name' => 'general_link', 'type' => 'string', 'uniq' => True ],
 
