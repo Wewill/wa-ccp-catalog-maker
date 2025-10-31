@@ -39,6 +39,7 @@ class ccpcm_data_custom extends ccpcm_object {
 		'farm' => ['post_title'],
 		'operation' => ['post_title'],
 		'structure' => ['post_title'],
+		'partner' => ['post_title'],
 	);
 
 	public $terms = array(
@@ -238,6 +239,18 @@ class ccpcm_data_custom extends ccpcm_object {
 			//
 			's_internal_notes' => ['name' => 'internal_notes', 'type' => 'string', 'uniq' => True ],
 		],
+		'partner' => [
+			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
+				//'r16_9'=>'16:8.38', 
+				//'r1920_1080'=>'16:9', 
+				//'r260_269'=>'260.945:269.14',
+				'r4_3'=>'394.03:297.64',
+				//'r10_6'=>'197.015:115.88',
+				//'r155_148'=>'155:148.82', //#44
+			]],
+			'p_general_link' => ['name' => 'general_link', 'type' => 'string', 'uniq' => True ],
+
+		],
 	];
 
 	public function verify() {
@@ -373,6 +386,32 @@ class ccpcm_data_custom extends ccpcm_object {
 		return $c_posts;
 	}
 
+	public function update_parters() {
+		$this->__fields = $this->get_fields();
+		$edition_id = $this->ccpcm->edition_id;
+		$c_posts['partner'] = 0;
+		# UPDATE PARTNERS
+		$args = array(
+			'post_type'=>'partner',
+			'orderby'=>'post_title',
+			'order'=>'ASC',
+			'offset'=>0,
+			'posts_per_page'=>-1,
+		);
+		$query = new WP_Query($args);
+		$query_data = get_posts($args);
+		$c_film = 0;
+		foreach($query_data as $data) {
+			$data = $this->get_post_data($data, 'partner');
+			$post_id = $data['id'];
+			$data['permalink'] = get_permalink($post_id);
+
+			$this->jsondb->append('partner', $post_id, $data);
+			$c_posts['partner'] ++;
+		}
+		return $c_posts;
+	}
+
 	//todo : fonction dupliquée dans ccpcm-data... à supprimer
 	public function get_terms_metas($taxonomy, &$data) {
 		$term_id = $data['term_id'];
@@ -484,6 +523,10 @@ class ccpcm_data_custom extends ccpcm_object {
 
 		$this->ccpcm->log('[ DATA.UPDATE ] update_structure');
 		$c_posts_tmp = $this->update_structure();
+		$c_posts = array_merge($c_posts, $c_posts_tmp);
+		
+		$this->ccpcm->log('[ DATA.UPDATE ] update_parters');
+		$c_posts_tmp = $this->update_parters();
 		$c_posts = array_merge($c_posts, $c_posts_tmp);
 
 		$this->ccpcm->log('[ DATA.UPDATE ] update_terms');

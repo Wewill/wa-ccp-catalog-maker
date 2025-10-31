@@ -2,7 +2,7 @@
 
 class ccpcm_catalogues_custom extends ccpcm_object {
     public $types = array(
-        'partenaire'=>'Partners',
+        'partner'=>'Partners',
         'html'=>'Html',
         'htmlx2'=>'2 Html',
         'media'=>'Media',
@@ -40,7 +40,25 @@ class ccpcm_catalogues_custom extends ccpcm_object {
                         if (array_key_exists($id, $index)) {
                             $d_ids = $index[$id];
                             foreach($d_ids as $d_id) {
-                                $directory = $this->ccpcm->data->jsondb->get('directory', $d_id);
+                                $directory = $this->ccpcm->data->jsondb->get('directory', $d_id);								
+								$terms = [
+									'relationships_farm' => 'farm',
+									'relationships_operation' => 'operation',
+									'relationships_structure' => 'structure',
+								];
+								foreach($terms as $fieldName => $termName) {
+									if (array_key_exists($fieldName, $directory)) {
+										$termsData = [];
+										if (is_string($directory[$fieldName])) {
+											$directory[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $d[$fieldName]);
+										} else {
+											$termIds = $directory[$fieldName];
+											foreach($termIds as $termId)
+												$termsData[] = $this->ccpcm->data->jsondb->get($termName, $termId);
+											$directory[$fieldName] = $termsData;
+										}
+									}
+								}
                                 $directories[] = $directory;
                             }
                         }
@@ -147,78 +165,7 @@ class ccpcm_catalogues_custom extends ccpcm_object {
                     }
                     $d['directories'] = $directories;
                     unset($directories);
-                    break;                    
-				case 'section':
-					$index = $this->ccpcm->data->jsondb->get_index('film', 'section');
-					$films = array();
-					if (array_key_exists($id, $index)) {
-						$f_ids = $index[$id];
-						foreach($f_ids as $f_id) {
-							$f_film = $this->ccpcm->data->jsondb->get('film', $f_id);
-							$this->ccpcm->custom->append_film_additionnal_fields($f_film);
-							$films[] = $f_film;
-						}
-					}
-					$d['films'] = $films;
-					$d['films'] = $this->ccpcm->custom->apply_post_in_taxonomy_order($d['ccppto_film'], $d['films']);
-					$d['projections'] = $this->ccpcm->custom->apply_post_in_taxonomy_order($d['ccppto_projection'], $d['projections']);
-					$d['films'] = $this->get_catalogue_data_order_by($d['films'], $order);
-					$d['projections'] = $this->get_catalogue_data_order_by($d['projections'], $order);
-					if ($d['featured_film_1']) {
-						$d['featured_film_1'] = $this->ccpcm->data->jsondb->get('film', $d['featured_film_1']);
-					} else {
-						$d['featured_film_1'] = False;
-					}
-					if ($d['featured_film_2']) {
-						$d['featured_film_2'] = $this->ccpcm->data->jsondb->get('film', $d['featured_film_2']);
-					} else {
-						$d['featured_film_2'] = False;
-					}
-					break;
-				case 'section_and_subsections':
-					$d = $this->ccpcm->data->jsondb->get('section', $id);
-					$p_index = $this->ccpcm->data->jsondb->get_index('projection', 'film');
-
-					$s_index = $this->ccpcm->data->jsondb->get_index('film', 'section');
-					if (array_key_exists($id, $s_index)) {
-						$f_ids = $s_index[$id];
-						$films = array();
-						foreach($f_ids as $f_id) {
-							$film = $this->ccpcm->data->jsondb->get('film', $f_id);
-							$this->ccpcm->custom->append_film_additionnal_fields($film);
-							$films[] = $film;
-						}
-						$s_section['films'] = $films;
-						$d['films'] = $this->get_catalogue_data_order_by($films, $order);
-					} else {
-						$d['films'] = array();
-					}
-
-					$section_index = $this->ccpcm->data->jsondb->get_index('section', 'parent');
-					$d['subsections'] = array();
-					if (array_key_exists($id, $section_index)) {
-						$s_ids = $section_index[$id];
-						foreach($s_ids as $s_id) {
-							$s_section = $this->ccpcm->data->jsondb->get('section', $s_id);
-
-							$films = array();
-							if (array_key_exists($s_id, $s_index)) {
-								$f_ids = $s_index[$s_id];
-								$films = array();
-								foreach($f_ids as $f_id) {
-									$film = $this->ccpcm->data->jsondb->get('film', $f_id);
-									$this->ccpcm->custom->append_film_additionnal_fields($film);
-									$films[] = $film;
-								}
-//								$s_section['films'] = $films;
-								$s_section['films'] = $this->get_catalogue_data_order_by($films, $order);
-							}
-							$d['subsections'][] = $s_section;
-						}
-						$d['subsections'] = $this->get_catalogue_data_order_by($d['subsections'], 'order');
-					}
-
-					break;
+                    break;
 				default:
 					break;
 			}

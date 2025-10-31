@@ -60,15 +60,15 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 						$d['films'] = $films;
 						break;
 					case 'movie-type':
-            $index = $this->ccpcm->data->jsondb->get_index('jury', 'movie-type');
-            $jurys = array();
-            if (array_key_exists($id, $index)) {
-              $j_ids = $index[$id];
-              foreach($j_ids as $j_id)
-                $jurys[] = $this->ccpcm->data->jsondb->get('jury', $j_id);
-            }
-            $d['jurys'] = $jurys;
-            break;
+						$index = $this->ccpcm->data->jsondb->get_index('jury', 'movie-type');
+						$jurys = array();
+						if (array_key_exists($id, $index)) {
+						$j_ids = $index[$id];
+						foreach($j_ids as $j_id)
+							$jurys[] = $this->ccpcm->data->jsondb->get('jury', $j_id);
+						}
+						$d['jurys'] = $jurys;
+						break;
 				}
 				$data[] = $d;
 			}
