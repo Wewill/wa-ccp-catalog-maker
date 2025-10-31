@@ -71,6 +71,24 @@ class ccpcm_templates_custom extends ccpcm_object {
                             foreach($d_ids as $d_id) {
                                 $directory = $this->ccpcm->data->jsondb->get('directory', $d_id);
                                 $this->ccpcm->custom->append_film_additionnal_fields($directory);
+								$terms = [
+									'relationships_farm' => 'farm',
+									'relationships_operation' => 'operation',
+									'relationships_structure' => 'structure',
+								];
+								foreach($terms as $fieldName => $termName) {
+									if (array_key_exists($fieldName, $directory)) {
+										$termsData = [];
+										if (is_string($directory[$fieldName])) {
+											$directory[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $d[$fieldName]);
+										} else {
+											$termIds = $directory[$fieldName];
+											foreach($termIds as $termId)
+												$termsData[] = $this->ccpcm->data->jsondb->get($termName, $termId);
+											$directory[$fieldName] = $termsData;
+										}
+									}
+								}                                
                                 $directories[] = $directory;
                             }
                         }
