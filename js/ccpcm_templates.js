@@ -177,8 +177,11 @@ var ccpcm_global = {};
   }
 
   var editor = CodeMirror.fromTextArea(document.getElementById("ccpcm_template_content"), {
+    mode: "application/javascript",
     lineNumbers: true,
     lineWrapping: true,
+    foldGutter: true,
+//    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
   });
   editor.setSize(null, 1000);
 

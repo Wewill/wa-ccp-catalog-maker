@@ -1,5 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
@@ -330,9 +330,9 @@
 
   cmds.previousLine = move(byLine, -1);
 
-  cmds.scrollDownCommand = move(byPage, 1);
+  cmds.scrollDownCommand = move(byPage, -1);
 
-  cmds.scrollUpCommand = move(byPage, -1);
+  cmds.scrollUpCommand = move(byPage, 1);
 
   cmds.backwardParagraph = move(byParagraph, -1);
 
@@ -480,8 +480,8 @@
     "Home": "goLineStart",
     "Alt-V": "scrollDownCommand",
     "Ctrl-V": "scrollUpCommand",
-    "PageUp": "scrollUpCommand",
-    "PageDown": "scrollDownCommand",
+    "PageUp": "scrollDownCommand",
+    "PageDown": "scrollUpCommand",
     "Ctrl-Up": "backwardParagraph",
     "Ctrl-Down": "forwardParagraph",
     "Alt-{": "backwardParagraph",

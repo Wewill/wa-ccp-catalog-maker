@@ -42,6 +42,8 @@ class ccpcm_templates extends ccpcm_templates_custom {
     wp_enqueue_script('pdfmake_after', plugin_dir_url(__FILE__).'../js/pdfmake_after.js', ['pdfmake']);
     wp_enqueue_script('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.js');
 //    wp_enqueue_script('codemirror_dialog', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/dialog/dialog.js');
+    wp_enqueue_script('codemirror_foldcode', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/fold/foldcode.js');
+    wp_enqueue_script('codemirror_foldgutter', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/fold/foldgutter.js');
     wp_enqueue_script('codemirror_searchcursor', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/search/searchcursor.js');
     wp_enqueue_script('codemirror_search', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/search/search.js');
     wp_enqueue_script('codemirror_annotatescrollbar', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/scroll/annotatescrollbar.js');
@@ -51,6 +53,7 @@ class ccpcm_templates extends ccpcm_templates_custom {
 
     wp_enqueue_style('codemirror', plugin_dir_url(__FILE__).'../bower_components/codemirror/lib/codemirror.css');
     wp_enqueue_style('codemirror_matchesonscrollbar_css', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/search/matchesonscrollbar.css');
+    wp_enqueue_style('codemirror_foldglutter_css', plugin_dir_url(__FILE__).'../bower_components/codemirror/addon/fold/foldgutter.css');
 
     wp_enqueue_script('pdfmake_fonts', plugin_dir_url(__FILE__).'../custom/'.CCPCM_PROJECT.'/js/pdfmake_fonts.js', ['pdfmake']);
     wp_enqueue_script('pdfmake_fonts_files', plugin_dir_url(__FILE__).'../custom/'.CCPCM_PROJECT.'/js/vfs_fonts.js', ['pdfmake_fonts']);
