@@ -14,6 +14,7 @@ if (file_exists(__DIR__.'/../custom/ccpcm-catalogues-'.CCPCM_PROJECT.'.inc.php')
 			'toc'=>'Toc',
 			'index'=>'Index',
 			'page_break'=>'Page break',
+			'pdf'=>'PDF page',
 		);
 	}
 }
@@ -137,6 +138,14 @@ class ccpcm_catalogues extends ccpcm_catalogues_custom {
 		print('<div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_media_upload" type="button" class="button" value="Select media" /></div>');
 		print('<div class=""><img id="ccpcm_catalogue_popup_media_preview"><div id="ccpcm_catalogue_popup_media_url"></div><input type="hidden" value="" id="ccpcm_catalogue_popup_media_id"></div>');
 		print('<p><a id="ccpcm_catalogue_popup_media_save" class="button button-primary">Save</a></p>');
+		print('</div>');
+
+		$dpis = array(9, 72, 150, 300);
+		print('<div id="ccpcm_catalogue_popup_pdf" class="ccpcm_catalogue_popup_type">');
+		foreach($dpis as $dpi) {
+			print('<div class="ccpcm_catalogue_popup_left">URL pour '.$dpi.' DPI : </div><div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_pdf_dpi_'.$dpi.'" class="ccpcm_catalogue_popup_input"></div>');
+		}
+		print('<p><a id="ccpcm_catalogue_popup_pdf_save" class="button button-primary">Save</a></p>');
 		print('</div>');
 
 		print('<div id="ccpcm_catalogue_popup_data" class="ccpcm_catalogue_popup_type">');

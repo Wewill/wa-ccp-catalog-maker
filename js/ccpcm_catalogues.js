@@ -40,6 +40,10 @@ var ccpcm_tags_to_keep = [
   var ccpcm_catalogue_popup_section_display_by_select = $('#ccpcm_catalogue_popup_section_display_by_select');
   var ccpcm_catalogue_btn_render = $('#ccpcm_catalogue_btn_render');
   var ccpcm_catalogue_btn_download = $('#ccpcm_catalogue_btn_download');
+  var ccpcm_catalogue_popup_pdf_dpi_9 = $('#ccpcm_catalogue_popup_pdf_dpi_9');
+  var ccpcm_catalogue_popup_pdf_dpi_72 = $('#ccpcm_catalogue_popup_pdf_dpi_72');
+  var ccpcm_catalogue_popup_pdf_dpi_150 = $('#ccpcm_catalogue_popup_pdf_dpi_150');
+  var ccpcm_catalogue_popup_pdf_dpi_300 = $('#ccpcm_catalogue_popup_pdf_dpi_300');
   var ccpcm_catalogue_popup_html_title = $('#ccpcm_catalogue_popup_html_title');
   var ccpcm_catalogue_popup_html_color = $('#ccpcm_catalogue_popup_html_color');
   var ccpcm_catalogue_popup_htmlx2_title = $('#ccpcm_catalogue_popup_htmlx2_title');
@@ -317,8 +321,8 @@ var ccpcm_tags_to_keep = [
       $('#ccpcm_catalogue_popup').css('display', 'block');
       $('#ccpcm_catalogue_popup').children('div.ccpcm_catalogue_popup_type').each(function(idx, element) {
         $(element).children('div.ccpcm_catalogue_popup_type_inside').each(function(idx2, element2) {
-		$(element2).css('display', 'none');
-	});
+          $(element2).css('display', 'none');
+        });
         $(element).css('display', 'none');
       });
       var template = element.data('template');
@@ -340,6 +344,12 @@ var ccpcm_tags_to_keep = [
           $('#ccpcm_catalogue_popup_media_url').text('');
           $('#ccpcm_catalogue_popup_media_preview').attr('src', '');
         }
+      } else if (type == 'pdf') {
+        $('#ccpcm_catalogue_popup_pdf').css('display', 'block');
+        ccpcm_catalogue_popup_pdf_dpi_9.val($(element).data('dpi_9'));
+        ccpcm_catalogue_popup_pdf_dpi_72.val($(element).data('dpi_72'));
+        ccpcm_catalogue_popup_pdf_dpi_150.val($(element).data('dpi_150'));
+        ccpcm_catalogue_popup_pdf_dpi_300.val($(element).data('dpi_300'));
       } else if (type == 'html') {
         $('#ccpcm_catalogue_popup_html').css('display', 'block');
         var html = $(element).data('html');
@@ -486,6 +496,28 @@ var ccpcm_tags_to_keep = [
     set_element_info(current_element_popup, {
       'Template': $('#ccpcm_catalogue_popup_template_select').children('option:selected').text(),
     });
+    current_element_popup.data(data);
+    ccpcm_display_popup(false);
+  });
+
+  $('#ccpcm_catalogue_popup_pdf_save').on('click', function(event) {
+    event.preventDefault();
+    data = {
+      'template': $('#ccpcm_catalogue_popup_template_select').val(),
+      'type': $(current_element_popup).attr('rel'),
+      'dpi_9': ccpcm_catalogue_popup_pdf_dpi_9.val(),
+      'dpi_72': ccpcm_catalogue_popup_pdf_dpi_72.val(),
+      'dpi_150': ccpcm_catalogue_popup_pdf_dpi_150.val(),
+      'dpi_300': ccpcm_catalogue_popup_pdf_dpi_300.val(),
+    };
+    set_element_info(current_element_popup, {
+      'Template': $('#ccpcm_catalogue_popup_template_select').children('option:selected').text(),
+      'dpi_9': ccpcm_catalogue_popup_pdf_dpi_9.val(),
+      'dpi_72': ccpcm_catalogue_popup_pdf_dpi_72.val(),
+      'dpi_150': ccpcm_catalogue_popup_pdf_dpi_150.val(),
+      'dpi_300': ccpcm_catalogue_popup_pdf_dpi_300.val(),
+    });
+
     current_element_popup.data(data);
     ccpcm_display_popup(false);
   });

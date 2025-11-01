@@ -15,6 +15,7 @@ class ccpcm_catalogues_custom extends ccpcm_object {
         'toc'=>'Toc',
         'index'=>'Index',
         'page_break'=>'Page break',
+		'pdf'=>'PDF page',
     );
 
 	public function get_catalogue_element_data($type) {
