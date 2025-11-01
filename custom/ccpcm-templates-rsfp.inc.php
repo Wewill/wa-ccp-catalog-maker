@@ -80,7 +80,7 @@ class ccpcm_templates_custom extends ccpcm_object {
 									if (array_key_exists($fieldName, $directory)) {
 										$termsData = [];
 										if (is_string($directory[$fieldName])) {
-											$directory[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $d[$fieldName]);
+											$directory[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $directory[$fieldName]);
 										} else {
 											$termIds = $directory[$fieldName];
 											foreach($termIds as $termId)
@@ -122,7 +122,21 @@ class ccpcm_templates_custom extends ccpcm_object {
                                 }
                             }
                         }
-                        break;                    
+                        break;    
+                    case 'partner-category':
+                        $index = $this->ccpcm->data->jsondb->get_index('partner', 'partner-category');
+                        $partner = [];
+                        if (array_key_exists($id, $index)) {
+                        $c_ids = $index[$id];
+                        foreach($c_ids as $c_id) {
+                            $partner[] = $this->ccpcm->data->jsondb->get('partner', $c_id);
+                        }
+                        }
+            //            $d['partners'] = $partenaire;
+                        $order = 'order';
+                        $d['partners'] = $this->ccpcm->catalogues->get_catalogue_data_order_by($partner, $order);
+        
+                        break;                                        
                 }
                 $data[] = $d;
             }
