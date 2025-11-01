@@ -280,6 +280,11 @@
   color: #e91e63;
 }
 
+.ccpcm_catalogue_items_item[rel*='toc'],
+.ccpcm_catalogue_items_item[rel*='index'] {
+  border-left-color: #7b2506;
+  color: #7b2506;
+}
 
 /* Styles du RTE */
 /* Generique */
