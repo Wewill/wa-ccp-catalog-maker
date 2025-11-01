@@ -80,7 +80,7 @@ class ccpcm_templates_custom extends ccpcm_object {
 									if (array_key_exists($fieldName, $directory)) {
 										$termsData = [];
 										if (is_string($directory[$fieldName])) {
-											$directory[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $d[$fieldName]);
+											$directory[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $directory[$fieldName]);
 										} else {
 											$termIds = $directory[$fieldName];
 											foreach($termIds as $termId)
