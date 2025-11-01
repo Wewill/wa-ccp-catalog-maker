@@ -3,6 +3,7 @@
 class ccpcm_catalogues_custom extends ccpcm_object {
     public $types = array(
         'partner'=>'Partners',
+		'partner-category'=>'Catégories de Partners',
         'html'=>'Html',
         'htmlx2'=>'2 Html',
         'media'=>'Media',
@@ -193,6 +194,19 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 					foreach($infos as $k => $v)
 						$d['infos'][$k] = $v;
 				}
+				switch($type) {
+					case 'partner-category':
+						$index = $this->ccpcm->data->jsondb->get_index('partner', 'partner-category');
+						$partner = [];
+						if (array_key_exists($id, $index)) {
+						  $c_ids = $index[$id];
+						  foreach($c_ids as $c_id) {
+							$partner[] = $this->ccpcm->data->jsondb->get('partner', $c_id);
+						  }
+						}
+						$d['partners'] = $this->get_catalogue_data_order_by($partner, $order);
+						break;
+				}				
 				$data[] = $d;
 			}
 			$data = $this->get_catalogue_data_order_by($data, $order);

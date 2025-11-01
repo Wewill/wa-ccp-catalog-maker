@@ -31,6 +31,9 @@ class ccpcm_data_custom extends ccpcm_object {
 		'structure' => [
 
 		],
+		'partner' => array(
+			'partner-category' => 'partner-category@term_id',
+		),		
 	);
 
 	public $quick_names = array(
@@ -40,6 +43,7 @@ class ccpcm_data_custom extends ccpcm_object {
 		'operation' => ['post_title'],
 		'structure' => ['post_title'],
 		'partner' => ['post_title'],
+		'partner-category' => array('name'),
 	);
 
 	public $terms = array(
@@ -48,6 +52,10 @@ class ccpcm_data_custom extends ccpcm_object {
 			'production' => [],
 			'thematic' => [],
 		],
+		'partner' => array(
+			'partner-category'=>array(),
+		),
+
 	);
 
 	public $relations = array(
