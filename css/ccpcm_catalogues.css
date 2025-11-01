@@ -284,31 +284,38 @@
 #ccpcm_catalogue_popup_html_rte h6, #ccpcm_catalogue_popup_htmlx2 h6, .ccpcm_catalogue_element_infos h6 {
   font-size: 14px;
   font-weight: bold;
+  line-height: 1.2;
 }
 
 #ccpcm_catalogue_popup_html_rte h5, #ccpcm_catalogue_popup_htmlx2 h5, .ccpcm_catalogue_element_infos h5 {
   font-size: 16px;
   font-weight: bold;
+  line-height: 1.2;
 }
 
 #ccpcm_catalogue_popup_html_rte h4, #ccpcm_catalogue_popup_htmlx2 h4, .ccpcm_catalogue_element_infos h4 {
   font-size: 19px;
   font-weight: bold;
+  line-height: 1.2;  
 }
 
 #ccpcm_catalogue_popup_html_rte h3, #ccpcm_catalogue_popup_htmlx2 h3, .ccpcm_catalogue_element_infos h3 {
   font-size: 22px;
+  line-height: 1.2;
 }
 
 #ccpcm_catalogue_popup_html_rte h2, #ccpcm_catalogue_popup_htmlx2 h2, .ccpcm_catalogue_element_infos h2 {
   font-size: 26px;
   font-weight: bold;
+  line-height: 1.2;
 }
 
 #ccpcm_catalogue_popup_html_rte h1, #ccpcm_catalogue_popup_htmlx2 h1, .ccpcm_catalogue_element_infos h1{
   font-size: 32px;
   opacity: .6;
+  font-weight: light;
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
 /* .ccpcm_catalogue_rsfp */
@@ -319,6 +326,7 @@
   font-size: 14px;
   font-weight: bold;
   color: #3c0a0a;
+  line-height: 1.2;
 }
 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h5, 
@@ -327,6 +335,7 @@
   font-size: 16px;
   font-weight: bold;
   color: #3c0a0a;
+  line-height: 1.2;
 }
 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h4, 
@@ -335,22 +344,25 @@
   font-size: 18px;
   font-weight: bold;
   color: #3c0a0a;
+  line-height: 1.2;
 }
 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h3, 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h3, 
 .ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h3 {
-  font-size: 22px;
+  font-size: 20px;
   color: #ff644d;
   opacity: .85;
+  line-height: 1.2;
 }
 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h2, 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h2, 
 .ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h2 {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: bold;
   color: #ff644d;
+  line-height: 1.2;
 }
 
 .ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h1, 
@@ -359,6 +371,8 @@
   font-size: 26px;
   opacity: 1;
   color: #d7be96;
+  line-height: 1.2;
+  text-transform: none !important;
 }
 
 
