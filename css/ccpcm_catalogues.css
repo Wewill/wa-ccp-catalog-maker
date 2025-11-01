@@ -236,10 +236,14 @@
   color: #ff9900;
 }
 
-.ccpcm_catalogue_items_item[rel*='film'],
-.ccpcm_catalogue_items_item[rel*='directory'] {
+.ccpcm_catalogue_items_item[rel*='film']{
   border-left-color: #d84400;
   color: #d84400;
+}
+
+.ccpcm_catalogue_items_item[rel*='directory'] {
+  border-left-color: #ff644d;
+  color: #ff644d;
 }
 
 .ccpcm_catalogue_items_item[rel*='section'],
