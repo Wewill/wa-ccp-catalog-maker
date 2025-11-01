@@ -236,36 +236,50 @@
   color: #ff9900;
 }
 
-.ccpcm_catalogue_items_item[rel*='film'] {
+.ccpcm_catalogue_items_item[rel*='film'],
+.ccpcm_catalogue_items_item[rel*='directory'] {
   border-left-color: #d84400;
   color: #d84400;
 }
 
 .ccpcm_catalogue_items_item[rel*='section'],
 .ccpcm_catalogue_items_item[rel*='section_and_subsections'],
-.ccpcm_catalogue_items_item[rel*='2sections'] {
+.ccpcm_catalogue_items_item[rel*='2sections'], 
+.ccpcm_catalogue_items_item[rel*='thematic'] {
   border-left-color: #458219;
   color: #458219;
 }
 
 .ccpcm_catalogue_items_item[rel*='partenaire'],
-.ccpcm_catalogue_items_item[rel*='partenaire-category'] {
+.ccpcm_catalogue_items_item[rel*='partenaire-category'],
+.ccpcm_catalogue_items_item[rel*='partner'],
+.ccpcm_catalogue_items_item[rel*='partner-category'] {
   border-left-color: #5739c4;
   color: #5739c4;
 }
 
 .ccpcm_catalogue_items_item[rel*='planning'],
-.ccpcm_catalogue_items_item[rel*='accreditation'] {
+.ccpcm_catalogue_items_item[rel*='accreditation'], 
+.ccpcm_catalogue_items_item[rel*='farm'] {
   border-left-color: #0087e0;
   color: #0087e0;
 }
 
-.ccpcm_catalogue_items_item[rel*='contact'] {
+.ccpcm_catalogue_items_item[rel*='contact'],
+.ccpcm_catalogue_items_item[rel*='operation'] {
   border-left-color: #229911;
   color: #229911;
 }
 
+.ccpcm_catalogue_items_item[rel*='structure'] {
+  border-left-color: #e91e63;
+  color: #e91e63;
+}
+
+
 /* Styles du RTE */
+/* Generique */
+
 
 #ccpcm_catalogue_popup_html_rte h6, #ccpcm_catalogue_popup_htmlx2 h6, .ccpcm_catalogue_element_infos h6 {
   font-size: 14px;
@@ -296,6 +310,60 @@
   opacity: .6;
   text-transform: uppercase;
 }
+
+/* .ccpcm_catalogue_rsfp */
+
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h6,
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h6, 
+.ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h6 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #3c0a0a;
+}
+
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h5, 
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h5, 
+.ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h5 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #3c0a0a;
+}
+
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h4, 
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h4, 
+.ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3c0a0a;
+}
+
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h3, 
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h3, 
+.ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h3 {
+  font-size: 22px;
+  color: #ff644d;
+  opacity: .85;
+}
+
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h2, 
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h2, 
+.ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ff644d;
+}
+
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_html_rte h1, 
+.ccpcm_catalogue_rsfp #ccpcm_catalogue_popup_htmlx2 h1, 
+.ccpcm_catalogue_rsfp .ccpcm_catalogue_element_infos h1{
+  font-size: 26px;
+  opacity: 1;
+  color: #d7be96;
+}
+
+
+
+
 
 #ccpcm_catalogue_popup_html_rte blockquote, #ccpcm_catalogue_popup_htmlx2 blockquote, .ccpcm_catalogue_element_infos blockquote {
   opacity: .75;
