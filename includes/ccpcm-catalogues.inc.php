@@ -51,7 +51,7 @@ class ccpcm_catalogues extends ccpcm_catalogues_custom {
 		wp_enqueue_script('ccpcm_catalogues', plugin_dir_url(__FILE__).'../js/ccpcm_catalogues.js', ['ccpcm_templates_functions']);
     	wp_enqueue_script('ccpcm_catalogues_functions_tmp', plugin_dir_url(__FILE__).'../js/ccpcm_catalogues_functions_tmp.js', ['ccpcm_catalogues']);
 
-		print('<div id="ccpcm_catalogue_container">');
+		print('<div id="ccpcm_catalogue_container" class="ccpcm_catalogue_'.CCPCM_PROJECT.'">');
 		$this->display_top();
 		$this->display_left();
 		$this->display_right();
