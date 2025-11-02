@@ -247,7 +247,7 @@ var ccpcm_tags_to_keep = [
 
         for (const content of ccpcm_global.catalogue_content_persistant) {
           if (content.type == 'pdf') {
-            console.log('==> ', content, content.reference, annotationsPage[content.reference]);
+//            console.log('==> ', content, content.reference, annotationsPage[content.reference]);
             if (content.reference && annotationsPage[content.reference] != undefined) {
               let pageNumber = annotationsPage[content.reference];
               let url = content['dpi_'+ccpcm_global.renderDpi]
