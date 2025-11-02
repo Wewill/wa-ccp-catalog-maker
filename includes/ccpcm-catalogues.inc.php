@@ -145,6 +145,7 @@ class ccpcm_catalogues extends ccpcm_catalogues_custom {
 		foreach($dpis as $dpi) {
 			print('<div class="ccpcm_catalogue_popup_left">URL pour '.$dpi.' DPI : </div><div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_pdf_dpi_'.$dpi.'" class="ccpcm_catalogue_popup_input"></div>');
 		}
+		print('<div class="ccpcm_catalogue_popup_left">Référence unique</div><div class="ccpcm_catalogue_popup_right"><input id="ccpcm_catalogue_popup_pdf_reference" class="ccpcm_catalogue_popup_input"></div>');
 		print('<p><a id="ccpcm_catalogue_popup_pdf_save" class="button button-primary">Save</a></p>');
 		print('</div>');
 
@@ -339,6 +340,13 @@ class ccpcm_catalogues extends ccpcm_catalogues_custom {
 					$data['content'][$idx]['html2'] = $html2;
 //					$this->ccpcm->log($data['content'][$idx]['html']);
 //					$this->ccpcm->log("DPI : $dpi");
+					break;
+				case 'pdf':
+					$data['content'][$idx]['reference'] = $element['reference'];
+					$data['content'][$idx]['dpi_9'] = $element['dpi_9'];
+					$data['content'][$idx]['dpi_72'] = $element['dpi_72'];
+					$data['content'][$idx]['dpi_150'] = $element['dpi_150'];
+					$data['content'][$idx]['dpi_300'] = $element['dpi_300'];
 					break;
 			}
 		}

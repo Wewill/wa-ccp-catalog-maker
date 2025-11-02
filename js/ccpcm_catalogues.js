@@ -44,6 +44,7 @@ var ccpcm_tags_to_keep = [
   var ccpcm_catalogue_popup_pdf_dpi_72 = $('#ccpcm_catalogue_popup_pdf_dpi_72');
   var ccpcm_catalogue_popup_pdf_dpi_150 = $('#ccpcm_catalogue_popup_pdf_dpi_150');
   var ccpcm_catalogue_popup_pdf_dpi_300 = $('#ccpcm_catalogue_popup_pdf_dpi_300');
+  var ccpcm_catalogue_popup_pdf_reference = $('#ccpcm_catalogue_popup_pdf_reference');
   var ccpcm_catalogue_popup_html_title = $('#ccpcm_catalogue_popup_html_title');
   var ccpcm_catalogue_popup_html_color = $('#ccpcm_catalogue_popup_html_color');
   var ccpcm_catalogue_popup_htmlx2_title = $('#ccpcm_catalogue_popup_htmlx2_title');
@@ -196,23 +197,43 @@ var ccpcm_tags_to_keep = [
       try {
         const uint8Array = new Uint8Array(buffer);
         const mainPdfDoc = await PDFLib.PDFDocument.load(uint8Array);
+        
+        function pdfLibGetObjectByRef(mainPdfDoc) {
+          mainPdfDoc.context.indirectObjects.forEach((aObject, index) => {
+            let ref = index['ref'];
+            var values = {};
+//            ['A', 'D', 'S'], aObject.lookupMaybe('A');
+            console.log('=== > mainPdfDocOject', index, aObject);
+          });
+        }
 
-        // 🧽 Étape 1 : suppression de 2 pages au début et 2 à la fin
+        var annotationsPage = {};
+        mainPdfDoc.getPages().forEach((aPage, pageNumber) => {
+          const pageAnnotsRaw = aPage.node.lookupMaybe(
+            PDFLib.PDFName.of("Annots"),
+            PDFLib.PDFArray
+          );
+          const pageAnnots = pageAnnotsRaw ? pageAnnotsRaw.asArray() : [];
+          pageAnnots.forEach((aAnnot, aAnnotIndex) => {
+            let aAnnotObject = mainPdfDoc.context.indirectObjects.get(aAnnot);
+            aAnnotObject.dict.forEach((aAnnotValue, aAnnotKey) => {
+              if (aAnnotKey.encodedName == '/A') {
+                let aSubAnnotObject = mainPdfDoc.context.indirectObjects.get(aAnnotValue);
+                aSubAnnotObject.dict.forEach((aSubAnnotValue, aSubAnnotKey) => {
+                  if (aSubAnnotKey.encodedName == '/D')
+                    annotationsPage[aSubAnnotValue.value] = pageNumber;
+                });
+              }
+              if (aAnnotKey.encodedName == '/D')
+                annotationsPage[aAnnotValue.value] = pageNumber;
+            });
+          });
+        });
+        console.log('annotationsPage', annotationsPage);
+        
         const total = mainPdfDoc.getPageCount();
         console.log(`Document pdfmake : ${total} pages initiales`);
 
-        if (total > 4) {
-          // Toujours supprimer en partant de la fin
-          mainPdfDoc.removePage(total - 1);
-          mainPdfDoc.removePage(total - 2);
-          mainPdfDoc.removePage(1);
-          mainPdfDoc.removePage(0);
-          console.log('Suppression : 2 pages au début + 2 à la fin');
-        } else {
-          console.warn('Le document contient moins de 5 pages — aucune suppression effectuée.');
-        }
-
-        // Utilitaire pour insérer un PDF à un emplacement précis
         async function insertPdf(mainPdfDoc, pdfPath, insertAt) {
           const response = await fetch(pdfPath);
           if (!response.ok) throw new Error(`Erreur chargement PDF : ${pdfPath}`);
@@ -220,17 +241,22 @@ var ccpcm_tags_to_keep = [
           const insertPdfDoc = await PDFLib.PDFDocument.load(insertPdfBytes);
           const insertPages = await mainPdfDoc.copyPages(insertPdfDoc, insertPdfDoc.getPageIndices());
           insertPages.forEach((page, i) => mainPdfDoc.insertPage(insertAt + i, page));
-          console.log(`—> Insertion : ${pdfPath} à la page ${insertAt}`);
+//          console.log(`—> Insertion : ${pdfPath} à la page ${insertAt}`);
           return mainPdfDoc.getPageCount();
         }
 
-        // Insérer les 2 premières couvertures AU DÉBUT (dans l'ordre inverse)
-        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_2.pdf', 0);
-        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_1.pdf', 0);
-
-        // Insérer les 2 dernières couvertures À LA FIN
-        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_3.pdf', mainPdfDoc.getPageCount());
-        await insertPdf(mainPdfDoc, '/wp-content/plugins/wa-ccp-catalog-maker/custom/rsfp/assets/Pages_COUV_4.pdf', mainPdfDoc.getPageCount());
+        for (const content of ccpcm_global.catalogue_content_persistant) {
+          if (content.type == 'pdf') {
+            console.log('==> ', content, content.reference, annotationsPage[content.reference]);
+            if (content.reference && annotationsPage[content.reference] != undefined) {
+              let pageNumber = annotationsPage[content.reference];
+              let url = content['dpi_'+ccpcm_global.renderDpi]
+//              console.log(`—> Remove : la page ${pageNumber}`);
+              mainPdfDoc.removePage(pageNumber);
+              await insertPdf(mainPdfDoc, url, pageNumber);
+            }
+          }
+        };
 
         // Preparer le PDF final
         const mergedPdfBytes = await mainPdfDoc.save();
@@ -350,6 +376,7 @@ var ccpcm_tags_to_keep = [
         ccpcm_catalogue_popup_pdf_dpi_72.val($(element).data('dpi_72'));
         ccpcm_catalogue_popup_pdf_dpi_150.val($(element).data('dpi_150'));
         ccpcm_catalogue_popup_pdf_dpi_300.val($(element).data('dpi_300'));
+        ccpcm_catalogue_popup_pdf_reference.val($(element).data('reference'));
       } else if (type == 'html') {
         $('#ccpcm_catalogue_popup_html').css('display', 'block');
         var html = $(element).data('html');
@@ -509,6 +536,7 @@ var ccpcm_tags_to_keep = [
       'dpi_72': ccpcm_catalogue_popup_pdf_dpi_72.val(),
       'dpi_150': ccpcm_catalogue_popup_pdf_dpi_150.val(),
       'dpi_300': ccpcm_catalogue_popup_pdf_dpi_300.val(),
+      'reference': ccpcm_catalogue_popup_pdf_reference.val(),
     };
     set_element_info(current_element_popup, {
       'Template': $('#ccpcm_catalogue_popup_template_select').children('option:selected').text(),
@@ -516,6 +544,7 @@ var ccpcm_tags_to_keep = [
       'dpi_72': ccpcm_catalogue_popup_pdf_dpi_72.val(),
       'dpi_150': ccpcm_catalogue_popup_pdf_dpi_150.val(),
       'dpi_300': ccpcm_catalogue_popup_pdf_dpi_300.val(),
+      'reference': ccpcm_catalogue_popup_pdf_reference.val(),
     });
 
     current_element_popup.data(data);

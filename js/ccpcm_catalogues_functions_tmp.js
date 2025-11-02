@@ -4,8 +4,9 @@ var $ = jQuery;
 
 function display_content() {
   var dd = []
-  var ccpcm_display_content_callback = function(data) {
-    $.each(data, function(idx, content) {
+  var ccpcm_display_content_callback = function(catalogueData) {
+    ccpcm_global.catalogue_content_persistant = [];
+    $.each(catalogueData, function(idx, content) {
       var type = content['type'];
       var template_id = content['template'];
       var data = {};
@@ -20,19 +21,26 @@ function display_content() {
         //no data
       } else if (type == 'toc') {
         //no data
+      } else if (type == 'pdf') {
+        data = content;
+        if (idx == catalogueData.length - 1)
+          data['lastPage'] = true;
+        else
+          data['lastPage'] = false;
+        ccpcm_global.catalogue_content_persistant.push(content);
       } else {
-	var ids = [content['data']];
-	if (content['data2'])
-		ids.push(content['data2']);
-        var options = {
-          template_id: template_id,
-          order: content['order'],
-          ids: ids,
-          type: type,
-          dpi: ccpcm_global.renderDpi,
-        }
-	if (content['displayBy'])
-	      options['display_by'] = content['displayBy'];
+        var ids = [content['data']];
+        if (content['data2'])
+          ids.push(content['data2']);
+              var options = {
+                template_id: template_id,
+                order: content['order'],
+                ids: ids,
+                type: type,
+                dpi: ccpcm_global.renderDpi,
+              }
+        if (content['displayBy'])
+              options['display_by'] = content['displayBy'];
         var hash = MD5(JSON.stringify(options));
         if (!catalogue_data_caches[hash]) {
           var ccpcm_get_catalogue_data_callback = function(d) {
@@ -41,7 +49,6 @@ function display_content() {
           ccpcm_ajax('get_catalogue_data_by_type_and_id', options, ccpcm_get_catalogue_data_callback, false);
         }
         data = catalogue_data_caches[hash];
-
       }
       console.log("**** display_template("+template_id+")")
       var t_dd = display_template(template_id, data);
