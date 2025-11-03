@@ -69,28 +69,12 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'production' => [
 			'p_general_image' => ['name'=>'image', 'type'=>'picture', 'uniq'=>True, 'sizes'=>[
-				//'r036_1'=>'0.3620689655:1', 
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r419_136'=>'419.53:136.32', 
-				//'r419_181'=>'419.53:181.76', 
-				//'r419_90' => '419.53:90.88', 
-				//'r380_550' => '380:550',
-				//'r10_15'=>'170.3979:247.64',
-				'r4_3'=>'433.7032338099:311.8132338099', //#44
+				'r3_4'=>'290.30500000035005:424.9480000005',
 			]],
 		],
 		'thematic' => [
 			't_general_image' => ['name'=>'image', 'type'=>'picture', 'uniq'=>True, 'sizes'=>[
-				//'r036_1'=>'0.3620689655:1', 
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r419_136'=>'419.53:136.32', 
-				//'r419_181'=>'419.53:181.76', 
-				//'r419_90' => '419.53:90.88', 
-				//'r380_550' => '380:550',
-				//'r10_15'=>'170.3979:247.64',
-				'r4_3'=>'433.7032338099:311.8132338099', //#44
+				'r3_4'=>'290.30500000035005:424.9480000005',
 			]],
 			't_general_color' => ['name'=>'color', 'type'=>'string', 'uniq'=>True],
 			't_general_content' => ['name'=>'content', 'type'=>'string', 'uniq'=>True],
@@ -100,14 +84,8 @@ class ccpcm_data_custom extends ccpcm_object {
 	public $meta_keys = [
 		'directory' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
-				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
-				'r264_297' => '264.56888888919997:297.64',
-				'r198_238' => '198.4266666669:238.11199999999997',
+				'r18_21'=>'187.23520000022404:214.47400000025', 
+				//'r4_3'=>'394.03:297.64',
 			]],
 			//'d_farm_address' => ['name' => 'farm_address', 'type' => 'string', 'uniq' => True ],
 			//'d_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
@@ -140,11 +118,7 @@ class ccpcm_data_custom extends ccpcm_object {
 			//'d_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
 			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'post_picture', 'sizes'=>[
 				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
 				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
 			]],
 			'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
 			'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
@@ -163,12 +137,8 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'farm' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
-				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
+				'r18_21'=>'187.23520000022404:214.47400000025', 
+				//'r4_3'=>'394.03:297.64',
 			]],
 			//'f_farm_in_transmission' => ['name' => 'farm_in_transmission', 'type' => 'string', 'uniq' => True ],
 			//'f_farm_to_transmit' => ['name' => 'farm_to_transmit', 'type' => 'string', 'uniq' => True ],
@@ -181,11 +151,7 @@ class ccpcm_data_custom extends ccpcm_object {
 			'f_general_farmers' => ['name' => 'general_farmers', 'type' => 'serialize', 'uniq' => True ],
 			'f_general_gallery' => ['name' => 'general_gallery', 'type' => 'post_picture', 'sizes'=>[
 				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
 				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
 			]],
 			'f_general_legal_entity' => ['name' => 'general_legal_entity', 'type' => 'string', 'uniq' => True ],
 			'f_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
@@ -205,14 +171,11 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'operation' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
-				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
+				'r18_21'=>'187.23520000022404:214.47400000025', 
+				'r1_1'=>'1:1',
 			]],
 			'o_general_image' => ['name' => 'general_image', 'type' => 'post_picture', 'sizes'=>[
+				'r16_9'=>'16:8.38', 
 				'r4_3'=>'394.03:297.64',
 			]],
 			//
@@ -229,12 +192,8 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'structure' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				//'r1920_1080'=>'16:9', 
-				//'r260_269'=>'260.945:269.14',
-				'r4_3'=>'394.03:297.64',
-				//'r10_6'=>'197.015:115.88',
-				//'r155_148'=>'155:148.82', //#44
+				'r18_21'=>'187.23520000022404:214.47400000025', 
+				'r1_1'=>'1:1',
 			]],
 			//
 			's_general_referent' => ['name' => 'general_referent', 'type' => 'string', 'uniq' => True ],
