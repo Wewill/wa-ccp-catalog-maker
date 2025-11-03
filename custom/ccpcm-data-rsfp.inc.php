@@ -21,6 +21,7 @@ class ccpcm_data_custom extends ccpcm_object {
 	public $indexes = array(
 		'directory' => [
 			'thematic' => 'thematic@term_id',
+			'production' => 'production@term_id',
 		],
 		'farm' => [
 
@@ -44,6 +45,7 @@ class ccpcm_data_custom extends ccpcm_object {
 		'structure' => ['post_title'],
 		'partner' => ['post_title'],
 		'partner-category' => array('name'),
+		'production' => array('name'),
 	);
 
 	public $terms = array(
