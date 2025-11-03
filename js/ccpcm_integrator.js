@@ -14,12 +14,12 @@ function display_content() {
     var dd = false;
 
     if (renderDpi)
-      ccpcm_global.renderDpi = renderDpi
+      ccpcm_global.renderDpi = renderDpi;
 
     display_javascript('_Javascript');
 
     if (renderDpi)
-      ccpcm_global.renderDpi = renderDpi
+      ccpcm_global.renderDpi = renderDpi;
 
     var data = {}
     var ccpcm_integrator_content_callback = function(d) {
@@ -28,8 +28,7 @@ function display_content() {
     ccpcm_ajax('get_integrator_content', {'template': template, 'dpi': renderDpi, 'data': inputs}, ccpcm_integrator_content_callback, false);
 
     dd = display_template(master);
-    dd.content = display_template(template, data);
-
+    dd.content = ccpcm_global.documentContentParser(display_template(template, data));
     var filename = master+"_"+template+"_"+ccpcm_global.renderDpi+"dpi_"+(new Date()).toISOString()+".pdf";
     if (filenamePrefix) {
       filename = filenamePrefix+"_"+ccpcm_global.renderDpi+"dpi_"+(new Date()).toISOString()+".pdf";

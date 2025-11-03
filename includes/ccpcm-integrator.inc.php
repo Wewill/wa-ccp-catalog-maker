@@ -46,10 +46,28 @@ class ccpcm_integrator extends ccpcm_object {
   }
 
   #RSFP
-  public function Test_directory($inputs = [], $dpi = 150) {
+  public function Directory($inputs = [], $dpi = 150) {
     if (array_key_exists('form_id' ,$inputs)) {
-      $data = $this->ccpcm->data->jsondb->get('directory', $inputs['form_id']);
-      return $data;
+      $d = $this->ccpcm->data->jsondb->get('directory', $inputs['form_id']);
+      $terms = [
+        'relationships_farm' => 'farm',
+        'relationships_operation' => 'operation',
+        'relationships_structure' => 'structure',
+      ];
+      foreach($terms as $fieldName => $termName) {
+          if (array_key_exists($fieldName, $d)) {
+              $termsData = [];
+              if (is_string($d[$fieldName])) {
+                  $d[$fieldName] = $this->ccpcm->data->jsondb->get($termName, $d[$fieldName]);
+              } else {
+                  $termIds = $d[$fieldName];
+                  foreach($termIds as $termId)
+                      $termsData[] = $this->ccpcm->data->jsondb->get($termName, $termId);
+                  $d[$fieldName] = $termsData;
+              }
+          }
+      }
+      return $d;
     }
     return ['error' => 'pas de données'];
   }
