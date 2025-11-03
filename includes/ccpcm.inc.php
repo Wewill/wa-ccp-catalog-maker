@@ -57,8 +57,10 @@ class ccpcm {
 					'id' => get_the_ID(),
 					'title' => 'Voir le PDF',
 					'class' => 'ccpcm-integrator-button',
-				], $attrs, 'shortcode');
-				$html = sprintf('<a class="%s" onclick="ccpcm_integrator_download_pdf(\'%s\', \'%s\', {\'form_id\' : %s});">%s</a>', $attrs['class'],  $attrs['master'], $attrs['template'], $attrs['id'], $attrs['title']);
+					'render_dpi' => 9,
+					'filename_prefix' => false,
+				], $attrs, 'ccpcm');
+				$html = sprintf('<a class="%s" onclick="ccpcm_integrator_download_pdf(\'%s\', \'%s\', {\'form_id\' : %s}, %s, \'%s\');">%s</a>', $attrs['class'],  $attrs['master'], $attrs['template'], $attrs['id'], $attrs['render_dpi'], $attrs['filename_prefix'], $attrs['title']);
 				break;
 		}	
 		
