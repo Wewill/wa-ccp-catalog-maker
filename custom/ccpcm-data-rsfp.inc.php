@@ -10,7 +10,7 @@ class ccpcm_data_custom extends ccpcm_object {
         "300"=>['width'=>1753, 'height'=>2481],
     ];
 
-    public $strip_tags_allowed = '<br><i><strong><b><img><u><ul><li><em><h1><h2><h3><h4><h5><h6><p><span><aside>'; // ajout wil <h4> + suppression <p> pour <p style="text-align: right;"> align right //
+    public $strip_tags_allowed = '<br><i><strong><b><img><u><ul><li><em><h1><h2><h3><h4><h5><h6><p><span><aside><more>'; // ajout wil <h4> + suppression <p> pour <p style="text-align: right;"> align right // Added RSFP 2026 more tag for handle readmore block
 
     public $dpi = 9;
 
