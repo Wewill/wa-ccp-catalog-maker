@@ -680,4 +680,9 @@ class ccpcm_data_custom extends ccpcm_object {
 
 		return $data;
 	}
+
+	public function replace_readmore_block( $content ) {
+		$pattern = '/<!--\s*wp:meta-box\/rsfp-readmore\b[^>]*\/-->/i';
+		return preg_replace( $pattern, '<more></more>', $content );
+	}
 }

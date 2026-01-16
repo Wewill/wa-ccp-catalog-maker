@@ -1359,4 +1359,9 @@ class ccpcm_data_custom extends ccpcm_object {
 
 		return $data;
 	}
+
+	public function replace_readmore_block( $content ) {
+		return $content;
+	}
+
 }

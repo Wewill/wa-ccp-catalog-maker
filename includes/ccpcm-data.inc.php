@@ -677,6 +677,9 @@ class ccpcm_data extends ccpcm_data_custom {
 		$days = array('DIMANCHE', 'LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI', 'SAMEDI');
 		$id = $data->ID;
 		$content = $data->post_content;
+		// Added Wil for RSFP read more block replacement
+		$content = $this->replace_readmore_block($content);
+		// Is Gutenberg editor used ?
 		if (! $this->is_gutenberg) {
 			$content = str_replace("\r", "", $content);
 			$content = str_replace("\n", "<br/>", $content);
