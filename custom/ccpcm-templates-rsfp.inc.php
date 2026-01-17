@@ -63,6 +63,7 @@ class ccpcm_templates_custom extends ccpcm_object {
                 $t_ids[] = $id;
                 $d = $this->ccpcm->data->jsondb->get($type, $id);
                 switch($type) {
+                    case 'geography':
                     case 'thematic':
                     case 'production':
                         $index = $this->ccpcm->data->jsondb->get_index('directory', $type);

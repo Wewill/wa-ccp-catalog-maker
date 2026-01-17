@@ -9,6 +9,7 @@ class ccpcm_catalogues_custom extends ccpcm_object {
         'media'=>'Media',
         'directory' => 'Répertoire',
         'thematic' => 'Thématique',
+		'geography' => 'Géographies',
 		'production' => 'Production',
         'farm' => 'Ferme',
         'operation' => 'Opération',
@@ -37,6 +38,7 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 				$id = $ids[$rand];
 				$d = $this->ccpcm->data->jsondb->get($type, $id);
 				switch($type) {
+                    case 'geography':
 					case 'thematic':
 					case 'production':
                         $index = $this->ccpcm->data->jsondb->get_index('directory', $type);

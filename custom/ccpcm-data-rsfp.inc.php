@@ -22,6 +22,7 @@ class ccpcm_data_custom extends ccpcm_object {
 		'directory' => [
 			'thematic' => 'thematic@term_id',
 			'production' => 'production@term_id',
+			'geography' => 'geography@term_id',
 		],
 		'farm' => [
 
@@ -46,6 +47,7 @@ class ccpcm_data_custom extends ccpcm_object {
 		'partner' => ['post_title'],
 		'partner-category' => array('name'),
 		'production' => array('name'),
+		'geography' => array('name'),
 	);
 
 	public $terms = array(
@@ -57,7 +59,6 @@ class ccpcm_data_custom extends ccpcm_object {
 		'partner' => array(
 			'partner-category'=>array(),
 		),
-
 	);
 
 	public $relations = array(
