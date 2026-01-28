@@ -9,7 +9,7 @@ class ccpcm_catalogues_custom extends ccpcm_object {
         'media'=>'Media',
         'directory' => 'Répertoire',
         'thematic' => 'Thématique',
-		'geography' => 'Géographies',
+		'geography' => 'Géographie(s)',
 		'production' => 'Production',
         'farm' => 'Ferme',
         'operation' => 'Opération',
@@ -159,8 +159,9 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 					$d['infos'][$k] = $v;
 			}
 			switch($type) {
-                case 'thematic':
-                    $index = $this->ccpcm->data->jsondb->get_index('directory', 'thematic');
+                case 'geography':
+				case 'thematic':
+                    $index = $this->ccpcm->data->jsondb->get_index('directory', $type);
                     $directories = [];
                     if (array_key_exists($id, $index)) {
                         $d_ids = $index[$id];
@@ -200,6 +201,18 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 						$d['infos'][$k] = $v;
 				}
 				switch($type) {
+					case 'geography':
+						$index = $this->ccpcm->data->jsondb->get_index('directory', $type);
+						$directories = [];
+						if (array_key_exists($id, $index)) {
+							$d_ids = $index[$id];
+							foreach($d_ids as $d_id) {
+								$directory = $this->ccpcm->data->jsondb->get('directory', $d_id);
+								$directories[] = $directory;
+							}
+						}
+						$d['directories'] = $directories;
+						break;
 					case 'partner-category':
 						$index = $this->ccpcm->data->jsondb->get_index('partner', 'partner-category');
 						$partner = [];
