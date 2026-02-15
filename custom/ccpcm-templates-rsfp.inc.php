@@ -62,6 +62,8 @@ class ccpcm_templates_custom extends ccpcm_object {
                 }
                 $t_ids[] = $id;
                 $d = $this->ccpcm->data->jsondb->get($type, $id);
+				if (array_key_exists('parent', $d))
+					$d['parent'] = $this->ccpcm->data->jsondb->get($type, $d['parent']);
                 switch($type) {
                     case 'geography':
                     case 'thematic':

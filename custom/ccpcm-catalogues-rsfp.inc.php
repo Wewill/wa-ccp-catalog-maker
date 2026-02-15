@@ -158,6 +158,8 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 				foreach($infos as $k => $v)
 					$d['infos'][$k] = $v;
 			}
+			if (array_key_exists('parent', $d))
+				$d['parent'] = $this->ccpcm->data->jsondb->get($type, $d['parent']);
 			switch($type) {
                 case 'geography':
 				case 'thematic':
@@ -200,6 +202,8 @@ class ccpcm_catalogues_custom extends ccpcm_object {
 					foreach($infos as $k => $v)
 						$d['infos'][$k] = $v;
 				}
+				if (array_key_exists('parent', $d))
+					$d['parent'] = $this->ccpcm->data->jsondb->get($type, $d['parent']);
 				switch($type) {
 					case 'geography':
 						$index = $this->ccpcm->data->jsondb->get_index('directory', $type);
