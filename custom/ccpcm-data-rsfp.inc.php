@@ -10,7 +10,10 @@ class ccpcm_data_custom extends ccpcm_object {
         "300"=>['width'=>1753, 'height'=>2481],
     ];
 
-    public $strip_tags_allowed = '<br><i><strong><b><img><u><ul><li><em><h1><h2><h3><h4><h5><h6><p><span><aside><more>'; // ajout wil <h4> + suppression <p> pour <p style="text-align: right;"> align right // Added RSFP 2026 more tag for handle readmore block
+    public $strip_tags_allowed = '<br><i><strong><b><img><u><ul><li><em><h1><h2><h3><h4><h5><h6><p><aside><more>'; 
+	// ajout wil <h4> + suppression <p> pour <p style="text-align: right;"> align right 
+	// Added RSFP 2026 more tag for handle readmore block
+	// Removed RSFP 2026 <span> tag to avoid conflict with wp rte ex: <span class="TextRun SCXW227031722 BCX0" lang="FR-FR" style="margin: 0px;padding: 0px;color: #3f1012;background-color: #ffffff;font-size: 12pt;line-height: 20.85px;font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, sans-serif" xml:lang="FR-FR" data-contrast="none"><span class="NormalTextRun SCXW227031722 BCX0" style="margin: 0px;padding: 0px">
 
     public $dpi = 9;
 
