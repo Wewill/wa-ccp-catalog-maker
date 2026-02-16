@@ -108,12 +108,12 @@ class ccpcm_data_custom extends ccpcm_object {
 			//
 			'd_knowledge_acquisitions' => ['name' => 'knowledge_acquisitions', 'type' => 'serialize', 'uniq' => True ],
 			'd_knowledge_diagrams' => ['name' => 'knowledge_diagrams', 'type' => 'serialize', 'uniq' => True ],
-			'd_knowledge_installation_period' => ['name' => 'knowledge_installation_period', 'type' => 'string', 'uniq' => True ],
 			//'d_knowledge_knowledge_ap' => ['name' => 'knowledge_knowledge_ap', 'type' => 'string', 'uniq' => True ],
 			//'d_knowledge_testimony' => ['name' => 'knowledge_testimony', 'type' => 'string', 'uniq' => True ],
 			'd_knowledge_viabilitys' => ['name' => 'knowledge_viabilitys', 'type' => 'serialize', 'uniq' => False ],
 			'd_knowledge_vivabilitys' => ['name' => 'knowledge_vivabilitys', 'type' => 'serialize', 'uniq' => False ],
-			'd_knowledge_transmission_association' => ['name' => 'knowledge_transmission_association', 'type' => 'string', 'uniq' => True ],
+			'd_knowledge_installation_period' => ['name' => 'knowledge_installation_period', 'type' => 'wprte', 'uniq' => True ],
+			'd_knowledge_transmission_association' => ['name' => 'knowledge_transmission_association', 'type' => 'wprte', 'uniq' => True ],
 			'd_knowledge_skills' => ['name' => 'knowledge_skills', 'type' => 'serialize', 'uniq' => False ],
 			//
 			//'d_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
