@@ -759,6 +759,42 @@ class ccpcm_data extends ccpcm_data_custom {
 						}
 					}
 					break;
+				case 'wprte':
+					$vs = $metas[$key];
+					if (is_array($vs)) {
+						$vs = array_filter( $vs, 'strlen' );
+						foreach($vs as $vsk => $vsv) {
+							$vsv = str_replace("\r", "", $vsv);
+							$vsv = str_replace("\n", "<br/>", $vsv);
+							$vsv = strip_tags($vsv , $this->strip_tags_allowed);
+							$vsv = wpautop($vsv);
+							$vs[$vsk] = $vsv;
+							if (preg_match('/.*<aside>.*/', $vsv)) {
+								$vsv = $this->convert_aside_to_img_table($vsv);
+							}
+							if (preg_match('/.*\[caption.*/', $vsv)) {
+								$vsv = $this->convert_caption_to_p($vsv);
+							}
+							$vsv = $this->ccpcm->catalogues->convert_html_img_inline($this->dpi, $vsv);
+							$vs[$vsk] = $vsv;
+						}
+					} else {
+						$vsv = $vs;
+						$vsv = str_replace("\r", "", $vsv);
+						$vsv = str_replace("\n", "<br/>", $vsv);
+						$vsv = strip_tags($vsv , $this->strip_tags_allowed);
+						$vsv = wpautop($vsv);
+						$vs[$vsk] = $vsv;
+						if (preg_match('/.*<aside>.*/', $vsv)) {
+							$vsv = $this->convert_aside_to_img_table($vsv);
+						}
+						if (preg_match('/.*\[caption.*/', $vsv)) {
+							$vsv = $this->convert_caption_to_p($vsv);
+						}
+						$vsv = $this->ccpcm->catalogues->convert_html_img_inline($this->dpi, $vsv);
+						$vs = $vsv;
+					}
+					break;					
 				case 'picture':
 					$t_vs = $metas[$key];
 					$vs = array();

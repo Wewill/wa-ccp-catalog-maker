@@ -520,6 +520,8 @@ class ccpcm_data_custom extends ccpcm_object {
 					$data = get_object_vars($term);
 					$data['_order'] = intval($data['term_order']);
 					unset($data['term_order']);
+					if ($data['_order'] === 0)
+						$data['_order'] = $data['term_id'];
 					$this->get_terms_metas($k_taxonomy, $data);
 //					print("<br/><br/>------ $k_taxonomy ------ ".$data['term_id']."<br/>");
 //					print_r($ata);
