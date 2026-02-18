@@ -119,14 +119,14 @@ class ccpcm_data_custom extends ccpcm_object {
 			'd_knowledge_transmission_association' => ['name' => 'knowledge_transmission_association', 'type' => 'wprte', 'uniq' => True ],
 			'd_knowledge_skills' => ['name' => 'knowledge_skills', 'type' => 'serialize', 'uniq' => False ],
 			//
-			//'d_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'string', 'uniq' => True ],
-			'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'post_picture', 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				'r4_3'=>'394.03:297.64',
-			]],
-			'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
-			'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
-			'd_medias_files' => ['name' => 'files', 'type' => 'string', 'uniq' => True ],
+			// Comment medias gallery and video for the moment, to avoid too much data RSFP 022026
+			// 'd_medias_gallery' => ['name' => 'medias_gallery', 'type' => 'post_picture', 'sizes'=>[
+			// 	//'r16_9'=>'16:8.38', 
+			// 	'r4_3'=>'394.03:297.64',
+			// ]],
+			// 'd_medias_video' => ['name' => 'medias_video', 'type' => 'string', 'uniq' => True ],
+			// 'd_medias_video_link' => ['name' => 'medias_video_link', 'type' => 'string', 'uniq' => True ],
+			// 'd_medias_files' => ['name' => 'files', 'type' => 'string', 'uniq' => True ],
 			//
 			'd_relationships_farm' => ['name' => 'relationships_farm', 'type' => 'string', 'uniq' => True ],
 			'd_relationships_operation' => ['name' => 'relationships_operation', 'type' => 'string', 'uniq' => True ],
@@ -153,10 +153,13 @@ class ccpcm_data_custom extends ccpcm_object {
 			'f_general_biography' => ['name' => 'general_biography', 'type' => 'string', 'uniq' => True ],
 			'f_general_emails' => ['name' => 'general_emails', 'type' => 'serialize', 'uniq' => True ],
 			'f_general_farmers' => ['name' => 'general_farmers', 'type' => 'serialize', 'uniq' => True ],
-			'f_general_gallery' => ['name' => 'general_gallery', 'type' => 'post_picture', 'sizes'=>[
-				//'r16_9'=>'16:8.38', 
-				'r4_3'=>'394.03:297.64',
-			]],
+			//
+			// Comment medias gallery and video for the moment, to avoid too much data RSFP 022026
+			// 'f_general_gallery' => ['name' => 'general_gallery', 'type' => 'post_picture', 'sizes'=>[
+			// 	//'r16_9'=>'16:8.38', 
+			// 	'r4_3'=>'394.03:297.64',
+			// ]],
+			//
 			'f_general_legal_entity' => ['name' => 'general_legal_entity', 'type' => 'string', 'uniq' => True ],
 			'f_general_links' => ['name' => 'general_links', 'type' => 'serialize', 'uniq' => True ],
 			'f_general_phones' => ['name' => 'general_phones', 'type' => 'serialize', 'uniq' => True ],
@@ -175,13 +178,14 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'operation' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				'r18_21'=>'187.23520000022404:214.47400000025', 
+				// 'r18_21'=>'187.23520000022404:214.47400000025', 
 				'r1_1'=>'1:1',
 			]],
-			'o_general_image' => ['name' => 'general_image', 'type' => 'post_picture', 'sizes'=>[
-				'r16_9'=>'16:8.38', 
-				'r4_3'=>'394.03:297.64',
-			]],
+			// Comment medias gallery and video for the moment, to avoid too much data RSFP 022026
+			// 'o_general_image' => ['name' => 'general_image', 'type' => 'post_picture', 'sizes'=>[
+			// 	'r16_9'=>'16:8.38', 
+			// 	'r4_3'=>'394.03:297.64',
+			// ]],
 			//
 			'o_general_leaders' => ['name' => 'general_leaders', 'type' => 'serialize', 'uniq' => True ],
 			//'o_general_description' => ['name' => 'general_description', 'type' => 'string', 'uniq' => True ],
@@ -196,7 +200,7 @@ class ccpcm_data_custom extends ccpcm_object {
 		],
 		'structure' => [
 			'_thumbnail_id' => ['name' => 'featured_image', 'type' => 'post_picture', 'uniq' => True, 'sizes'=>[
-				'r18_21'=>'187.23520000022404:214.47400000025', 
+				// 'r18_21'=>'187.23520000022404:214.47400000025', 
 				'r1_1'=>'1:1',
 			]],
 			//
