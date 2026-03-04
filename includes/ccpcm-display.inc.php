@@ -81,7 +81,6 @@ dpi_selector.on('change', function() {
 			foreach($dpis as $dpi) {
 				$this->ccpcm->data->redefine($dpi);
 				$this->ccpcm->data->jsondb->remove_all(__DIR__.'/'.$this->ccpcm->data->storage_path);
-				die('9dpi only for moment');
 			}
 		}
 

@@ -288,6 +288,7 @@ class jsondb {
 	function remove_all($src = False) {
 		if (!$src)
 			$src = __DIR__.'/'.$this->db_path;
+
 		$dir = opendir($src);
 		while(false !== ( $file = readdir($dir)) ) {
 			if (( $file != '.' ) && ( $file != '..' )) {
