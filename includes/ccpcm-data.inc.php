@@ -767,6 +767,7 @@ class ccpcm_data extends ccpcm_data_custom {
 							$vsv = str_replace("\r", "", $vsv);
 							$vsv = str_replace("\n", "<br/>", $vsv);
 							$vsv = strip_tags($vsv , $this->strip_tags_allowed);
+							$vsv = preg_replace('/\s+style\s*=\s*(["\'])[^"\']*\1/', '', $vsv); // Remove style attributes such as style="line-height: normal;"
 							$vsv = wpautop($vsv);
 							$vs[$vsk] = $vsv;
 							if (preg_match('/.*<aside>.*/', $vsv)) {
@@ -783,6 +784,7 @@ class ccpcm_data extends ccpcm_data_custom {
 						$vsv = str_replace("\r", "", $vsv);
 						$vsv = str_replace("\n", "<br/>", $vsv);
 						$vsv = strip_tags($vsv , $this->strip_tags_allowed);
+						$vsv = preg_replace('/\s+style\s*=\s*(["\'])[^"\']*\1/', '', $vsv); // Remove style attributes such as style="line-height: normal;"
 						$vsv = wpautop($vsv);
 						$vs[$vsk] = $vsv;
 						if (preg_match('/.*<aside>.*/', $vsv)) {
