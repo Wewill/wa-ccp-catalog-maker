@@ -3,7 +3,7 @@
 /*
 Plugin Name: WA CCP Catalog Maker
 Author: Justin Petermann
-Version: 2.0
+Version: 2.1
 Requires at least: 4
 Tested up to: 4.4
 Stable tag: 1.0

@@ -7,12 +7,12 @@ class ccpcm_display extends ccpcm_object {
 
 	function setup_menu() {
 		wp_enqueue_script('ccpcm_ajax', plugin_dir_url(__FILE__).'../js/ccpcm_ajax.js');
-		add_menu_page('Catalogue Maker', 'Catalogue Maker', 'manage_options', 'ccpcm', [$this, 'catalogue'], 'dashicons-book', 200);
+		add_menu_page('Catalogue Maker', 'Catalogue Maker', 'edit_pages', 'ccpcm', [$this, 'catalogue'], 'dashicons-book', 200);
 		add_submenu_page( 'ccpcm', 'Templates', 'Templates', 'manage_options', 'ccpcm-templates', [$this, 'templates']);
-		add_submenu_page( 'ccpcm', 'Verify', 'Verify', 'manage_options', 'ccpcm-verify', [$this, 'verify']);
+		add_submenu_page( 'ccpcm', 'Verify', 'Verify', 'edit_pages', 'ccpcm-verify', [$this, 'verify']);
 #		add_submenu_page( 'ccpcm', 'Settings', 'Settings', 'manage_options', 'ccpcm-settings', [$this, 'settings']);
-		add_submenu_page( 'ccpcm', 'Generate data', 'Generate data', 'manage_options', 'ccpcm-generate-data', [$this, 'generate_data']);
-		add_submenu_page( 'ccpcm', 'Exports', 'Exports', 'manage_options', 'ccpcm-export-data', [$this, 'export_data']);
+		add_submenu_page( 'ccpcm', 'Generate data', 'Generate data', 'edit_pages', 'ccpcm-generate-data', [$this, 'generate_data']);
+		add_submenu_page( 'ccpcm', 'Exports', 'Exports', 'edit_pages', 'ccpcm-export-data', [$this, 'export_data']);
 	}
 
 	function catalogue(){
